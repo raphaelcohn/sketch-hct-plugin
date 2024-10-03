@@ -1,0 +1,31 @@
+{
+	"name": "sketch-hct-plugin",
+	"description": "A simple plugin to work with the HCT (Hue-Color-Tone) perceptual color space",
+	"author": "Raphael Cohn <raphael.cohn@stormmq.com>",
+	"version": "0.0.0",
+	"engines":
+	{
+		"sketch": ">=3.0"
+	},
+	"skpm":
+	{
+		"name": "sketch-hct-plugin",
+		"manifest": "src/manifest.json",
+		"main": "plugin.sketchplugin",
+		"assets":
+		[
+			"assets/**/*"
+		]
+	},
+	"scripts":
+	{
+		"build": "skpm-build",
+		"watch": "skpm-build --watch",
+		"start": "skpm-build --watch --run",
+		"postinstall": "npm run build && skpm-link"
+	},
+	"devDependencies":
+	{
+		"@skpm/builder": "^0.4.0"
+	}
+}

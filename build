@@ -1,0 +1,184 @@
+#!/usr/bin/env sh
+# This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
+# Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
+
+set -e
+set -f
+set -u
+
+_program_path_find()
+{
+	if [ "${0%/*}" = "$0" ]; then
+
+		# We've been invoked by the interpreter as, say, bash program
+		if [ -r "$0" ]; then
+			pwd -P
+		# Clutching at straws; probably run via a download, anonymous script, etc, weird execve, etc
+		else
+			printf '\n'
+		fi
+
+	else
+
+		# We've been invoked with a relative or absolute path (also when invoked via PATH in a shell)
+
+		_program_path_find_parentPath()
+		{
+			parentPath="${scriptPath%/*}"
+			if [ -z "$parentPath" ]; then
+				parentPath='/'
+			fi
+			cd "$parentPath" 1>/dev/null
+		}
+
+		# pdksh / mksh have problems with unsetting a variable that was never set...
+		if [ "${CDPATH+set}" = 'set' ]; then
+			unset CDPATH
+		fi
+
+		if command -v realpath 1>/dev/null 2>/dev/null; then
+			(
+				scriptPath="$(realpath "$0")"
+
+				_program_path_find_parentPath
+				pwd -P
+			)
+		elif command -v readlink 1>/dev/null 2>/dev/null; then
+			(
+				local -r recursionDepth=0
+				_program_path_resolve_symlinks_recursively()
+				{
+					local -r unresolvedPath="$1"
+
+					recursionDepth=$((recursionDepth + 1))
+
+					if [ $recursionDepth -gt 10 ]; then
+						printf '%s\n' 'Recursion to depths greater than 10 is not allowed when resolving links.'
+						return 1
+					fi
+
+					local -r potentialLinkDestination="$(readlink -- "$unresolvedPath")"
+
+					if [ -z "$potentialLinkDestination" ]; then
+						scriptPath="$unresolvedPath"
+						return 0
+					fi
+					local -r linkDestination="$potentialLinkDestination"
+					local -r parentFolderPath="${unresolvedPath%/*}"
+
+					if [ "$parentFolderPath" = "$unresolvedPath" ]; then
+						_program_path_resolve_symlinks_recursively "$linkDestination"
+					else
+						case "$linkDestination" in
+
+							/*)
+								_program_path_resolve_symlinks_recursively "$linkDestination"
+							;;
+
+							*)
+								_program_path_resolve_symlinks_recursively "$parentFolderPath"/"$linkDestination"
+							;;
+
+						esac
+					fi
+				}
+
+				scriptPath="$0"
+				_program_path_resolve_symlinks_recursively "$scriptPath"
+
+				_program_path_find_parentPath
+				pwd -P
+			)
+		else
+			# This approach will fail in corner cases where the script itself is a symlink in a path not parallel with the concrete script
+			(
+				scriptPath="$0"
+
+				_program_path_find_parentPath
+				pwd -P
+			)
+		fi
+
+	fi
+}
+
+prepare_build_environment_npm()
+{
+
+}
+
+prepare_build_environment_skpm()
+{
+
+}
+
+prepare_build_environment()
+{
+	depends npm
+
+	npm install skpm
+}
+
+build_using_npm()
+{
+	depends npm
+	depends skpm-build
+
+	cd "$root_folder_path" 1>/dev/null 2>/dev/null
+	npm run build
+
+}
+
+# https://nodejs.org/dist/v20.17.0/node-v20.17.0-darwin-x64.tar.gz
+
+rebuild_automatically_using_npm()
+{
+	depends npm
+	depends skpm-build
+
+	cd "$root_folder_path" 1>/dev/null 2>/dev/null
+	npm run watch
+
+}
+
+#prepare_output_folder()
+#{
+#	depends rm mkdir
+#
+#	rm -rf "$outputFolderPath"
+#	mkdir -m 0700 -p "$outputFolderPath"
+#}
+#
+#copy_core_modules()
+#{
+#	depends cp
+#	cp -R "$coreModulesInputFolderPath"/node_modules/. "$outputFolderPath"/core-modules
+#}
+#
+#bundle()
+#{
+#	depends webpack
+#
+#	webpack
+#}
+
+main()
+{
+	cd "$(_program_path_find)" 1>/dev/null 2>/dev/null
+		local -r program_folder_path="$(pwd)"
+	cd -  1>/dev/null 2>/dev/null
+
+	local -r root_folder_path="$program_folder_path"
+	local -r functions_folder_path="$root_folder_path"/lib/posix-shell/functions
+
+	. "$functions_folder_path"/essential.sh
+	. "$functions_folder_path"/clean-environment.sh
+	clean_environment ''
+
+	local -r outputFolderPath="$root_folder_path/output"
+	local -r coreModulesInputFolderPath="$root_folder_path/core-modules"
+
+	build_using_npm
+}
+
+main "$@"
