@@ -116,15 +116,7 @@ main()
 	. "$functions_folder_path"/nodejs.sh
 	clean_environment ''
 
-	local invocation_name
-	set_invocation_name
-	local -r invocation_name
-
-	if [ "$invocation_name" = 'nodejs-common' ]; then
-		return 0
-	fi
-
-	nodejs_run_binary true "$invocation_name" "$@"
+	nodejs_package_run_binary true skpm skpm "$@"
 }
 
 main "$@"

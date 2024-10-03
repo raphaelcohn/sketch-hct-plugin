@@ -183,3 +183,25 @@ nodejs_run_binary()
 
 	child_process_or_exec "$execute" "$absolute_binary_file_path" "$@"
 }
+
+_nodejs_package_install()
+{
+	local -r npm_package_name="$1"
+
+	local tool_version_value
+	tool_version "$npm_package_name"
+	nodejs_run_binary false npm install "$npm_package_name"@"$tool_version_value"
+}
+
+nodejs_package_run_binary()
+{
+	local -r execute="$1"
+	local -r npm_package_name="$2"
+	local -r binary_file_name="$3"
+	shift 2
+
+	_nodejs_package_install "$npm_package_name"
+
+	echo "FIXME" 1>&2
+	exit 99
+}
