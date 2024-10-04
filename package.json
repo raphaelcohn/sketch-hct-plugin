@@ -11,7 +11,7 @@
 	{
 		"name": "sketch-hct-plugin",
 		"manifest": "src/manifest.json",
-		"main": "plugin.sketchplugin",
+		"main": "tmp/plugin.sketchplugin",
 		"assets":
 		[
 			"assets/**/*"

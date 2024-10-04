@@ -116,6 +116,9 @@ main()
 	clean_environment ''
 
 	cd "$root_folder_path" 1>/dev/null 2>/dev/null
+	npm install
+
+	# '/Users/raph/Library/Application Support/com.bohemiancoding.sketch3/Plugins/sketch-hct-plugin/plugin.sketchplugin'
 	npm run build
 }
 
