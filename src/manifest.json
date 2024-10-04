@@ -1,7 +1,7 @@
 {
 	"identifier": "com.stormmq.sketch-hct-plugin",
 	"name": "Sketch HCT Plugin",
-	"description": "A simple plugin to work with the HCT (Hue-Color-Tone) perceptual color space",
+	"description": "A plugin to work with the HCT (Hue-Color-Tone) perceptual color space",
 	"author": "Raphael Cohn",
 	"authorEmail": "raphael.cohn@stormmq.com",
 	"homepage": "https://github.com/raphaelcohn/sketch-hct-plugin",
@@ -25,7 +25,7 @@
 			"identifier": "com.stormmq.sketch-hct-plugin.commands.example",
 			"name": "Example",
 			"description": "Example command to run",
-			"shortcut": "ctrl c",
+			"shortcut": "ctrl d",
 			"script": "./example.command.js",
 			"handler": "example"
 		}

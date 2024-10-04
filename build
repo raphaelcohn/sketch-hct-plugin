@@ -102,66 +102,6 @@ _program_path_find()
 	fi
 }
 
-prepare_build_environment_npm()
-{
-
-}
-
-prepare_build_environment_skpm()
-{
-
-}
-
-prepare_build_environment()
-{
-	depends npm
-
-	npm install skpm
-}
-
-build_using_npm()
-{
-	depends npm
-	depends skpm-build
-
-	cd "$root_folder_path" 1>/dev/null 2>/dev/null
-	npm run build
-
-}
-
-# https://nodejs.org/dist/v20.17.0/node-v20.17.0-darwin-x64.tar.gz
-
-rebuild_automatically_using_npm()
-{
-	depends npm
-	depends skpm-build
-
-	cd "$root_folder_path" 1>/dev/null 2>/dev/null
-	npm run watch
-
-}
-
-#prepare_output_folder()
-#{
-#	depends rm mkdir
-#
-#	rm -rf "$outputFolderPath"
-#	mkdir -m 0700 -p "$outputFolderPath"
-#}
-#
-#copy_core_modules()
-#{
-#	depends cp
-#	cp -R "$coreModulesInputFolderPath"/node_modules/. "$outputFolderPath"/core-modules
-#}
-#
-#bundle()
-#{
-#	depends webpack
-#
-#	webpack
-#}
-
 main()
 {
 	cd "$(_program_path_find)" 1>/dev/null 2>/dev/null
@@ -175,10 +115,8 @@ main()
 	. "$functions_folder_path"/clean-environment.sh
 	clean_environment ''
 
-	local -r outputFolderPath="$root_folder_path/output"
-	local -r coreModulesInputFolderPath="$root_folder_path/core-modules"
-
-	build_using_npm
+	cd "$root_folder_path" 1>/dev/null 2>/dev/null
+	npm run build
 }
 
 main "$@"
