@@ -116,7 +116,7 @@ main()
 	. "$functions_folder_path"/nodejs.sh
 	clean_environment ''
 
-	nodejs_package_run_binary true skpm skpm "$@"
+	nodejs_package_run_binary_tool true skpm skpm "$@"
 }
 
 main "$@"

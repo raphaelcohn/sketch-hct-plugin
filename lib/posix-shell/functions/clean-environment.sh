@@ -129,6 +129,11 @@ _export_TERM_if_standard_out_and_standard_error_are_both_terminals()
 	fi
 }
 
+_export_TZ_as_UTC()
+{
+	export TZ=Etc/UTC
+}
+
 _remove_polluting_environment_variables()
 {
 	local -r environment_variable_name_to_preserve="$1"
@@ -196,6 +201,7 @@ clean_environment()
 	_export_LANG_variables
 	_export_USER_LOGNAME_and_HOME_variables
 	_export_TERM_if_standard_out_and_standard_error_are_both_terminals
+	_export_TZ_as_UTC
 
 	_remove_polluting_environment_variables "$environment_variable_name_to_preserve"
 }

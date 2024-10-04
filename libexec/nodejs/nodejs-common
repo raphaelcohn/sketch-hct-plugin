@@ -108,7 +108,10 @@ main()
 		local -r program_folder_path="$(pwd)"
 	cd -  1>/dev/null 2>/dev/null
 
-	local -r root_folder_path="$program_folder_path"/../..
+	cd "$program_folder_path"/../.. 1>/dev/null 2>/dev/null
+    	local -r root_folder_path="$(pwd)"
+	cd -  1>/dev/null 2>/dev/null
+
 	local -r functions_folder_path="$root_folder_path"/lib/posix-shell/functions
 
 	. "$functions_folder_path"/essential.sh

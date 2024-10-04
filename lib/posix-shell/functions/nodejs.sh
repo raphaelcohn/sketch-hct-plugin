@@ -153,7 +153,12 @@ _nodejs_set_variables()
 	readonly nodejs_output_folder_path="$root_folder_path"/lib/nodejs
 	readonly nodejs_downloaded_distribution_file_path="$nodejs_output_folder_path"/"$nodejs_archive_file_name"
 	readonly nodejs_extracted_distribution_folder_path="$TMPDIR"/nodejs/"$nodejs_version"
-	readonly nodejs_bin_folder_path="$nodejs_extracted_distribution_folder_path"/"$nodejs_extracted_folder_name"/bin
+	readonly nodejs_prefix_folder_path="$nodejs_extracted_distribution_folder_path"/"$nodejs_extracted_folder_name"
+	readonly nodejs_bin_folder_path="$nodejs_prefix_folder_path"/bin
+	readonly nodejs_lib_folder_path="$nodejs_prefix_folder_path"/lib
+	readonly nodejs_etc_folder_path="$nodejs_prefix_folder_path"/etc
+	readonly nodejs_cache_folder_path="$nodejs_prefix_folder_path"/cache
+	readonly nodejs_libexec_folder_path="$root_folder_path"/libexec/nodejs
 }
 
 _nodejs_extract_distribution()
@@ -164,6 +169,29 @@ _nodejs_extract_distribution()
 
 	depends tar
 	tar -x -C "$nodejs_extracted_distribution_folder_path" -f "$nodejs_downloaded_distribution_file_path"
+
+	# Create the npm user cache
+	mkdir_m_0700_p "$nodejs_cache_folder_path"
+
+	# Make global installs of npm modules part of the repository so they can be checked in; destroys any currently globally installed modules (which helps keep dependencies well managed)
+	depends rm mv ln
+	local -r tool_modules_folder_path="$nodejs_output_folder_path"/modules/nodejs/"$nodejs_version"
+	mkdir_m_0700_p "$tool_modules_folder_path"
+	rm -rf "$tool_modules_folder_path"/node_modules
+	mv "$nodejs_lib_folder_path"/node_modules "$tool_modules_folder_path"
+	ln -s ../../../../../lib/nodejs/modules/nodejs/"$nodejs_version"/node_modules "$nodejs_lib_folder_path"/node_modules
+
+	# Create the global npm config file
+	local
+	mkdir_m_0700_p "$nodejs_etc_folder_path"
+	cat >"$nodejs_etc_folder_path"/npmrc <<-EOF
+		cache = "$nodejs_cache_folder_path"
+		init-module = "$nodejs_libexec_folder_path/npm-init.js"
+		init.module = "$nodejs_libexec_folder_path/npm-init.js"
+		userconfig = "$nodejs_libexec_folder_path/user.config.npmrc"
+	EOF
+
+	cat "$nodejs_libexec_folder_path" >>"$nodejs_etc_folder_path"/npmrc
 }
 
 nodejs_run_binary()
@@ -181,27 +209,51 @@ nodejs_run_binary()
 		_nodejs_extract_distribution
 	fi
 
+	export NODE_DISABLE_COLORS=1
+	export NODE_NO_WARNINGS=1
+	export NODE_PENDING_DEPRECATION=1
+	export NODE_REPL_HISTORY=''
+	export NODE_REPL_EXTERNAL_MODULE=''
+
+	#export NODE_PATH=XXXXXX
+
 	child_process_or_exec "$execute" "$absolute_binary_file_path" "$@"
 }
 
-_nodejs_package_install()
+_nodejs_package_install_for_binary_tool()
 {
 	local -r npm_package_name="$1"
+	local -r binary_file_name="$2"
+
+	_nodejs_set_variables
 
 	local tool_version_value
 	tool_version "$npm_package_name"
-	nodejs_run_binary false npm install "$npm_package_name"@"$tool_version_value"
+
+	local -r nodejs_package_parent_of_node_modules_folder_path="$nodejs_output_folder_path"/modules/"$npm_package_name"/"$tool_version_value"
+	mkdir_m_0700_p "$nodejs_package_parent_of_node_modules_folder_path"/node_modules
+
+	nodejs_binary_tool_file_path="$nodejs_package_parent_of_node_modules_folder_path"/node_modules/.bin/"$binary_file_name"
+
+	if is_file_readable_and_executable "$nodejs_binary_tool_file_path"; then
+		return 0
+	fi
+
+	cd "$nodejs_package_parent_of_node_modules_folder_path" 1>/dev/null 2>/dev/null
+		nodejs_run_binary false npm install "$npm_package_name"@"$tool_version_value"
+	cd - 1>/dev/null 2>/dev/null
 }
 
-nodejs_package_run_binary()
+nodejs_package_run_binary_tool()
 {
 	local -r execute="$1"
 	local -r npm_package_name="$2"
 	local -r binary_file_name="$3"
-	shift 2
+	shift 3
 
-	_nodejs_package_install "$npm_package_name"
+	local nodejs_binary_tool_file_path
+	_nodejs_package_install_for_binary_tool "$npm_package_name" "$binary_file_name"
+	local -r nodejs_binary_tool_file_path
 
-	echo "FIXME" 1>&2
-	exit 99
+	child_process_or_exec "$execute" "$nodejs_binary_tool_file_path" "$@"
 }
