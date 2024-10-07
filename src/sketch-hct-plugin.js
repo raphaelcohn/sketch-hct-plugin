@@ -4,6 +4,8 @@
 const sketch = require('sketch')
 const { randomEmoji } = require('./shared')
 
+import {ContrastRatio} from "./domain/ContrastRatio";
+
 export default function()
 {
 	const selected_document = sketch.getSelectedDocument()

@@ -2,6 +2,14 @@
 	"name": "sketch-hct-plugin",
 	"description": "A simple plugin to work with the HCT (Hue-Color-Tone) perceptual color space",
 	"author": "Raphael Cohn <raphael.cohn@stormmq.com>",
+	"license": "AGPL-3.0-or-later",
+	"keywords":
+	[
+		"sketch",
+		"HCT",
+		"Color"
+	],
+	"homepage": "https://github.com/raphaelcohn/sketch-hct-plugin",
 	"version": "0.0.0",
 	"engines":
 	{
@@ -26,6 +34,7 @@
 	},
 	"devDependencies":
 	{
-		"@skpm/builder": "^0.9.5"
+		"@skpm/builder": "^0.9.5",
+		"typescript": "^5.6.2"
 	}
 }
