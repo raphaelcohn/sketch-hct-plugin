@@ -6,10 +6,13 @@ _nodejs_set_variables()
 	if [ "${nodejs_version+SET}" = 'SET' ]; then
 		return 0
 	fi
+
 	local tool_version_value
 	tool_version 'nodejs'
-
 	readonly nodejs_version="$tool_version_value"
+
+	tool_version 'npm-before'
+	readonly nodejs_npm_package_version_resolution_before_iso_date="$tool_version_value"
 
 	local operating_system_family
 	local operating_system
@@ -157,8 +160,10 @@ _nodejs_set_variables()
 	readonly nodejs_bin_folder_path="$nodejs_prefix_folder_path"/bin
 	readonly nodejs_lib_folder_path="$nodejs_prefix_folder_path"/lib
 	readonly nodejs_etc_folder_path="$nodejs_prefix_folder_path"/etc
-	readonly nodejs_cache_folder_path="$nodejs_prefix_folder_path"/cache
+	readonly nodejs_cache_folder_path="$nodejs_output_folder_path"/cache
+	readonly nodejs_global_config_file_path="$nodejs_etc_folder_path"/npmrc
 	readonly nodejs_libexec_folder_path="$root_folder_path"/libexec/nodejs
+	readonly nodejs_logs_folder_path="$nodejs_extracted_distribution_folder_path"/logs
 }
 
 _nodejs_extract_distribution()
@@ -170,9 +175,6 @@ _nodejs_extract_distribution()
 	depends tar
 	tar -x -C "$nodejs_extracted_distribution_folder_path" -f "$nodejs_downloaded_distribution_file_path"
 
-	# Create the npm user cache
-	mkdir_m_0700_p "$nodejs_cache_folder_path"
-
 	# Make global installs of npm modules part of the repository so they can be checked in; destroys any currently globally installed modules (which helps keep dependencies well managed)
 	depends rm mv ln
 	local -r tool_modules_folder_path="$nodejs_output_folder_path"/modules/nodejs/"$nodejs_version"
@@ -181,16 +183,28 @@ _nodejs_extract_distribution()
 	mv "$nodejs_lib_folder_path"/node_modules "$tool_modules_folder_path"
 	ln -s ../../../../../lib/nodejs/modules/nodejs/"$nodejs_version"/node_modules "$nodejs_lib_folder_path"/node_modules
 
+	# Create a logs folder
+	mkdir_m_0700_p "$nodejs_logs_folder_path"
+
+	# Create a cache folder that cab be committed (this ensures npm ci can be run offline and is always fully reproducible).
+	mkdir_m_0700_p "$nodejs_cache_folder_path"
+
+	depends sh
+	local -r shell_binary_file_path="$(command -v sh)"
+
 	# Create the global npm config file
-	local
 	mkdir_m_0700_p "$nodejs_etc_folder_path"
-	cat >"$nodejs_etc_folder_path"/npmrc <<-EOF
+
+	depends cat
+	cat >"$nodejs_global_config_file_path" <<-EOF
 		cache = "$nodejs_cache_folder_path"
 		init-module = "$nodejs_libexec_folder_path/npm-init.js"
-		init.module = "$nodejs_libexec_folder_path/npm-init.js"
+		logs-dir = "$nodejs_logs_folder_path"
+		script-shell = "$shell_binary_file_path"
+		shell = "$shell_binary_file_path"
+		prefer-offline = true
+		prefer-online = false
 	EOF
-
-	cat "$nodejs_libexec_folder_path" >>"$nodejs_etc_folder_path"/npmrc
 }
 
 nodejs_run_binary()
@@ -213,9 +227,11 @@ nodejs_run_binary()
 	export NODE_PENDING_DEPRECATION=1
 	export NODE_REPL_HISTORY=''
 	export NODE_REPL_EXTERNAL_MODULE=''
+
+	export NPM_CONFIG_GLOBALCONFIG="$nodejs_global_config_file_path"
 	export NPM_CONFIG_USERCONFIG="$root_folder_path"/libexec/nodejs/user.config.npmrc
 
-	#export NODE_PATH=XXXXXX
+	export npm_config_before="$nodejs_npm_package_version_resolution_before_iso_date"
 
 	child_process_or_exec "$execute" "$absolute_binary_file_path" "$@"
 }

@@ -27,9 +27,9 @@
 	},
 	"scripts":
 	{
-		"update-package-lock": "npm install --silent --package-lock-only",
+		"build-online": "npm cache clean --force && rm -rf node_modules && npm install --silent --package-lock-only --before=$(head -n 1 versioning/npm-before) && npm ci --silent && skpm-build",
+		"build-offline": "npm ci --silent --offline && skpm-build",
 		
-		"build": "skpm-build",
 		"watch": "skpm-build --watch",
 		"start": "skpm-build --watch --run",
 		"was_postinstall": "npm run-script build && skpm-link"
