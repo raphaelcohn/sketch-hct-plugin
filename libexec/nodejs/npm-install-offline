@@ -119,15 +119,5 @@ main()
 	. "$functions_folder_path"/npm.sh
 	clean_environment ''
 
-	local invocation_name
-	set_invocation_name
-	local -r invocation_name
-
-	if [ "$invocation_name" = 'npm-run-script-wrapper' ]; then
-		return 0
-	fi
-
-	npm_run_script "$invocation_name" "$@"
+	npm_install_offline
 }
-
-main "$@"

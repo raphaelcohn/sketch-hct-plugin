@@ -27,12 +27,12 @@
 	},
 	"scripts":
 	{
-		"build-online": "npm cache clean --force && rm -rf node_modules && npm install --silent --package-lock-only --before=$(head -n 1 versioning/npm-before) && npm ci --silent && skpm-build",
-		"build-offline": "npm ci --silent --offline && skpm-build",
+		"build-online": "./libexec/nodejs/npm-install-online && skpm-build",
+		"build-offline": "./libexec/nodejs/npm-install-offline && skpm-build",
 		
-		"watch": "skpm-build --watch",
-		"start": "skpm-build --watch --run",
-		"was_postinstall": "npm run-script build && skpm-link"
+		"watch": "./libexec/nodejs/npm-install-online && --watch",
+		"start": "./libexec/nodejs/npm-install-online && -watch --run",
+		"was_postinstall": "./libexec/nodejs/npm-install-online && skpm-link"
 	},
 	"devDependencies":
 	{

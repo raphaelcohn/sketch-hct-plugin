@@ -1,4 +1,3 @@
-#!/usr/bin/env sh
 # This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 # Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
@@ -119,15 +118,7 @@ main()
 	. "$functions_folder_path"/npm.sh
 	clean_environment ''
 
-	local invocation_name
-	set_invocation_name
-	local -r invocation_name
-
-	if [ "$invocation_name" = 'npm-run-script-wrapper' ]; then
-		return 0
-	fi
-
-	npm_run_script "$invocation_name" "$@"
+	exec npm exec --package=typescript -- tsc "$@"
 }
 
 main "$@"
