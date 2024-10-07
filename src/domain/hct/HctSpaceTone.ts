@@ -3,15 +3,8 @@
 
 import {XyzSpaceY} from "../xyz/XyzSpaceY";
 import {LabSpaceLStar} from "../lab/LabSpaceLStar";
-import {ContrastRatio} from "../ContrastRatio";
-
-export const InclusiveMinimumToneValue = new LabSpaceLStar(InclusiveMinimumLabSpaceLStarValue)
-
-export const InclusiveMaximumToneValue = new LabSpaceLStar(InclusiveMaximumLabSpaceLStarValue)
-
-export const InclusiveMinimumTone = new HctSpaceTone(InclusiveMinimumToneValue)
-
-export const InclusiveMaximumTone = new HctSpaceTone(InclusiveMaximumToneValue)
+import {ContrastRatio} from "../xyz/ContrastRatio";
+import {AlphaSRgbSpace} from "../sRGB/AlphaSRgbSpace";
 
 // Color spaces that measure luminance, such as Y in XYZ, L* in L*a*b*, or T in HCT, are known as perceptually accurate color spaces.
 //
@@ -28,7 +21,7 @@ export const InclusiveMaximumTone = new HctSpaceTone(InclusiveMaximumToneValue)
 //
 // 0.4 is generous, ex. HCT requires much less delta.
 // It was chosen because it provides a rough guarantee that as long as a perceptual color space gamut maps lightness such that the resulting lightness rounds to the same as the requested, the desired contrast ratio will be reached.
-const LUMINANCE_GAMUT_MAP_TOLERANCE = 0.4;
+const LUMINANCE_GAMUT_MAP_TOLERANCE: number = 0.4;
 
 // HCT Tone.
 // Perceptual Luminance.
@@ -37,91 +30,86 @@ const LUMINANCE_GAMUT_MAP_TOLERANCE = 0.4;
 // A difference of 50 guarantees a contrast ratio >= 4.5.
 export class HctSpaceTone
 {
-	#value = InclusiveMinimumToneValue;
+	public static InclusiveMinimum: NonNullable<HctSpaceTone> = new HctSpaceTone(LabSpaceLStar.InclusiveMinimum)
+	
+	public static InclusiveMaximum: NonNullable<HctSpaceTone> = new HctSpaceTone(LabSpaceLStar.InclusiveMaximum)
+	
+	readonly #value: LabSpaceLStar
 
-	constructor(lab_space_l_star)
+	constructor(lab_space_l_star: LabSpaceLStar)
 	{
-		guard_instance(lab_space_l_star, LabSpaceLStar, 'lab_space_l_star')
-
 		this.#value = lab_space_l_star
 	}
+	
+	public static from_alpha_srgb_space(alpha_srgb_space: NonNullable<AlphaSRgbSpace>): NonNullable<HctSpaceTone>
+	{
+		return new HctSpaceTone(LabSpaceLStar.from_alpha_srgb_space(alpha_srgb_space))
+	}
 
-    toString()
+    public toString(this: NonNullable<this>): NonNullable<string>
     {
-        return `${this.value.value}%`
+        return `${this.value}%`
     }
-
-    get value()
+	
+	public get value(): NonNullable<LabSpaceLStar>
 	{
 		return this.#value
 	}
-
-	to_LabSpaceLStar()
+	
+	public contrast_ratio(this: NonNullable<this>, other: NonNullable<this>): NonNullable<ContrastRatio>
+	{
+		return XyzSpaceY.contrast_ratio(this.to_XyzSpaceY(), other.to_XyzSpaceY())
+	}
+	
+	public lighter(contrast_ratio: NonNullable<ContrastRatio>): NonNullable<HctSpaceTone>
+	{
+		const dark_y = this.to_XyzSpaceY()
+		const raw_light_y = contrast_ratio.lighten(dark_y)
+		
+		return HctSpaceTone.#darker_or_lighter_common(contrast_ratio, dark_y, raw_light_y, HctSpaceTone.InclusiveMinimum, +1)
+	}
+	
+	public darker(contrast_ratio: NonNullable<ContrastRatio>): NonNullable<HctSpaceTone>
+	{
+		const light_y = this.to_XyzSpaceY()
+		const raw_dark_y = contrast_ratio.darken(light_y)
+		
+		return HctSpaceTone.#darker_or_lighter_common(contrast_ratio, light_y, raw_dark_y, HctSpaceTone.InclusiveMaximum, -1)
+	}
+	
+	public to_LabSpaceLStar(this: NonNullable<this>): NonNullable<LabSpaceLStar>
 	{
 		return this.value
 	}
-
-	to_XyzSpaceY()
+	
+	public to_XyzSpaceY(this: NonNullable<this>): NonNullable<XyzSpaceY>
 	{
-		return this.value.to_XyzSpaceY()
+		return this.#value.to_XyzSpaceY()
 	}
 
-	add(increment)
+	add(this: NonNullable<this>, increment: NonNullable<number>): NonNullable<HctSpaceTone>
 	{
 		guard_number(increment, "increment")
 
-		return new HctSpaceTone(this.value.add(increment))
+		return new HctSpaceTone(this.#value.add(increment))
 	}
 
-    difference(other)
+    difference(this: NonNullable<this>, other: NonNullable<this>): number
 	{
-        guard_instance(other, HctSpaceTone, "other")
-
-        return this.value.difference(other.value)
+        return this.#value.difference(other.#value)
     }
 
-	average(other)
+	average(this: NonNullable<this>, other: NonNullable<this>): NonNullable<HctSpaceTone>
 	{
-		guard_instance(other, HctSpaceTone, "other")
-
-		return new HctSpaceTone(this.value.average(other.value))
+		return new HctSpaceTone(this.#value.average(other.#value))
 	}
 
-    is_less_than(other)
+    is_less_than(this: NonNullable<this>, other: NonNullable<this>): boolean
     {
-        guard_instance(other, HctSpaceTone, "other")
-
-        return this.value.is_less_than(other)
+        return this.#value.is_less_than(other.#value)
     }
 
-	contrast_ratio(other)
-	{
-		guard_instance(other, HctSpaceTone, "other")
-
-		return XyzSpaceY.contrast_ratio(this.to_LabSpaceLStar(), other.to_LabSpaceLStar())
-	}
-
-	lighter(contrast_ratio)
-	{
-        guard_instance(contrast_ratio, ContrastRatio, "ratio")
-
-        const dark_y = this.to_XyzSpaceY()
-		const raw_light_y = contrast_ratio.lighten(dark_y)
-
-		return HctSpaceTone.#darker_or_lighter_common(contrast_ratio, dark_y, raw_light_y, InclusiveMaximumTone, +LUMINANCE_GAMUT_MAP_TOLERANCE)
-	}
-
-	darker(contrast_ratio)
-	{
-        guard_instance(contrast_ratio, ContrastRatio, "ratio")
-
-        const light_y = this.to_XyzSpaceY()
-		const raw_dark_y = contrast_ratio.darken(light_y)
-
-		return HctSpaceTone.#darker_or_lighter_common(contrast_ratio, light_y, raw_dark_y, InclusiveMinimumTone, -LUMINANCE_GAMUT_MAP_TOLERANCE)
-	}
-
-	static #darker_or_lighter_common(contrast_ratio, before_y, raw_after_y, out_of_range_tone, tolerance)
+	static #darker_or_lighter_common(contrast_ratio: NonNullable<ContrastRatio>, before_y: NonNullable<XyzSpaceY>, raw_after_y: number, out_of_range_tone: NonNullable<HctSpaceTone>, tolerance_sign: -1 | 1): NonNullable<HctSpaceTone>
 	{
 		if (XyzSpaceY.is_out_of_range(raw_after_y))
 		{
@@ -134,6 +122,7 @@ export class HctSpaceTone
 			return out_of_range_tone
 		}
 
+		const tolerance = tolerance_sign * LUMINANCE_GAMUT_MAP_TOLERANCE
 		const raw_after_l_star = after_y.to_LabSpaceLStar().value + tolerance
 		if (LabSpaceLStar.is_out_of_range(raw_after_l_star))
 		{

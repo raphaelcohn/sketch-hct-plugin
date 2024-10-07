@@ -34,6 +34,10 @@
 		"start": "./libexec/nodejs/npm-install-online && -watch --run",
 		"was_postinstall": "./libexec/nodejs/npm-install-online && skpm-link"
 	},
+	"dependencies":
+	{
+		"@material/material-color-utilities": "0.3.0"
+	},
 	"devDependencies":
 	{
 		"@skpm/builder": "0.9.5",
