@@ -188,7 +188,6 @@ _nodejs_extract_distribution()
 		cache = "$nodejs_cache_folder_path"
 		init-module = "$nodejs_libexec_folder_path/npm-init.js"
 		init.module = "$nodejs_libexec_folder_path/npm-init.js"
-		userconfig = "$nodejs_libexec_folder_path/user.config.npmrc"
 	EOF
 
 	cat "$nodejs_libexec_folder_path" >>"$nodejs_etc_folder_path"/npmrc
@@ -214,6 +213,7 @@ nodejs_run_binary()
 	export NODE_PENDING_DEPRECATION=1
 	export NODE_REPL_HISTORY=''
 	export NODE_REPL_EXTERNAL_MODULE=''
+	export NPM_CONFIG_USERCONFIG="$root_folder_path"/libexec/nodejs/user.config.npmrc
 
 	#export NODE_PATH=XXXXXX
 
