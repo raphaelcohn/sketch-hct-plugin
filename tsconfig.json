@@ -110,6 +110,12 @@
 		
 		/* Completeness */
 		"skipDefaultLibCheck": true,
-		"skipLibCheck": false
+		"skipLibCheck": false,
+		
+		"types":
+		[
+			"@material/material-color-utilities",
+			"@sketch-hq/sketch-file-format-ts"
+		]
 	}
 }

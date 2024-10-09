@@ -4,9 +4,9 @@
 // @ts-ignore
 import sketch from "sketch";
 
-import {randomEmoji} from "./shared";
+import {randomEmoji} from "../domain/randomEmoji";
 
-export default function()
+export default function(_context: object)
 {
 	// const selected_document = sketch.getSelectedDocument()
 	//
