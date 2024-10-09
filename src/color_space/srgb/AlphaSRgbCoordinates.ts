@@ -1,14 +1,14 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-import {SRgbSpace} from "./SRgbSpace.js";
+import {SRgbCoordinates} from "./SRgbCoordinates.js";
 import {Component} from "./Component.js";
 import {argbFromRgba, Cam16, Rgba, rgbaFromArgb} from "@material/material-color-utilities";
-import {HctSpace} from "../hct/HctSpace";
-import {TonalPalette} from "../hct/TonalPalette";
-import {HctSpaceTone} from "../hct/HctSpaceTone";
+import {HueChromaToneCoordinates} from "../hct";
+import {TonalPalette} from "../hct";
+import {Tone} from "../hct";
 
-export class AlphaSRgbSpace extends SRgbSpace
+export class AlphaSRgbCoordinates extends SRgbCoordinates
 {
 	public readonly alpha: NonNullable<Component>
 	
@@ -18,14 +18,19 @@ export class AlphaSRgbSpace extends SRgbSpace
 		this.alpha = alpha
 	}
 	
-	public override toString(this: NonNullable<this>): NonNullable<string>
+	public override toString(this: NonNullable<this>): string
 	{
-		return `(${this.alpha}, ${this.red}, ${this.green}, ${this.blue})`
+		return `${SRgbCoordinates.hexadecimal_string_prefix}${SRgbCoordinates.component_hexadecimal_upper_case_string(this.alpha)}${this.red_green_blue_hexadecimal_upper_case_string()}`
 	}
 	
-	public into_hct_space(this: NonNullable<this>): NonNullable<HctSpace>
+	public override valueOf(this: NonNullable<this>): number
 	{
-		return HctSpace.from_alpha_srgb_space(this)
+		return this.#into_argb()
+	}
+	
+	public into_hue_chroma_tone_coordinates(this: NonNullable<this>): NonNullable<HueChromaToneCoordinates>
+	{
+		return HueChromaToneCoordinates.from_alpha_srgb_space(this)
 	}
 	
 	public into_tonal_palette(this: NonNullable<this>): NonNullable<TonalPalette>
@@ -33,29 +38,27 @@ export class AlphaSRgbSpace extends SRgbSpace
 		return TonalPalette.from_alpha_srgb_space(this)
 	}
 	
-	public into_tone(this: NonNullable<this>): NonNullable<HctSpaceTone>
+	public into_tone(this: NonNullable<this>): NonNullable<Tone>
 	{
-		return HctSpaceTone.from_alpha_srgb_space(this)
+		return Tone.from_alpha_srgb_space(this)
 	}
 	
-	static from_argb(argb: NonNullable<number>): NonNullable<AlphaSRgbSpace>
+	static from_argb(argb: number): NonNullable<AlphaSRgbCoordinates>
 	{
-		guard_number(argb, "argb")
-		
-		return AlphaSRgbSpace.from_rgba(rgbaFromArgb(argb))
+		return AlphaSRgbCoordinates.from_rgba(rgbaFromArgb(argb))
 	}
 	
-	static from_rgba(rgba: NonNullable<Rgba>): NonNullable<AlphaSRgbSpace>
+	static from_rgba(rgba: NonNullable<Rgba>): NonNullable<AlphaSRgbCoordinates>
 	{
-		return new AlphaSRgbSpace(Component.alpha_from_rgba(rgba), Component.red_from_rgba(rgba), Component.green_from_rgba(rgba), Component.blue_from_rgba(rgba))
+		return new AlphaSRgbCoordinates(Component.alpha_from_rgba(rgba), Component.red_from_rgba(rgba), Component.green_from_rgba(rgba), Component.blue_from_rgba(rgba))
 	}
 	
 	into_rgba(this: NonNullable<this>): NonNullable<Rgba>
 	{
-		return {r: this.red.value, g: this.green.value, b: this.blue.value, a: this.alpha.value}
+		return {r: this.red.valueOf(), g: this.green.valueOf(), b: this.blue.valueOf(), a: this.alpha.valueOf()}
 	}
 	
-	#into_argb(this: NonNullable<this>): NonNullable<number>
+	#into_argb(this: NonNullable<this>): number
 	{
 		return argbFromRgba(this.into_rgba())
 	}

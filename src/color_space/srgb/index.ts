@@ -1,16 +1,7 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-import {Component} from "./Component.js";
-
-export class SRgbSpace
-{
-	constructor(public readonly red: NonNullable<Component>, public readonly green: NonNullable<Component>, public readonly blue: NonNullable<Component>)
-	{
-	}
-	
-	public toString(this: NonNullable<this>): NonNullable<string>
-	{
-		return `(${this.red}, ${this.green}, ${this.blue})`
-	}
-}
+export * from './AlphaSRgbCoordinates'
+export * from './Component'
+export * from './LinearizedComponent'
+export * from './SRgbCoordinates'
