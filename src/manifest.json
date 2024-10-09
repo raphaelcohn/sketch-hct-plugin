@@ -19,14 +19,14 @@
 			"name": "Sketch HCT Plugin",
 			"description": "Default command to run",
 			"shortcut": "ctrl c",
-			"script": "./sketch-hct-plugin.js"
+			"script": "../tmp/typescript/sketch-hct-plugin.js"
 		},
 		{
 			"identifier": "com.stormmq.sketch-hct-plugin.commands.example",
 			"name": "Example",
 			"description": "Example command to run",
 			"shortcut": "ctrl d",
-			"script": "./example.command.js",
+			"script": "../tmp/typescript/example.command.js",
 			"handler": "example"
 		}
 	],
