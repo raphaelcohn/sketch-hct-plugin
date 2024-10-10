@@ -115,7 +115,8 @@
 		"types":
 		[
 			"@material/material-color-utilities",
-			"@sketch-hq/sketch-file-format-ts"
+			"@sketch-hq/sketch-file-format-ts",
+			"@types/node"
 		]
 	}
 }

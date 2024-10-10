@@ -41,6 +41,7 @@
 	"devDependencies":
 	{
 		"@skpm/builder": "0.9.5",
+		"@types/node": "20.16.11",
 		"typescript": "5.6.2",
 		"@sketch-hq/sketch-file-format-ts": "6.5.0"
 	}
