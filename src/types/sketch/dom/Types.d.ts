@@ -62,6 +62,8 @@ declare module 'sketch/dom'
 			
 			Style = 'Style',
 			
+			Swatch = 'Swatch',
+			
 			SymbolInstance = 'SymbolInstance',
 			
 			SymbolMaster = 'SymbolMaster',

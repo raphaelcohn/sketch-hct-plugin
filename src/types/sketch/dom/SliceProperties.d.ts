@@ -28,24 +28,5 @@ declare module 'sketch/dom'
 			 */
 			exportFormats?: ExportFormat[]
 		}
-		
-		// import MSSliceLayer = sketchInternal.MSSliceLayer
-		
-		/**
-		 * A slice.
-		 * It is an instance of both Layer so all the methods defined there are available.
-		 */
-			// export class Slice extends Layer<MSSliceLayer>
-		export class Slice extends Layer
-		{
-			constructor(properties?: SliceProperties)
-			
-			type: Types.Slice
-			
-			/**
-			 * The group the Slice is in.
-			 */
-			parent: Group
-		}
 	}
 }
