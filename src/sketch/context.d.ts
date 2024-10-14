@@ -1,41 +1,4 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-declare namespace sketchPublic
-{
-	// import MSPluginCommand = sketchInternal.MSPluginCommand
-	// import MSDocument = sketchInternal.MSDocument
-	// import MSAction = sketchInternal.MSAction
-	// import MSExportRequest = sketchInternal.MSExportRequest
-	// import NSURL = cocoascript.NSURL
-	// import NSArray = cocoascript.NSArray
-	
-	interface SketchContext
-	{
-		// command: MSPluginCommand
-		// document: MSDocument
-		scriptPath: string
-		// scriptURL: NSURL
-		// selection: NSArray
-	}
-	
-	// interface SketchActionContext<T extends MSAction> extends SketchContext
-	interface SketchActionContext<Action> extends SketchContext
-	{
-		actionContext:
-		{
-			// document: MSDocument
-			action?: Action
-			exports?:
-			{
-				path: string
-				// request: MSExportRequest
-			}[]
-		}
-		action: string
-	}
-}
-
-declare type SketchContext = sketchPublic.SketchContext
-
 declare const context: sketchPublic.SketchContext
