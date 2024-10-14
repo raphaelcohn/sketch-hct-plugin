@@ -101,7 +101,7 @@
 /// <reference path="./getDocuments.d.ts" />
 /// <reference path="./getSelectedDocument.d.ts" />
 
-declare module 'sketch/dom'
+declare module "sketch/dom"
 {
 	// @ts-ignore
 	export = dom

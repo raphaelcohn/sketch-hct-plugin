@@ -3,14 +3,13 @@
 
 import {ImageProperties} from "sketch/dom";
 
-declare module 'sketch/dom'
+declare module "sketch/dom"
 {
 	namespace dom
 	{
-		// import MSBitmapLayer = sketchInternal.MSBitmapLayer
+		import MSBitmapLayer = sketchInternal.MSBitmapLayer
 		
-		// export class Image extends StyledLayer<MSBitmapLayer>
-		export class Image extends StyledLayer<any>
+		export class Image extends StyledLayer<MSBitmapLayer>
 		{
 			constructor(properties?: ImageProperties)
 			

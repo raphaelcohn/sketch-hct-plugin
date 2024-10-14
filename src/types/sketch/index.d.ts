@@ -2,14 +2,10 @@
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
 /// <reference path="./SketchContext.d.ts" />
-/// <reference path="./sketch-types.SketchFormat.d.ts" />
-/// <reference path="./async.Fiber.d.ts" />
-/// <reference path="./async.createFiber.d.ts" />
+/// <reference path="./async/index.d.ts" />
 /// <reference path="./context.d.ts" />
 /// <reference path="./data-supplier/index.d.ts" />
 /// <reference path="./dom/index.d.ts" />
 /// <reference path="./settings/index.d.ts" />
 /// <reference path="./sketch.d.ts" />
-/// <reference path="./sketchPublic.SketchActionContext.d.ts" />
-/// <reference path="./sketchPublic.SketchContext.d.ts" />
 /// <reference path="./ui/index.d.ts" />

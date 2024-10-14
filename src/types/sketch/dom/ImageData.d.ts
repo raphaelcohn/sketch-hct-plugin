@@ -3,27 +3,26 @@
 
 import {ImageProperties} from "sketch/dom";
 
-declare module 'sketch/dom'
+declare module "sketch/dom"
 {
 	namespace dom
 	{
-		// import NSImage = cocoascript.NSImage
-		// import MSImageData = sketchInternal.MSImageData
-		// import NSURL = cocoascript.NSURL
-		// import NSData = cocoascript.NSData
+		import NSImage = cocoascript.NSImage
+		import MSImageData = sketchInternal.MSImageData
+		import NSURL = cocoascript.NSURL
+		import NSData = cocoascript.NSData
 		
 		/**
 		 * An ImageData is a wrapper around a native NSImage.
 		 * You can access the native NSImage with nsimage or a native NSData representation of the image with nsdata.
 		 */
-		// export abstract class ImageData extends Component<MSImageData>
-		export abstract class ImageData extends Component
+		export abstract class ImageData extends Component<MSImageData>
 		{
 			type: Types.ImageData
 			
-			// readonly nsimage: NSImage
+			readonly nsimage: NSImage
 			
-			// readonly nsdata: NSData
+			readonly nsdata: NSData
 			
 			/**
 			 * The image property accept a wide range of input:—
@@ -35,8 +34,7 @@ declare module 'sketch/dom'
 			 * * an object with a path property: path to the file to load the image from.
 			 * * an object with a base64 string: a base64 encoded image.
 			 */
-			static from(input: ImageData | string | { path: string } | { base64: string }): ImageData
-			//static from(input: ImageData | NSImage | NSURL | MSImageData | string | { path: string } | { base64: string }): ImageData
+			static from(input: ImageData | NSImage | NSURL | MSImageData | string | { path: string } | { base64: string }): ImageData
 		}
 	}
 }

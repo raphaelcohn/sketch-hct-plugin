@@ -1,14 +1,13 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-declare module 'sketch/dom'
+declare module "sketch/dom"
 {
 	namespace dom
 	{
-		// import MSSymbolInstance = sketchInternal.MSSymbolInstance
-		// import NSImage = cocoascript.NSImage
-		// export class SymbolInstance extends StyledLayer<MSSymbolInstance>
-		export class SymbolInstance
+		import MSSymbolInstance = sketchInternal.MSSymbolInstance
+		import NSImage = cocoascript.NSImage
+		export class SymbolInstance extends StyledLayer<MSSymbolInstance>
 		{
 			constructor(properties: SymbolInstanceProperties)
 			
@@ -50,7 +49,7 @@ declare module 'sketch/dom'
 			//  * @param value The value of override to set.
 			//  * Can be a string or an NSImage or a symbolId depending on the type of the override.
 			//  */
-			// setOverrideValue(override: Override, value: string | NSImage): this
+			setOverrideValue(override: Override, value: string | NSImage): this
 			
 			/**
 			 * In order to trigger a Smart Layout resize in an instance, for example after changing an override value, call the `resizeWithSmartLayout()` method.

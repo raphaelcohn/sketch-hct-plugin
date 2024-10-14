@@ -3,12 +3,13 @@
 
 import {ImageProperties} from "sketch/dom";
 
-declare module 'sketch/dom'
+declare module "sketch/dom"
 {
 	namespace dom
 	{
-		// import NSImage = cocoascript.NSImage
-		// import MSImageData = sketchInternal.MSImageData
+		import NSImage = cocoascript.NSImage
+		import MSImageData = sketchInternal.MSImageData
+		import NSURL = cocoascript.NSURL
 		
 		export interface ImageProperties
 		{
@@ -47,8 +48,7 @@ declare module 'sketch/dom'
 			 * * an object with a path property: path to the file to load the image from.
 			 * * an object with a base64 string: a base64 encoded image.
 			 */
-			image?: ImageData | string | { path: string } | { base64: string }
-			// image?: ImageData | NSImage | NSURL | MSImageData | string | { path: string } | { base64: string }
+			image?: ImageData | NSImage | NSURL | MSImageData | string | { path: string } | { base64: string }
 		}
 	}
 }
