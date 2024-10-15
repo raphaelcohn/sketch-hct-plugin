@@ -7,9 +7,17 @@ declare module "sketch/dom"
 	{
 		import MSShapePathLayer = sketchInternal.MSShapePathLayer
 		
+		/**
+		 * A shape path layer.
+		 * It is an instance of Layer so all the methods defined there are available.
+		 */
 		export class ShapePath extends StyledLayer<MSShapePathLayer>
 		{
-			constructor(properties?: ShapePathProperties)
+			/**
+			 * You can only set the shapeType when creating a new one. Once it is created, the shapeType is read-only
+			 * If it is not specified and you do not specify any points, it will default to ShapePath.ShapeType.Rectangle (if you do specify some points, it will default to ShapePath.ShapeType.Custom).
+			 */
+			constructor(properties?: ShapePathConstructorProperties)
 			
 			type: Types.ShapePath
 			
@@ -17,21 +25,6 @@ declare module "sketch/dom"
 			 * The group the Shape is in.
 			 */
 			parent: Group
-			
-			/**
-			 * The points defining the Shape Path.
-			 */
-			points: CurvePoint[]
-			
-			/**
-			 * The type of the Shape Path. It can only be set when creating a new ShapePath.
-			 */
-			readonly shapeType: ShapePath.ShapeType
-			
-			/**
-			 * If the Path is closed.
-			 */
-			closed: boolean
 			
 			/**
 			 * The ID of the SharedStyle or null, identical to sharedStyle.id.
@@ -45,13 +38,30 @@ declare module "sketch/dom"
 			
 			/**
 			 * create a new ShapePath from an SVG path (the string that goes in the `d` attribute of a path tag in an SVG).
+			 * @param d eg 'M10 10 H 90 V 90 H 10 L 10 10'.
 			 */
-			static fromSVGPath(svg: string): ShapePath
+			static fromSVGPath(d: string): ShapePath
 			
 			/**
 			 * Returns a string representing the SVG path of the ShapePath.
 			 */
 			getSVGPath(): string
+			
+			/**
+			 * The points defining the Shape Path.
+			 */
+			points: CurvePoint[]
+			
+			/**
+			 * If the Path is closed.
+			 */
+			closed: boolean
+			
+			/**
+			 * The type of the Shape Path.
+			 * It can only be set when creating a new ShapePath.
+			 */
+			readonly shapeType: ShapePath.ShapeType
 		}
 	}
 }

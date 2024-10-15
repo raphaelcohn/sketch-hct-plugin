@@ -5,37 +5,50 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		export interface GroupProperties
+		export interface ShapePathConstructorProperties
 		{
 			/**
-			 * The name of the Group
+			 * The name of the Shape
 			 */
 			name?: string
 			
 			/**
-			 * The group the Group is in.
+			 * The group the Shape is in.
 			 */
 			parent?: Group
 			
 			/**
-			 * The frame of the Group. This is given in coordinates that are local to the parent of the layer.
+			 * The frame of the Shape.
+			 * This is given in coordinates that are local to the parent of the layer.
 			 */
 			frame?: Rectangle
 			
 			/**
-			 * The prototyping action associated with the Group.
+			 * The prototyping action associated with the Shape.
 			 */
 			flow?: FlowProperty
 			
 			/**
-			 * The style of the Group.
+			 * The style of the Shape.
 			 */
 			style?: Style | IStyle
 			
 			/**
-			 * The layers that this Group has
+			 * The points defining the Shape Path.
 			 */
-			layers?: LayersPropertyType
+			points?: ICurvePoint[]
+			
+			/**
+			 * The type of the Shape Path.
+			 * It can only be set when creating a new ShapePath.
+			 */
+			shapeType: ShapePath.ShapeType
+			
+			/**
+			 * If the Path is closed.
+			 */
+			closed?: boolean
 		}
+		
 	}
 }

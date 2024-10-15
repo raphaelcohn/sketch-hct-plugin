@@ -21,7 +21,9 @@ declare module "sketch/dom"
 			endArrowhead?: Style.Arrowhead
 			
 			/**
-			 * The dash pattern of the borders. For example, a dash pattern of 4-2 will draw the stroke for four pixels, put a two pixel gap, draw four more pixels and then so on. A dashed pattern of 5-4-3-2 will draw a stroke of 5 px, a gap of 4 px, then a stroke of 3 px, a gap of 2 px, and then repeat.
+			 * The dash pattern of the borders.
+			 * For example, a dash pattern of 4-2 will draw the stroke for four pixels, put a two pixel gap, draw four more pixels and then so on.
+			 * A dashed pattern of 5-4-3-2 will draw a stroke of 5 px, a gap of 4 px, then a stroke of 3 px, a gap of 2 px, and then repeat.
 			 */
 			dashPattern?: number[]
 			
@@ -33,7 +35,7 @@ declare module "sketch/dom"
 			/**
 			 * The type of the border joins (if any).
 			 */
-			lineJoin?: Style.LineJoin.Bevel | Style.LineJoin.Round | 'Miter'
+			lineJoin?: Style.LineJoin
 		}
 	}
 }

@@ -8,4 +8,7 @@
 /// <reference path="./dom/index.d.ts" />
 /// <reference path="./settings/index.d.ts" />
 /// <reference path="./sketch.d.ts" />
+/// <reference path="./sketch.createLayerFromData.d.ts" />
+/// <reference path="./sketch.globalAssets.d.ts" />
+/// <reference path="./sketch.version.d.ts" />
 /// <reference path="./ui/index.d.ts" />

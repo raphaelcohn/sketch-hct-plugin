@@ -13,15 +13,21 @@ declare module "sketch/dom"
 			/**
 			 * The type of the fill of the border.
 			 */
-			fillType: Style.FillType
+			fillType: Style.FillType.Color | Style.FillType.Gradient
 			
 			/**
-			 * A rgba hex-string (#000000ff is opaque black).
+			 * The color of border.
+			 *
+			 * Defined if `fillType` is `Style.FillType.Color`.
+			 *
+			 * A rgba hex-string (`#000000ff` is opaque black).
 			 */
 			color?: string
 			
 			/**
-			 * The gradient of the fill.
+			 * The gradient of the border.
+			 *
+			 * Defined if `fillType` is `Style.FillType.Gradient`.
 			 */
 			gradient?: Gradient
 			

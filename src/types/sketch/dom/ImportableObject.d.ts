@@ -6,6 +6,8 @@ declare module "sketch/dom"
 	namespace dom
 	{
 		/**
+		 * Also known as a Shareable Object
+		 *
 		 * An Object that can imported from a Library.
 		 * All its properties are read-only.
 		 */

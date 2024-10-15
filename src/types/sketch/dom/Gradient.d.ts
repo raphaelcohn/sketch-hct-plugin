@@ -18,23 +18,15 @@ declare module "sketch/dom"
 			/**
 			 * The position of the start of the Gradient
 			 */
-			from:
-			{
-				x: number
-				y: number
-			}
+			from: Point
 			
 			/**
 			 * The position of the end of the Gradient.
 			 */
-			to:
-			{
-				x: number
-				y: number
-			}
+			to: Point
 			
 			/**
-			 * The different stops of the Gradient
+			 * The different stops of the Gradient.
 			 */
 			stops: GradientStop[]
 		}

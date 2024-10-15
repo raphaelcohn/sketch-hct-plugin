@@ -12,7 +12,7 @@ declare module "sketch/dom"
 		 * This component is not exposed, it is only returned when accessing the overrides of a Symbol Instance.
 		 * Can't be constructed: only returned from a SymbolInstance.
 		 */
-		export abstract class Override extends Component<MSAvailableOverride>
+		export abstract class SymbolOverride extends Component<MSAvailableOverride>
 		{
 			type: Types.Override
 			
@@ -24,9 +24,9 @@ declare module "sketch/dom"
 			
 			/**
 			 * The property that this override controls.
-			 * It can be "stringValue" for a text override, "symbolId" for a nested symbol, or "image" for an image override.
+			 * It can be "stringValue" for a text override, "symbolID" for a nested symbol, "layerStyle" for a shared layer style override, "textStyle" for a shared text style override, "flowDestination" for a Hotspot target override or "image" for an image override.
 			 */
-			property: 'stringValue' | 'symbolID' | 'image' | 'textStyle'
+			property: 'stringValue' | 'symbolID' | 'layerStyle' | 'textStyle' | 'flowDestination' | 'image'
 			
 			/**
 			 * The unique ID of the override (${path}_${property}).
@@ -48,8 +48,10 @@ declare module "sketch/dom"
 			 */
 			
 			isDefault: boolean
+			
 			/**
-			 * The layer the override applies to. It will be an immutable version of the layer
+			 * The layer the override applies to.
+			 * It will be an immutable version of the layer.
 			 */
 			affectedLayer: Text | Image | SymbolInstance
 			
@@ -59,9 +61,17 @@ declare module "sketch/dom"
 			editable: boolean
 			
 			/**
-			 * If the override is selected.
+			 * If the override is selected (or undefined if it’s the override of a Symbol Source).
 			 */
-			selected: boolean
+			selected: boolean | undefined
+			
+			/**
+			 * Get the frame of an Override.
+			 *
+			 * The frame of an override can be different than the frame of its affected Layer in case where the Symbol Instance has been scaled for example.
+			 * @return A Rectangle describing the frame of the affected layer in the Symbol Instance’s coordinates.
+			 */
+			getFrame(): Rectangle
 		}
 	}
 }

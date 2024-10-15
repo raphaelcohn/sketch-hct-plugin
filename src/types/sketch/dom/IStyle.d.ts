@@ -61,12 +61,14 @@ declare module "sketch/dom"
 			verticalAlignment?: Text.VerticalAlignment
 			
 			/**
-			 * The kerning between letters of a Text Layer. null means that the kerning will be the one defined by the font.
+			 * The kerning between letters of a Text Layer.
+			 * `null` means that the kerning will be the one defined by the font.
 			 */
 			kerning?: number | null
 			
 			/**
-			 * The height of a line of text in a Text Layer. null means "automatic".
+			 * The height of a line of text in a Text Layer.
+			 * `null` means "automatic".
 			 */
 			lineHeight?: number | null
 			
@@ -76,7 +78,7 @@ declare module "sketch/dom"
 			paragraphSpacing?: number
 			
 			/**
-			 * A rgba hex-string (#000000ff is opaque black) of the color of the text in a Text Layer.
+			 * A rgba hex-string (`#000000ff` is opaque black) of the color of the text in a Text Layer.
 			 */
 			textColor?: string
 			

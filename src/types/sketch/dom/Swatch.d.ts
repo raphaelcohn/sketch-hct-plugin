@@ -7,27 +7,27 @@ declare module "sketch/dom"
 	{
 		import MSColor = sketchInternal.MSColor
 		
-		export class Swatch implements ISwatch
+		export class Swatch implements IColorAsset
 		{
 			type: Types.Swatch
 			
 			/**
-			 * The name of the swatch, or null
+			 * The name of the asset, or null.
 			 */
 			name?: string
 			
 			/**
 			 * The hex string for the color.
 			 */
-			color: string
+			color: ColorString
 			
 			referencingColor: MSColor
 			
 			/**
-			 * Get a referencing Color
+			 * Get a referencing Color.
 			 * @return A Color that references a Color Variable, which you can use anywhere the API expects a Color object.
 			 */
-			static from(swatch: ISwatch): Swatch
+			static from(colorAsset: IColorAsset): Swatch
 		}
 	}
 }

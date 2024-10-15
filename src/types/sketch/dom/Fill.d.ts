@@ -12,25 +12,38 @@ declare module "sketch/dom"
 		{
 			/**
 			 * The type of the fill.
+			 *
+			 * Can not be `Style
 			 */
 			fillType: Style.FillType
 			
 			/**
-			 * A rgba hex-string (#000000ff is opaque black).
+			 * The color of the fill.
+			 *
+			 * Defined if `fillType` is `Style.FillType.Color`.
+			 *
+			 * A rgba hex-string (`#000000ff` is opaque black).
 			 */
 			color?: string
 			
 			/**
 			 * The gradient of the fill.
+			 *
+			 * Defined if `fillType` is `Style.FillType.Gradient`.
 			 */
 			gradient?: Gradient
+			
+			/**
+			 * The pattern of the fill.
+			 *
+			 * Defined if `fillType` is `Style.FillType.Pattern`.
+			 */
+			pattern?: FillPattern
 			
 			/**
 			 * Whether the fill is active or not.
 			 */
 			enabled?: boolean
-			
-			pattern?: Pattern
 		}
 	}
 }

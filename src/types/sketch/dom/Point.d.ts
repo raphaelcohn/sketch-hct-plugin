@@ -23,15 +23,15 @@ declare module "sketch/dom"
 			 */
 			y: number
 			
-			// /**
-			//  * Return the Point as a CGPoint.
-			//  */
+			/**
+			 * Return the Point as a CGPoint.
+			 */
 			asCGPoint(): CGPoint
 			
-			//
-			// /**
-			//  * Return the Point as a NSPoint.
-			//  */
+
+			/**
+			 * Return the Point as a NSPoint.
+			 */
 			asNSPoint(): NSPoint
 		}
 	}

@@ -5,11 +5,15 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
+		/**
+		 *  Sketch artboard.
+		 *  It is an instance of both Layer and Group so all the methods defined there are available.
+		 */
 		export class Artboard extends BaseArtboard
 		{
 			type: Types.Artboard
 
-			constructor(properties?: ArtboardProperties)
+			constructor(properties?: ArtboardConstructorProperties)
 		}
 	}
 }

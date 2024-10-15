@@ -22,7 +22,9 @@ declare module "sketch/dom"
 				 */
 				variable = 'variable',
 				
-				// Undocumented.
+				/**
+				 * Undocumented.
+ 				 */
 				natural = 'natural',
 			}
 		}

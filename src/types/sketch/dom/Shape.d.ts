@@ -7,6 +7,11 @@ declare module "sketch/dom"
 	{
 		import MSShapeGroup = sketchInternal.MSShapeGroup
 		
+		/**
+		 * A shape layer.
+		 * It is an instance of Layer so all the methods defined there are available.
+		 * It is shaped by its layers which have boolean operations between them.
+		 */
 		export class Shape extends BaseGroup<MSShapeGroup>
 		{
 			constructor(properties?: ShapeProperties)
@@ -19,14 +24,14 @@ declare module "sketch/dom"
 			parent: Group
 			
 			/**
-			 * The ID of the SharedStyle or null, identical to sharedStyle.id.
-			 */
-			sharedStyleId: string | null
-			
-			/**
 			 * The associated shared style.
 			 */
 			sharedStyle: SharedStyle | null
+			
+			/**
+			 * The ID of the SharedStyle or null, identical to sharedStyle.id.
+			 */
+			sharedStyleId: string | null
 		}
 	}
 }

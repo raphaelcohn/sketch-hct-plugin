@@ -26,14 +26,9 @@ declare module "sketch/dom"
 			motionAngle?: number
 			
 			/**
-			 * The center of the blur (only used when the blur type is Zoom.
+			 * The center of the blur (only used when the blur type is Zoom).
 			 */
-			center?:
-				{
-					x: number
-					
-					y: number
-				}
+			center?: BlurZoomCenter
 			
 			/**
 			 * Whether the fill is active or not.

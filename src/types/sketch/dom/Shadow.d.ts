@@ -11,9 +11,9 @@ declare module "sketch/dom"
 		export interface Shadow
 		{
 			/**
-			 * A rgba hex-string (#000000ff is opaque black).
+			 * A rgba hex-string (`#000000ff` is opaque black).
 			 */
-			color: string
+			color: ColorString
 			
 			/**
 			 * The blur radius of the shadow.

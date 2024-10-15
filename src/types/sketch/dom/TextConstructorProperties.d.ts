@@ -5,7 +5,7 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		export interface TextProperties
+		export interface TextConstructorProperties
 		{
 			/**
 			 * The name of the Text

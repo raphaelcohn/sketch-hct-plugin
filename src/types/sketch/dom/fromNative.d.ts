@@ -27,7 +27,7 @@ declare module "sketch/dom"
 		export function fromNative(nativeObject: ImportableNative): ImportableObject
 		export function fromNative(nativeObject: MSArtboardGroup): Artboard
 		export function fromNative(nativeObject: MSAssetLibrary): Library
-		export function fromNative(nativeObject: MSAvailableOverride): Override
+		export function fromNative(nativeObject: MSAvailableOverride): SymbolOverride
 		export function fromNative(nativeObject: MSBitmapLayer): Image
 		export function fromNative(nativeObject: MSCurvePoint): CurvePoint
 		export function fromNative(nativeObject: MSDocument): Document

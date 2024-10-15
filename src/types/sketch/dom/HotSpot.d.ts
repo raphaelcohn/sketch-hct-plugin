@@ -9,10 +9,11 @@ declare module "sketch/dom"
 		
 		/**
 		 * A Sketch hotspot.
+		 * It is an instance of Layer so all the methods defined there are available.
 		 */
 		export class HotSpot extends Component<MSHotspotLayer>
 		{
-			constructor(properties?: HotSpotProperties)
+			constructor(properties?: HotSpotConstructorProperties)
 			
 			type: Types.HotSpot
 			

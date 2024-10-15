@@ -17,7 +17,7 @@ declare module "sketch"
 	export namespace sketch
 	{
 		export import Artboard = dom.Artboard
-		export import ArtboardProperties = dom.ArtboardProperties
+		export import ArtboardProperties = dom.ArtboardConstructorProperties
 		export import Async = async
 		export import Blur = dom.Blur
 		export import Border = dom.Border
@@ -31,21 +31,21 @@ declare module "sketch"
 		export import Gradient = dom.Gradient
 		export import GradientStop = dom.GradientStop
 		export import Group = dom.Group
-		export import GroupProperties = dom.GroupProperties
+		export import GroupProperties = dom.GroupConstructorProperties
 		export import HotSpot = dom.HotSpot
-		export import HotSpotProperties = dom.HotSpotProperties
+		export import HotSpotProperties = dom.HotSpotConstructorProperties
 		export import IStyle = dom.IStyle
 		export import Image = dom.Image
 		export import ImageData = dom.ImageData
-		export import ImageProperties = dom.ImageProperties
+		export import ImageProperties = dom.ImageConstructorProperties
 		export import ImportableObject = dom.ImportableObject
 		export import Layer = dom.Layer
 		export import LayerPropertyType = dom.LayerPropertyType
 		export import LayersPropertyType = dom.LayersPropertyType
 		export import Library = dom.Library
-		export import Override = dom.Override
+		export import Override = dom.SymbolOverride
 		export import Page = dom.Page
-		export import PageProperties = dom.PageProperties
+		export import PageProperties = dom.PageConstructorProperties
 		export import Rectangle = dom.Rectangle
 		export import Selection = dom.Selection
 		export import Settings = settings
@@ -54,24 +54,20 @@ declare module "sketch"
 		export import ShapePath = dom.ShapePath
 		export import ShapeProperties = dom.ShapeProperties
 		export import SharedStyle = dom.SharedStyle
+		export import SmartLayout = dom.SmartLayout
 		export import Style = dom.Style
 		export import SymbolInstance = dom.SymbolInstance
-		export import SymbolInstanceProperties = dom.SymbolInstanceProperties
+		export import SymbolInstanceProperties = dom.SymbolInstanceConstructorProperties
 		export import SymbolMaster = dom.SymbolMaster
 		export import SymbolMasterProperties = dom.SymbolMasterProperties
 		export import Text = dom.Text
 		export import TextFragment = dom.TextFragment
-		export import TextProperties = dom.TextProperties
+		export import TextProperties = dom.TextConstructorProperties
 		export import Types = dom.Types
 		export import UI = ui
 		export import fromNative = dom.fromNative
-		export import getDocuments = dom.getDocuments
-		export import getSelectedDocument = dom.getSelectedDocument
-		export const version:
-		{
-			readonly api: string
-			
-			readonly sketch: string
-		}
+		export import getDocuments = dom.Document.getDocuments
+		export import getLibraries = dom.Library.getLibraries
+		export import getSelectedDocument = dom.Document.getSelectedDocument
 	}
 }

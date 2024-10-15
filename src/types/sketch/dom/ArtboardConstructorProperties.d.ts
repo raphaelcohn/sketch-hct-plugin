@@ -5,16 +5,32 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		/**
-		 * Image Fill Style
-		 */
-		export interface Pattern
+		export interface ArtboardConstructorProperties
 		{
-			patternType: Style.PatternFillType
+			/**
+			 * The name of the Artboard
+			 */
+			name?: string
 			
-			tileScale: number
+			/**
+			 * The document the Artboard is in.
+			 */
+			parent?: Page
 			
-			image: ImageData
+			/**
+			 * The layers that this component groups together
+			 */
+			layers?: LayersPropertyType
+			
+			/**
+			 * The frame of the page
+			 */
+			frame?: Rectangle
+			
+			/**
+			 * A Start Point allows you to choose where to start your prototype from.
+			 */
+			flowStartPoint?: boolean
 		}
 	}
 }

@@ -7,11 +7,11 @@ declare module "sketch/data-supplier"
 	{
 		/**
 		 * Register some data with a name and a key.
-		 * @param type The data type. Currently public.text or public.image are the only allowed values.
-		 * @param name The data name, will be used as the menu item title for the data.
+		 * @param dataType The data type. Currently public.text or public.image are the only allowed values.
+		 * @param dataName The data name, will be used as the menu item title for the data.
 		 * @param action The name of the Action that will be dispatched when the user requests some data.
 		 * See supplyData.
 		 */
-		export function registerDataSupplier(type: 'public.text' | 'public.image', name: string, action: string): void
+		export function registerDataSupplier(dataType: DataType, dataName: string, action: string): void
 	}
 }

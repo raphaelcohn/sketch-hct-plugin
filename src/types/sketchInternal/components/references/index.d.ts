@@ -4,5 +4,6 @@
 /// <reference path="./MSShareableObjectReference.d.ts" />
 /// <reference path="./MSSymbolMasterReference.d.ts" />
 /// <reference path="./MSSharedStyleReference.d.ts" />
+/// <reference path="./MSSharedSwatchReference.d.ts" />
 /// <reference path="./MSSharedLayerReference.d.ts" />
 /// <reference path="./MSSharedTextReference.d.ts" />

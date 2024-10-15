@@ -14,6 +14,6 @@ declare module "sketch/settings"
 		 * @param key The setting to set.
 		 * @param value The value to set it to.
 		 */
-		export function setLayerSettingForKey(layer: dom.Layer | dom.Override | data.DataOverride, key: string, value: any): void
+		export function setLayerSettingForKey(layer: dom.Layer | dom.SymbolOverride | data.DataOverride, key: string, value: any): void
 	}
 }

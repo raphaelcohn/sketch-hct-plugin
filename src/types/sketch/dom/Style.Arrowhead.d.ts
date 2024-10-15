@@ -24,8 +24,6 @@ declare module "sketch/dom"
 				OpenSquare = 'OpenSquare',
 				
 				FilledSquare = 'FilledSquare',
-				
-				ClosedArrow = 'FilledArrow',
 			}
 		}
 	}

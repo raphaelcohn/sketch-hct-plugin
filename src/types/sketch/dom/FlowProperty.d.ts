@@ -5,37 +5,6 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		/**
-		 * The prototyping action associated with a layer.
-		 */
-		export interface FlowProperty
-		{
-			/**
-			 * The target artboard of the action or Flow.BackTarget if the action is a back action.
-			 */
-			target?: Artboard | typeof Flow.BackTarget
-			
-			/**
-			 * The ID of target artboard of the action or Flow.BackTarget if the action is a back action.
-			 */
-			targetId?: string | typeof Flow.BackTarget
-			
-			/**
-			 * The type of the animation.
-			 */
-			animationType?: Flow.AnimationType
-			
-			/**
-			 * Returns whether the prototyping action is a back action or not, eg. whether layer.flow.target === Flow.BackTarget.
-			 * Is only valid on flow properties retrieved from layers
-			 */
-			readonly isBackAction?: () => boolean
-			
-			/**
-			 * In some cases, the target of the action can be invalid, for example when the target has been removed from the document. The methods returns whether the target is valid or not.
-			 * Is only valid on flow properties retrieved from layers.
-			 */
-			readonly isValidConnection?: () => boolean
-		}
+		export type FlowProperty = Flow
 	}
 }

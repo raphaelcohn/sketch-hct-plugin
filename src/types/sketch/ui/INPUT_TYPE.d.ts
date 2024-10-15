@@ -13,8 +13,6 @@ declare module "sketch/ui"
 			string = 'string',
 			
 			selection = 'selection',
-			
-			slider = 'slider',
 		}
 	}
 }

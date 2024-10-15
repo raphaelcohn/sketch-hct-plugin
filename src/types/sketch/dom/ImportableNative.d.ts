@@ -7,10 +7,12 @@ declare module "sketch/dom"
 	{
 		import MSShareableObjectReference = sketchInternal.MSShareableObjectReference
 		import MSSymbolMasterReference = sketchInternal.MSSymbolMasterReference
+		
 		import MSSharedStyleReference = sketchInternal.MSSharedStyleReference
 		import MSSharedLayerReference = sketchInternal.MSSharedLayerReference
 		import MSSharedTextReference = sketchInternal.MSSharedTextReference
+		import MSSharedSwatchReference = sketchInternal.MSSharedSwatchReference
 
-		type ImportableNative = MSShareableObjectReference | MSSymbolMasterReference | MSSharedStyleReference | MSSharedLayerReference | MSSharedTextReference
+		type ImportableNative = MSShareableObjectReference | MSSymbolMasterReference | MSSharedStyleReference | MSSharedLayerReference | MSSharedTextReference | MSSharedSwatchReference
 	}
 }

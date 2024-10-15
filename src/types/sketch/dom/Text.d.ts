@@ -6,9 +6,16 @@ declare module "sketch/dom"
 	namespace dom
 	{
 		import MSTextLayer = sketchInternal.MSTextLayer
+		import NSFont = cocoascript.NSFont
 		
+		/**
+		 * A text layer.
+		 * It is an instance of Layer so all the methods defined there are available.
+		 */
 		export class Text extends StyledLayer<MSTextLayer>
 		{
+			constructor(properties?: TextConstructorProperties)
+			
 			type: Types.Text
 			
 			/**
@@ -22,15 +29,19 @@ declare module "sketch/dom"
 			frame: Rectangle
 			
 			/**
+			 * The associated shared style.
+			 */
+			sharedStyle: SharedStyle | null
+			
+			/**
+			 * The ID of the SharedStyle or null, identical to sharedStyle.id.
+			 */
+			sharedStyleId: string | null
+			
+			/**
 			 * The string value of the text layer.
 			 */
 			text: string
-			
-			/**
-			 * @deprecated
-			 * The alignment of the layer.
-			 */
-			alignment: Text.Alignment
 			
 			/**
 			 * The line spacing of the layer.
@@ -43,26 +54,20 @@ declare module "sketch/dom"
 			fixedWidth: boolean
 			
 			/**
-			 * The ID of the SharedStyle or null, identical to sharedStyle.id.
+			 * @deprecated
+			 * The alignment of the layer.
 			 */
-			sharedStyleId: string | null
-			
-			/**
-			 * The associated shared style.
-			 */
-			sharedStyle: SharedStyle | null
-			
-			constructor(properties?: TextProperties)
+			alignment: Text.Alignment
 			
 			/**
 			 * Adjust the Text to fit its value.
 			 */
 			adjustToFit(): this
 			
-			// /**
-			//  * Set the font of the text layer.
-			//  */
-			// font: NSFont
+			/**
+			 * Set the font of the text layer.
+			 */
+			font: NSFont
 			
 			/**
 			 * @deprecated
@@ -71,7 +76,7 @@ declare module "sketch/dom"
 			systemFontSize: number
 			
 			/**
-			 * Returns a array of the text fragments for the text. Each one is a object containing a rectangle, and a baseline offset and the range of the fragment {rect, baselineOffset, range}.
+			 * Returns an array of the text fragments for the text.
 			 */
 			fragments: TextFragment[]
 		}

@@ -5,6 +5,6 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		export type LayerPropertyType = Layer | (GroupProperties & { type: Types.Group }) | (ImageProperties & { type: Types.Image }) | (ShapeProperties & { type: Types.Shape }) | (ShapeProperties & { type: Types.ShapePath }) | (TextProperties & { type: Types.Text }) | (SymbolInstanceProperties & { type: Types.SymbolInstance }) | (HotSpotProperties & { type: Types.HotSpot })
+		export type LayerPropertyType = Layer | (GroupConstructorProperties & { type: Types.Group }) | (ImageConstructorProperties & { type: Types.Image }) | (ShapeProperties & { type: Types.Shape }) | (ShapeProperties & { type: Types.ShapePath }) | (TextConstructorProperties & { type: Types.Text }) | (SymbolInstanceConstructorProperties & { type: Types.SymbolInstance }) | (HotSpotConstructorProperties & { type: Types.HotSpot })
 	}
 }

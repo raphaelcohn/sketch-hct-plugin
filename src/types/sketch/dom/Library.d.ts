@@ -44,6 +44,10 @@ declare module "sketch/dom"
 			 */
 			readonly lastModifiedAt: Date
 			
+			/**
+			 * Access all the Libraries
+			 * @return An array of Libraries.
+			 */
 			static getLibraries(): Library[]
 			
 			/**
@@ -77,34 +81,53 @@ declare module "sketch/dom"
 			 */
 			getDocument(): Document
 			
-			getImportableReferencesForDocument(document: Document, objectType: Library.ImportableObjectType): ImportableObject[]
-			
 			/**
-			 * To import a symbol from a Library, do not access its Document and look for the SymbolMaster directly.
+			 * Get the Symbols that can be imported.
+			 *
+			 * To import a Symbol from a Library, do not access its Document and look for the Symbol Source directly.
 			 * Instead, get the Symbol References of the Library and use those to import them.
+			 *
 			 * Those references depends on the document you want to import them into.
 			 * For example if a document has already imported a symbol, it will reference the local version to keep all the instances in sync.
-			 * @return An array of ImportableObject that represents the Symbols which you can import from the Library.
+			 * @ return An array of Shareable Object that represents the Symbols which you can import from the Library.
 			 */
 			getImportableSymbolReferencesForDocument(document: Document): ImportableObject[]
 			
 			/**
+			 * Get the Shared Layer Styles that can be imported.
+			 *
 			 * To import a shared style from a Library, do not access its Document and look for the SharedStyle directly.
 			 * Instead, get the Shared Layer Style References of the Library and use those to import them.
+			 *
 			 * Those references depends on the document you want to import them into.
 			 * For example if a document has already imported a shared style, it will reference the local version to keep all the instances in sync.
-			 * @return An array of ImportableObject that represents the shared Layer styles which you can import from the Library.
+			 * @return An array of Shareable Object that represents the Shared Layer Styles which you can import from the Library.
 			 */
 			getImportableLayerStyleReferencesForDocument(document: Document): ImportableObject[]
 			
 			/**
+			 * Get the Shared Text Styles that can be imported.
+			 *
 			 * To import a shared style from a Library, do not access its Document and look for the SharedStyle directly.
 			 * Instead, get the Shared Text Style References of the Library and use those to import them.
+			 *
 			 * Those references depends on the document you want to import them into.
 			 * For example if a document has already imported a shared style, it will reference the local version to keep all the instances in sync.
-			 * @return An array of ImportableObject that represents the shared Text styles which you can import from the Library.
+			 * @return An array of Shareable Object that represents the Shared Layer Styles which you can import from the Library.
 			 */
 			getImportableTextStyleReferencesForDocument(document: Document): ImportableObject[]
+			
+			/**
+			 * Get the Shared Swatches that can be imported.
+			 *
+			 * To import a Swatch from a Library, do not access its Document and look for the Swatch directly.
+			 * Instead, get the Shared Swatch References of the Library and use those to import them.
+			 *
+			 * Those references depends on the document you want to import them into.
+			 * For example if a document has already imported a shared Swatch, it will reference the local version to keep all the instances in sync.
+			 * @return An array of Shareable Object that represents the Shared Swatches which you can import from the Library.
+			 */
+			getImportableSwatchReferencesForDocument(document: Document): ImportableObject[]
 		}
 	}
 }

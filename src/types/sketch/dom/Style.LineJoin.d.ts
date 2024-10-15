@@ -10,12 +10,14 @@ declare module "sketch/dom"
 			export enum LineJoin
 			{
 				/**
-				 * This will simply create an angled, or pointy join. The default setting.
+				 * This will simply create an angled, or pointy join.
+				 * The default setting.
 				 */
 				Miter = 'Mitter',
 				
 				/**
-				 * Creates a rounded corner for the border. The radius is relative to the border thickness.
+				 * Creates a rounded corner for the border.
+				 * The radius is relative to the border thickness.
 				 */
 				Round = 'Round',
 				

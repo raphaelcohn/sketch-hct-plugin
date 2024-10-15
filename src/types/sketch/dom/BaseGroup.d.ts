@@ -7,7 +7,7 @@ declare module "sketch/dom"
 	{
 		import MSLayerGroup = sketchInternal.MSLayerGroup
 		
-		class BaseGroup<NativeType extends MSLayerGroup = MSLayerGroup> extends StyledLayer<NativeType>
+		abstract class BaseGroup<NativeType extends MSLayerGroup = MSLayerGroup> extends StyledLayer<NativeType>
 		{
 			/**
 			 * The layers that this component groups together.

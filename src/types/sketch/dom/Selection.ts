@@ -14,8 +14,9 @@ declare module "sketch/dom"
 		{
 			/**
 			 * The Layers in the selection.
+			 * Setting this property will change the selection.
 			 */
-			readonly layers: PageChildLayer[]
+			layers: PageChildLayer[]
 			
 			/**
 			 * The number of Layers in the selection.
@@ -27,10 +28,22 @@ declare module "sketch/dom"
 			 */
 			readonly isEmpty: boolean
 			
+			/**
+			 * Even though a selection isn’t an array, it defines map, forEach and reduce by just forwarding the arguments to its layers.
+			 * Those are just convenience methods to avoid getting the layers every time.
+			 */
 			map<T>(func: (layer: PageChildLayer) => T): T[]
 			
+			/**
+			 * Even though a selection isn’t an array, it defines map, forEach and reduce by just forwarding the arguments to its layers.
+			 * Those are just convenience methods to avoid getting the layers every time.
+			 */
 			forEach(func: (layer: PageChildLayer) => void): void
 			
+			/**
+			 * Even though a selection isn’t an array, it defines map, forEach and reduce by just forwarding the arguments to its layers.
+			 * Those are just convenience methods to avoid getting the layers every time.
+			 */
 			reduce<T>(func: (initial: T, layer: PageChildLayer) => T): T
 			
 			/**

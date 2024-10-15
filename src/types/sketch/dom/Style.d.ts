@@ -101,7 +101,7 @@ declare module "sketch/dom"
 			
 			/**
 			 * The weight of the font of a Text Layer.
-			 * Goes from 0 to 12, 0 being the thinnest and 12 being the boldest.
+			 * Goes from 0 inclusive to 12 inclusive, 0 being the thinnest and 12 being the boldest.
 			 * Not every weight is available for every font.
 			 * When setting a font weight that does not exist for the current font family, the closest weight that exists will be set instead.
 			 */
@@ -135,10 +135,15 @@ declare module "sketch/dom"
 			textStrikethrough?: string | undefined
 			
 			/**
+			 * The axes of the Text Layer font (only available when the font is a variable font).
+			 */
+			fontAxes?: FontAxes
+			
+			/**
 			 * @return Whether the Style has some differences with the Shared Style it is linked to.
 			 * In case it isn't linked to any, returns false.
 			 */
-			isOutOfSyncWithSharedStyle(): boolean
+			isOutOfSyncWithSharedStyle(sharedStyle: SharedStyle): boolean
 			
 			/**
 			 * The style instance will be updated with the value of the Shared Style.
@@ -146,6 +151,8 @@ declare module "sketch/dom"
 			syncWithSharedStyle(): void
 			
 			/**
+			 * When no line height is specified, style.lineHeight will be undefined.
+			 * You can get the default line height of the font using style.getDefaultLineHeight().
 			 * @return A number if the layer is a Text layer or undefined.
 			 */
 			getDefaultLineHeight(): number | undefined

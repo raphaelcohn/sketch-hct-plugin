@@ -5,13 +5,12 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		export interface IColorAsset
+		export interface IColorAsset extends Asset
 		{
-			type?: Types.ColorAsset
-			
-			name?: string
-			
-			color: string
+			/**
+			 * The hex string for the color.
+			 */
+			color: ColorString
 		}
 	}
 }

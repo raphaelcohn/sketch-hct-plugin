@@ -14,6 +14,6 @@ declare module "sketch/settings"
 		 * @param key The setting to look up.
 		 * @return The setting that was stored for the given key. undefined if there was nothing.
 		 */
-		export function layerSettingForKey(layer: dom.Layer | dom.Override | data.DataOverride, key: string): any
+		export function layerSettingForKey(layer: dom.Layer | dom.SymbolOverride | data.DataOverride, key: string): any
 	}
 }

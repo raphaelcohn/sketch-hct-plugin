@@ -7,38 +7,55 @@ declare module "sketch/dom"
 	{
 		import MSPage = sketchInternal.MSPage
 		
+		/**
+		 * A Sketch page.
+		 * It is an instance of both Layer and Group so all the methods defined there are available.
+		 */
 		export class Page extends StyledLayer<MSPage>
 		{
+			constructor(properties?: PageConstructorProperties)
+			
 			/**
 			 * The document the page is in.
 			 */
-			parent: Document;
+			parent: Document
 			
-			type: Types.Page;
+			type: Types.Page
 			
-			layers: PageChildLayer[];
-			
-			/**
-			 * Adjust the group to fit its children.
-			 */
-			adjustToFit(): this;
-			
-			/**
-			 * A method to get the Symbols Page of a Document.
-			 */
-			static getSymbolsPage(document: Document): Page | undefined;
-			
-			/**
-			 * A method to create the Page with the name that Sketch will recognize as the Symbols Page.
-			 */
-			static createSymbolsPage(): Page;
-			
-			constructor(properties?: PageProperties);
+			layers: PageChildLayer[]
 			
 			/**
 			 * A read-only property to get the layers that the user has selected in the page.
 			 */
-			readonly selectedLayers: Selection;
+			readonly selectedLayers: Selection
+			
+			/**
+			 * Adjust the group to fit its children.
+			 */
+			adjustToFit(): this
+			
+			/**
+			 * The “Symbols” page is similar to other pages.
+			 * The only way it is specific is when creating a Symbol, Sketch will ask the user if they want to move it to that page.
+			 *
+			 * You can put Symbols in any page but if you want to respect the convention Sketch put in place, here are a few methods to help you do so.
+			 *
+			 * A method to get the Symbols Page of a Document.
+			 *
+			 * @param document The document from which you want the Symbols Page.
+			 * @return Return a Page or undefined if there is no Symbols Page yet.
+			 */
+			static getSymbolsPage(document: Document): Page | undefined
+			
+			/**
+			 * A method to create the Page with the name that Sketch will recognize as the Symbols Page.
+			 */
+			static createSymbolsPage(): Page
+			
+			/**
+			 * A method to tell if the page is the Symbols Page.
+			 */
+			isSymbolsPage(): boolean
 		}
 	}
 }

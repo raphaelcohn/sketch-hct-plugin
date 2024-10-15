@@ -7,6 +7,10 @@ declare module "sketch/dom"
 	{
 		import MSLayer = sketchInternal.MSLayer
 		
+		/**
+		 * A Sketch layer.
+		 * This is the base class for most of the Sketch components and defines methods to manipulate them.
+		 */
 		export abstract class Layer<NativeType extends MSLayer = MSLayer> extends Component<NativeType>
 		{
 			/**
@@ -35,7 +39,8 @@ declare module "sketch/dom"
 			hidden: boolean
 			
 			/**
-			 * The frame of the Layer. This is given in coordinates that are local to the parent of the layer.
+			 * The frame of the Layer.
+			 * This is given in coordinates that are local to the parent of the layer.
 			 */
 			frame: Rectangle
 			
@@ -47,7 +52,7 @@ declare module "sketch/dom"
 			/**
 			 * The prototyping action associated with the layer.
 			 */
-			flow: FlowProperty
+			flow: Flow
 			
 			/**
 			 * The export formats of the Layer.
@@ -74,26 +79,36 @@ declare module "sketch/dom"
 			 * The index of this layer in its parent.
 			 * The layer at the back of the parent (visually) will be layer 0.
 			 * The layer at the front will be layer `n - 1` if there are `n` layers.
+			 *
+			 * You can set the index of the layer to move it in the hierarchy.
 			 */
-			readonly index: number
+			index: number
 			
 			/**
 			 * Move this layer to the front of its parent.
+			 *
+			 * @return The current layer.
 			 */
 			moveToFront(): this
 			
 			/**
 			 * Move this layer forward in its parent.
+			 *
+			 * @return The current layer.
 			 */
 			moveForward(): this
 			
 			/**
 			 * Move this layer to the back of its parent.
+			 *
+			 * @return The current layer.
 			 */
 			moveToBack(): this
 			
 			/**
 			 * Move this layer backward in its parent.
+			 *
+			 * @return The current layer.
 			 */
 			moveBackward(): this
 			
@@ -108,7 +123,7 @@ declare module "sketch/dom"
 			getParentArtboard(): Artboard | undefined
 			
 			/**
-			 * Access the symbol master the layer is in (if any).
+			 * Access the Symbol Source the layer is in (if any)
 			 */
 			getParentSymbolMaster(): SymbolMaster | undefined
 			

@@ -8,7 +8,7 @@ declare module "sketch/dom"
 		export namespace Library
 		{
 			/**
-			 * Enumeration of the types of Library.
+			 * Enumeration of the types of Importable Objects.
 			 */
 			export enum ImportableObjectType
 			{
@@ -18,7 +18,7 @@ declare module "sketch/dom"
 				
 				TextStyle = 'TextStyle',
 				
-				Unknown = 'Unknown',
+				Swatch = 'Swatch',
 			}
 		}
 	}

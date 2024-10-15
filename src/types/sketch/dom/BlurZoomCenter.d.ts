@@ -5,38 +5,20 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		export interface SymbolInstanceProperties
+		/**
+		 * The center of the blur (only used when the blur type is Zoom).
+		 */
+		export interface BlurZoomCenter
 		{
 			/**
-			 * The name of the SymbolInstance.
+			 * The horizontal coordinate of the center of the blur.
 			 */
-			name?: string
+			x: number
 			
 			/**
-			 * The group the SymbolInstance is in.
+			 * The vertical coordinate of the center of the blur.
 			 */
-			parent?: Group
-			
-			/**
-			 * The frame of the SymbolInstance.
-			 * This is given in coordinates that are local to the parent of the layer.
-			 */
-			frame?: Rectangle
-			
-			/**
-			 * The prototyping action associated with the SymbolInstance.
-			 */
-			flow?: FlowProperty
-			
-			/**
-			 * The style of the SymbolInstance.
-			 */
-			style?: Style | IStyle
-			
-			/**
-			 * The unique ID of the Symbol that the instance and its master share.
-			 */
-			symbolId: string
+			y: number
 		}
 	}
 }

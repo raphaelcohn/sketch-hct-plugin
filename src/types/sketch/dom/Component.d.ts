@@ -21,7 +21,7 @@ declare module "sketch/dom"
 			
 			/**
 			 * A string that represent the type of the component.
-			 * If it’s undefined, it means that we couldn’t match the native object and that we returned a really lightweight wrapper.
+			 * If it’s undefined, it means that we couldn’t match the native object and that we returned a lightweight wrapper.
 			 */
 			readonly type: Types | undefined
 			
@@ -31,7 +31,8 @@ declare module "sketch/dom"
 			readonly id: string
 			
 			/**
-			 * returns if the component is wrapping an immutable version of a native Sketch model object. If that is the case, you won't be able to mutable the object (setting any property will be a no-op).
+			 * Returns if the component is wrapping an immutable version of a native Sketch model object.
+			 * If that is the case, you won't be able to mutable the object (setting any property will be a no-op).
 			 */
 			isImmutable(): boolean
 			

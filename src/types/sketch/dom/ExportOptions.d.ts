@@ -69,5 +69,4 @@ declare module "sketch/dom"
 			compression?: number
 		}
 	}
-	
 }

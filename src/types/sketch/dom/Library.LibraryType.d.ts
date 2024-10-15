@@ -8,15 +8,11 @@ declare module "sketch/dom"
 		export namespace Library
 		{
 			/**
-			 * Enumeration of the types of Importable Objects.
+			 * Enumeration of the types of Library.
 			 */
 			export enum LibraryType
 			{
 				Internal = 'Internal',
-				
-				User = 'LocalUser',
-				
-				Remote = 'RemoteUser',
 				
 				LocalUser = 'LocalUser',
 				

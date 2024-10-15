@@ -13,12 +13,14 @@ declare module "sketch/dom"
 			 * The page the Artboard is in.
 			 */
 			parent: Page
+			
 			/**
 			 * A Start Point allows you to choose where to start your prototype from.
 			 */
 			flowStartPoint: boolean
+			
 			/**
-			 * The background of the Artboard
+			 * The background of the Artboard.
 			 */
 			background: ArtboardBackground
 		}

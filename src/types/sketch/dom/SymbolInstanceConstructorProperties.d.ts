@@ -5,28 +5,38 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		export interface HotSpotProperties
+		export interface SymbolInstanceConstructorProperties
 		{
 			/**
-			 * The name of the HotSpot
+			 * The name of the SymbolInstance.
 			 */
 			name?: string
 			
 			/**
-			 * The group the HotSpot is in.
+			 * The group the SymbolInstance is in.
 			 */
 			parent?: Group
 			
 			/**
-			 * The frame of the HotSpot.
+			 * The frame of the SymbolInstance.
 			 * This is given in coordinates that are local to the parent of the layer.
 			 */
 			frame?: Rectangle
 			
 			/**
-			 * The prototyping action associated with the HotSpot.
+			 * The prototyping action associated with the SymbolInstance.
 			 */
 			flow?: FlowProperty
+			
+			/**
+			 * The style of the SymbolInstance.
+			 */
+			style?: Style | IStyle
+			
+			/**
+			 * The unique ID of the Symbol that the instance and its master share.
+			 */
+			symbolId: string
 		}
 	}
 }

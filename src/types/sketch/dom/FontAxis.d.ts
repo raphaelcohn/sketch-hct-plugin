@@ -5,50 +5,27 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		export interface ShapePathProperties
+		export interface FontAxis
 		{
 			/**
-			 * The name of the Shape
+			 * The axis id.
 			 */
-			name?: string
+			id: string
 			
 			/**
-			 * The group the Shape is in.
+			 * The minimum value allowable on the axis.
 			 */
-			parent?: Group
+			readonly min: number
 			
 			/**
-			 * The frame of the Shape.
-			 * This is given in coordinates that are local to the parent of the layer.
+			 * The maximum value allowable on the axis.
 			 */
-			frame?: Rectangle
+			readonly max: number
 			
 			/**
-			 * The prototyping action associated with the Shape.
+			 * The current axis value.
 			 */
-			flow?: FlowProperty
-			
-			/**
-			 * The style of the Shape.
-			 */
-			style?: Style | IStyle
-			
-			/**
-			 * The points defining the Shape Path.
-			 */
-			points?: ICurvePoint[]
-			
-			/**
-			 * The type of the Shape Path.
-			 * It can only be set when creating a new ShapePath.
-			 */
-			shapeType: ShapePath.ShapeType
-			
-			/**
-			 * If the Path is closed.
-			 */
-			closed?: boolean
+			value: number
 		}
-		
 	}
 }

@@ -5,10 +5,11 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		/**
-		 * Access the selected Document.
-		 * @return The selected Document or undefined if no document is open.
-		 */
-		export function getSelectedDocument(): Document | undefined
+		export interface GradientAsset extends Asset
+		{
+			type: Types.Gradient
+			
+			gradient: Gradient
+		}
 	}
 }

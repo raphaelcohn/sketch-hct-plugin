@@ -7,9 +7,14 @@ declare module "sketch/dom"
 	{
 		import MSSymbolInstance = sketchInternal.MSSymbolInstance
 		import NSImage = cocoascript.NSImage
+		
+		/**
+		 * A Symbol instance
+		 * It is an instance of Layer so all the methods defined there are available.
+		 */
 		export class SymbolInstance extends StyledLayer<MSSymbolInstance>
 		{
-			constructor(properties: SymbolInstanceProperties)
+			constructor(properties: SymbolInstanceConstructorProperties)
 			
 			type: Types.SymbolInstance
 			
@@ -24,14 +29,14 @@ declare module "sketch/dom"
 			symbolId: string
 			
 			/**
-			 * The Symbol master that the instance is linked to.
+			 * The Symbol master (symbol source) that the instance is linked to.
 			 */
 			master: SymbolMaster
 			
 			/**
 			 * The array of the overrides to modify the instance.
 			 */
-			overrides: Override[]
+			overrides: SymbolOverride[]
 			
 			/**
 			 * Replaces a group that contains a copy of the Symbol this instance refers to.
@@ -43,13 +48,14 @@ declare module "sketch/dom"
 			 */
 			detach(options?: { recursively?: boolean }): Group | null
 			
-			// /**
-			//  * Change the value of the override.
-			//  * @param override The override to change.
-			//  * @param value The value of override to set.
-			//  * Can be a string or an NSImage or a symbolId depending on the type of the override.
-			//  */
-			setOverrideValue(override: Override, value: string | NSImage): this
+			/**
+			 * Change the value of the override.
+			 * @param override The override to change.
+			 * @param value The value of override to set.
+			 * Can be a string or an NSImage or a symbolId depending on the type of the override, eg "overridden".
+			 * @return The current Symbol instance (useful if you want to chain the calls).
+			 */
+			setOverrideValue(override: SymbolOverride, value: string | NSImage): this
 			
 			/**
 			 * In order to trigger a Smart Layout resize in an instance, for example after changing an override value, call the `resizeWithSmartLayout()` method.

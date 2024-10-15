@@ -21,6 +21,12 @@ declare module "sketch/ui"
 			 * The initial value of the input.
 			 */
 			initialValue?: T
+			
+			/**
+			 * Controls the height of the input field.
+			 * If a value is provided it converts the textfield into a scrollable textarea.
+			 */
+			numberOfLines?: number
 		}
 	}
 }

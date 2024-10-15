@@ -11,14 +11,16 @@ declare module "sketch/dom"
 			 * If the background should be enabled, eg. shown or not.
 			 */
 			enabled: boolean
+			
 			/**
 			 * If the background should be exported or if it should be transparent during the export.
 			 */
 			includedInExport: boolean
+			
 			/**
 			 * The rgba representation of the color of the background.
 			 */
-			color: string
+			color: ColorString
 		}
 	}
 }

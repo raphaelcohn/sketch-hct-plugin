@@ -5,11 +5,20 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
+		/**
+		 * A group of layers.
+		 * It is also an instance of Layer so all the methods defined there are available.
+		 */
 		export class Group extends BaseGroup
 		{
-			constructor(properties?: GroupProperties)
+			constructor(properties?: GroupConstructorProperties)
 			
 			type: Types.Group
+			
+			/**
+			 * The associated shared style.
+			 */
+			sharedStyle: SharedStyle | null
 			
 			/**
 			 * The ID of the SharedStyle or null, identical to sharedStyle.id.
@@ -17,9 +26,19 @@ declare module "sketch/dom"
 			sharedStyleId: string | null
 			
 			/**
-			 * The associated shared style.
+			 * Given a reference to a SymbolMaster or Group layer use the smartLayout setter to apply one of the Smart Layout values.
+			 *
+			 * Set the smartLayout value to null to remove the Smart Layout.
+			 * This is the equivalent of selecting “None” in the Sketch Inspector.
 			 */
-			sharedStyle: SharedStyle | null
+			smartLayout: SmartLayout | null
+			
+			/**
+			 * Adjust the group to fit its children.
+			 *
+			 * @return The current group (useful if you want to chain the calls).
+			 */
+			adjustToFit(): this
 		}
 	}
 }

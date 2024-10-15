@@ -21,7 +21,7 @@ declare module "sketch/dom"
 			/**
 			 * The color of the Stop.
 			 */
-			color: string
+			color: ColorString
 		}
 	}
 }

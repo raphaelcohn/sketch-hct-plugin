@@ -9,11 +9,25 @@ declare module "sketch/dom"
 		
 		export interface TextFragment
 		{
+			/**
+			 * Rectangle.
+			 */
 			rect: Rectangle
 			
+			/**
+			 * Baseline offset.
+			 */
 			baselineOffset: number
 			
+			/**
+			 * Range of the fragment.
+			 */
 			range: NSRange
+			
+			/**
+			 * Substring.
+			 */
+			text: string
 		}
 	}
 }

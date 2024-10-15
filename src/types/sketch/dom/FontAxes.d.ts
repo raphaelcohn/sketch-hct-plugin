@@ -5,27 +5,6 @@ declare module "sketch/dom"
 {
 	namespace dom
 	{
-		export interface PageProperties
-		{
-			/**
-			 * The name of the Page
-			 */
-			name?: string
-			
-			/**
-			 * The document the page is in.
-			 */
-			parent?: Document
-			
-			/**
-			 * The layers that this page has
-			 */
-			layers?: LayersPropertyType
-			
-			/**
-			 * The frame of the page
-			 */
-			frame?: Rectangle
-		}
+		type FontAxes = Record<symbol, FontAxis>
 	}
 }

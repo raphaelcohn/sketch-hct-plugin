@@ -14,8 +14,6 @@ declare module "sketch/dom"
 				Inside = 'Inside',
 				
 				Outside = 'Outside',
-				
-				Both = 'Both',
 			}
 		}
 	}

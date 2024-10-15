@@ -10,13 +10,10 @@ declare module "sketch/dom"
 			export enum FillType
 			{
 				Color = 'Color',
-				color = 'Color',
 				
 				Gradient = 'Gradient',
-				gradient = 'Gradient',
 				
 				Pattern = 'Pattern',
-				pattern = 'Pattern',
 			}
 		}
 	}

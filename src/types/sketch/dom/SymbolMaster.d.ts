@@ -8,13 +8,22 @@ declare module "sketch/dom"
 		import MSSymbolMaster = sketchInternal.MSSymbolMaster
 		
 		/**
-		 * Symbol master.
+		 * Symbol master / A Symbol Source.
+		 * It is an instance of Artboard (hence of Layer and Group) so all the methods defined there are available.
 		 **/
 		export class SymbolMaster extends BaseArtboard<MSSymbolMaster>
 		{
 			constructor(properties?: SymbolMasterProperties)
 			
 			type: Types.SymbolMaster
+			
+			/**
+			 * Given a reference to a SymbolMaster or Group layer use the smartLayout setter to apply one of the Smart Layout values.
+			 *
+			 * Set the smartLayout value to null to remove the Smart Layout.
+			 * This is the equivalent of selecting “None” in the Sketch Inspector.
+			 */
+			smartLayout: SmartLayout | null
 			
 			/**
 			 * The unique ID of the Symbol that the master and its instances share.
@@ -29,7 +38,7 @@ declare module "sketch/dom"
 			/**
 			 * The array of the overrides that the instances of the Symbol Master will be able to change.
 			 */
-			overrides: Override[]
+			overrides: SymbolOverride[]
 			
 			/**
 			 * Replace the artboard with a symbol master.

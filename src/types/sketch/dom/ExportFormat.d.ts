@@ -10,7 +10,7 @@ declare module "sketch/dom"
 		 */
 		export interface ExportFormat
 		{
-			type?: 'ExportFormat'
+			type?: Types.ExportFormat
 			
 			/**
 			 * The file format of the export.

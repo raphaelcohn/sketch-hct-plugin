@@ -6,9 +6,24 @@ declare module "sketch/dom"
 	namespace dom
 	{
 		/**
-		 * Access all the open Documents.
-		 * @return An array of Documents.
+		 * The pattern of the fill.
 		 */
-		export function getDocuments(): Document[]
+		export interface FillPattern
+		{
+			/**
+			 * How the pattern should fill the layer.
+			 */
+			patternType: Style.PatternFillType
+			
+			/**
+			 * The image of tile of the pattern.
+			 */
+			image: ImageData | null
+			
+			/**
+			 * The scale applied to the tile of the pattern.
+			 */
+			tileScale: number
+		}
 	}
 }

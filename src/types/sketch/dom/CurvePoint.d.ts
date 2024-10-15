@@ -36,11 +36,13 @@ declare module "sketch/dom"
 			 * The type of the point.
 			 */
 			pointType: CurvePoint.PointType
-		}
-		
-		namespace CurvePoint
-		{
-			type PointType = ShapePath.PointType
+			
+			/**
+			 * Check if the point is selected.
+			 *
+			 * In case the user is currently editing a path, you can check if a curve point is selected using the curvePoint.isSelected() method.
+			 */
+			isSelected(): boolean
 		}
 	}
 }

@@ -9,6 +9,10 @@ declare module "sketch/dom"
 		
 		export class Document extends Component<MSDocument>
 		{
+			constructor(properties: { colorSpace?: Document.ColorSpace })
+			
+			type: Types.Document
+			
 			/**
 			 * Access the selected Document
 			 * @return The selected Document or undefined if no document is open.
@@ -48,17 +52,6 @@ declare module "sketch/dom"
 			path: string
 			
 			/**
-			 * The pages of the document.
-			 */
-			pages: Page[]
-			
-			swatches: Swatch[]
-			
-			type: Types.Document
-			
-			constructor()
-			
-			/**
 			 * A read-only property to get the current page that the user has selected.
 			 */
 			readonly selectedPage: Page
@@ -69,67 +62,18 @@ declare module "sketch/dom"
 			readonly selectedLayers: Selection
 			
 			/**
-			 * A method to help find the first layer in this document which has the given id.
-			 * @param layerID The ID of the layer to find
-			 * @return Return a Layer object or undefined if it’s not found.
+			 * The color-space of the document.
+			 *
+			 * Setting this property changes the color space but does not convert it.
 			 */
-			getLayerWithID(layerID: string): AllLayers | undefined
+			colorSpace: Document.ColorSpace
 			
 			/**
-			 * A method to help find the layers in this document which have the given name.
-			 * @param name The name of the layers to find
-			 * @return Return an array of Layer.
+			 * A method to change a document’s color space.
+			 * For an in-depth discussion of this topic and the difference between assigning and converting the color space check the color management documentation.
+			 * Pass true as an optional second argument to convert instead of assign.
 			 */
-			getLayersNamed(name: string): AllLayers[]
-			
-			// /**
-			//  * A method to get all shared layer styles defined in the document.
-			//  * @return Return an array of the layer SharedStyle objects defined in the document.
-			//  * @deprecated
-			//  */
-			// getSharedLayerStyles(): IIOArray<SharedStyle,
-			// {
-			// 	name: string
-			// 	style: IStyle
-			// }>
-			
-			/**
-			 * A method to help find a shared style in the document.
-			 * @param id The ID of the shared style to find
-			 * @return Return a SharedStyle object or undefined if it's not found.
-			 */
-			getSharedLayerStyleWithID(id: string): SharedStyle | undefined
-			
-			// /**
-			//  * A method to get all shared text styles defined in the document.
-			//  * @return Return an array of the text SharedStyle objects defined in the document.
-			//  * @deprecated
-			//  */
-			// getSharedTextStyles(): IIOArray<SharedStyle,
-			// {
-			// 	name: string
-			// 	style: IStyle
-			// }>
-			
-			/**
-			 * A method to help find a shared style in the document.
-			 * @param id The ID of the shared style to find
-			 * @return Return a SharedStyle object or undefined if it's not found.
-			 */
-			getSharedTextStyleWithID(id: string): SharedStyle | undefined
-			
-			/**
-			 * A method to get all symbol masters defined in the document.
-			 * @return Return an array of the SymbolMaster objects defined in the document.
-			 */
-			getSymbols(): SymbolMaster[]
-			
-			/**
-			 * A method to help find a symbol master in the document.
-			 * @param symbolId The symbol ID of the symbol master to find
-			 * @return Return a SymbolMaster object or undefined if it’s not found.
-			 */
-			getSymbolMasterWithID(symbolId: string): SymbolMaster | undefined
+			changeColorSpace(colorSpace: Document.ColorSpace, convert?: boolean): void
 			
 			/**
 			 * A method to help center the view of the document window on a given layer.
@@ -171,10 +115,68 @@ declare module "sketch/dom"
 			close(): void
 			
 			/**
+			 * The pages of the document.
+			 */
+			pages: Page[]
+			
+			/**
 			 * A list of color assets defined in the document.
 			 * Mutating the returned array will update the document colors.
 			 */
 			colors: IIOArray<ColorAsset, IColorAsset>
+			
+			/**
+			 * A list of swatches defined in the document.
+			 * Mutating the returned array will update the document swatches.
+			 */
+			swatches: IIOArray<Swatch, Swatch>
+			
+			/**
+			 * A list of gradient assets defined in the document.
+			 * Mutating the returned array will update the document gradients.
+			 */
+			gradients: IIOArray<GradientAsset, GradientAsset>
+			
+			/**
+			 * A method to help find the first layer in this document which has the given id.
+			 * @param layerID The ID of the layer to find
+			 * @return Return a Layer object or undefined if it is not found.
+			 */
+			getLayerWithID(layerID: string): AllLayers | undefined
+			
+			/**
+			 * A method to help find the layers in this document which have the given name.
+			 * @param name The name of the layers to find
+			 * @return Return an array of Layer.
+			 */
+			getLayersNamed(name: string): AllLayers[]
+			
+			/**
+			 * A method to help find a shared style in the document.
+			 * @param id The ID of the shared style to find
+			 * @return Return a SharedStyle object or undefined if it is not found.
+			 */
+			getSharedLayerStyleWithID(id: string): SharedStyle | undefined
+			
+			/**
+			 * A method to help find a shared style in the document.
+			 * @param id The ID of the shared style to find
+			 * @return Return a SharedStyle object or undefined if it's not found.
+			 */
+			getSharedTextStyleWithID(id: string): SharedStyle | undefined
+			
+			/**
+			 * A method to get all symbol masters defined in the document.
+			 * @return Return an array of the SymbolMaster objects defined in the document.
+			 */
+			getSymbols(): SymbolMaster[]
+			
+			/**
+			 * A method to help find a symbol master in the document.
+			 * @param symbolId The symbol ID of the symbol master to find
+			 * @return Return a SymbolMaster object or undefined if it is not found.
+			 */
+			getSymbolMasterWithID(symbolId: string): SymbolMaster | undefined
 			
 			/**
 			 * The list of all shared text styles defined in the document.
@@ -197,9 +199,26 @@ declare module "sketch/dom"
 			}>
 			
 			/**
-			 * The color-space of the document/
+			 * A method to get all shared layer styles defined in the document.
+			 * @return Return an array of the layer SharedStyle objects defined in the document.
+			 * @deprecated
 			 */
-			colorSpace: Document.ColorSpace
+			getSharedLayerStyles(): IIOArray<SharedStyle,
+			{
+				name: string
+				style: IStyle
+			}>
+			
+			/**
+			 * A method to get all shared text styles defined in the document.
+			 * @return Return an array of the text SharedStyle objects defined in the document.
+			 * @deprecated
+			 */
+			getSharedTextStyles(): IIOArray<SharedStyle,
+			{
+				name: string
+				style: IStyle
+			}>
 		}
 	}
 }

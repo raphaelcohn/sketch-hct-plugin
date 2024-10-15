@@ -22,7 +22,7 @@ declare module "sketch/data-supplier"
 			/**
 			 * The override whose value will replaced by the supplied data.
 			 */
-			readonly override: dom.Override
+			readonly override: dom.SymbolOverride
 			
 			/**
 			 * The symbol instance that the override is on that will have the data replaced.

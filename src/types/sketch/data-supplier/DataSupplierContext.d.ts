@@ -14,18 +14,20 @@ declare module "sketch/data-supplier"
 		{
 			data:
 			{
-				/**
-				 * The number of datum items you need to supply.
-				 */
-				count: number
+				// /**
+				//  * The number of datum items you need to supply.
+				//  */
+				// count: number
 				
 				/**
-				 * A unique key to identify the supply request. You need to pass it to the supply method untouched.
+				 * A unique key to identify the supply request.
+				 * You need to pass it to the supply method untouched.
 				 */
 				key: string
 				
 				/**
-				 * The array of native model objects for which we want some data. It can be either a native Text, a native Image or a native DataOverride (a special object when the data is for an Override)
+				 * The array of native model objects for which we want some data.
+				 * It can be either a native Text, a native Image or a native DataOverride (a special object when the data is for an Override)
 				 */
 				items: (dom.Text | dom.Image | DataOverride)[]
 			}

@@ -7,12 +7,12 @@ declare module "sketch/dom"
 	{
 		import MSStyledLayer = sketchInternal.MSStyledLayer
 		
-		class StyledLayer<NativeType extends MSStyledLayer> extends Layer<NativeType>
+		abstract class StyledLayer<NativeType extends MSStyledLayer> extends Layer<NativeType>
 		{
 			/**
 			 * The style of the layer.
 			 */
-			style: Style | IStyle
+			style: Style
 		}
 	}
 }
