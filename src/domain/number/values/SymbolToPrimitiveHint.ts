@@ -4,6 +4,8 @@
 export const enum SymbolToPrimitiveHint
 {
 	string = "string",
+	
 	number = "number",
+	
 	default = "default",
 }

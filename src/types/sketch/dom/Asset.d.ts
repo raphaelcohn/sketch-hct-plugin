@@ -7,7 +7,7 @@ declare module "sketch/dom"
 	{
 		export interface Asset
 		{
-			type: Types
+			type?: Types
 			
 			/**
 			 * The name of the asset, or null.

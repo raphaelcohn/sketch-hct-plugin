@@ -7,13 +7,13 @@ import {InclusiveOrExclusive} from "./InclusiveOrExclusive";
 
 export class AnyRange implements Range
 {
-	static readonly Any: NonNullable<AnyRange> = new AnyRange()
+	public static readonly Any: NonNullable<AnyRange> = new AnyRange()
 	
-	readonly MinimumDescription: InclusiveOrExclusive = "inclusive"
+	public readonly MinimumDescription: InclusiveOrExclusive = "inclusive"
 	
-	readonly MaximumDescription: InclusiveOrExclusive = "inclusive"
+	public readonly MaximumDescription: InclusiveOrExclusive = "inclusive"
 	
-	constructor()
+	private constructor()
 	{
 	}
 	

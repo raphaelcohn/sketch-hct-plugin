@@ -24,11 +24,17 @@ export class HueChromaToneCoordinates
 		return new HueChromaToneCoordinates(TonalPalette.try_from(hue_degrees, chroma), Tone.try_from(tone_percentage))
 	}
 	
+	/**
+	 * @internal
+	 */
 	static from_hue_and_tone_with_maximum_chroma(hue: NonNullable<Hue>, tone: NonNullable<Tone>): NonNullable<HueChromaToneCoordinates>
 	{
 		return HueChromaToneCoordinates.from_with_maximum_chroma(hue, Chroma.PreferredInclusiveMaximum, tone)
 	}
 	
+	/**
+	 * @internal
+	 */
 	static from_with_maximum_chroma(hue: NonNullable<Hue>, chroma: NonNullable<Chroma>, tone: NonNullable<Tone>): NonNullable<HueChromaToneCoordinates>
 	{
 		const argb = HctSolver.solveToInt(hue.valueOf(), chroma.valueOf(), tone.to_cielab_lstar().valueOf())
@@ -43,6 +49,11 @@ export class HueChromaToneCoordinates
 	public toString(this: NonNullable<this>): string
 	{
 		return `(${this.hue}, ${this.chroma}, ${this.tone})`
+	}
+	
+	public get tonal_palette(): NonNullable<TonalPalette>
+	{
+		return this.#hue_and_chroma
 	}
 	
 	public get hue(): Hue
@@ -87,6 +98,9 @@ export class HueChromaToneCoordinates
 		}
 	}
 	
+	/**
+	 * @internal
+	 */
 	round(this: NonNullable<this>): NonNullable<HueChromaToneCoordinates>
 	{
 		return new HueChromaToneCoordinates(this.#hue_and_chroma.round(), this.#tone.round())

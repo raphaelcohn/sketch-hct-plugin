@@ -23,9 +23,47 @@ export class Component extends AbstractValue<FiniteNumber>
 		return new Component(FiniteNumber.try_from(value))
 	}
 	
+	public static try_from_hex_color(hex_color_string: string): NonNullable<Component>
+	{
+		let value: NonNullable<FiniteNumber>
+		switch (hex_color_string.length)
+		{
+			case 1:
+				const digit = FiniteNumber.try_from_integer_hexadecimal_eithercase(hex_color_string)
+				value = digit.shift_left(FiniteNumber.Four).add(digit)
+				break
+			
+			case 2:
+				value = FiniteNumber.try_from_integer_hexadecimal_eithercase(hex_color_string)
+				break
+			
+			default:
+				throw new RangeError(`${hex_color_string} did not have a recognised length of 1 or 2`)
+		}
+		return new Component(value)
+	}
+	
+	/**
+	 * @internal
+	 */
+	static try_from_hex_color_coordinates_string(hex_color_string: string, index: number, width: 1 | 2): NonNullable<Component>
+	{
+		return Component.try_from_hex_color(hex_color_string.substring(index, index + width))
+	}
+	
 	public override toString(this: NonNullable<Component>, radix?: number): string
 	{
+		return this.to_upper_case_hexadecimal_string(radix)
+	}
+	
+	public to_upper_case_hexadecimal_string(this: NonNullable<Component>, radix?: number): string
+	{
 		return super.toString(radix).toUpperCase()
+	}
+	
+	public to_lower_case_hexadecimal_string(this: NonNullable<Component>, radix?: number): string
+	{
+		return super.toString(radix)
 	}
 	
 	// Returns a number between 0.0 inclusive and 100.0 inclusive.
@@ -34,21 +72,33 @@ export class Component extends AbstractValue<FiniteNumber>
 		return new LinearizedComponent(FiniteNumber.try_from(linearized(this.valueOf())))
 	}
 	
+	/**
+	 * @internal
+	 */
 	static alpha_from_rgba(rgba: NonNullable<Rgba>): NonNullable<Component>
 	{
 		return Component.from_rgba_component(rgba.a)
 	}
 	
+	/**
+	 * @internal
+	 */
 	static red_from_rgba(rgba: NonNullable<Rgba>): NonNullable<Component>
 	{
 		return Component.from_rgba_component(rgba.r)
 	}
 	
+	/**
+	 * @internal
+	 */
 	static green_from_rgba(rgba: NonNullable<Rgba>): NonNullable<Component>
 	{
 		return Component.from_rgba_component(rgba.g)
 	}
 	
+	/**
+	 * @internal
+	 */
 	static blue_from_rgba(rgba: NonNullable<Rgba>): NonNullable<Component>
 	{
 		return Component.from_rgba_component(rgba.b)
@@ -58,4 +108,5 @@ export class Component extends AbstractValue<FiniteNumber>
 	{
 		return new Component(FiniteNumber.try_from(rgba_component))
 	}
+	
 }

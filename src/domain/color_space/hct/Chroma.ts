@@ -21,26 +21,49 @@ export class Chroma extends AbstractValue<FiniteNumber>
         return new Chroma(FiniteNumber.try_from(value))
     }
     
+    /**
+     * @internal
+     */
     round(this: NonNullable<this>): NonNullable<Chroma>
     {
         return new Chroma(this.value.round())
     }
-
+    
+    /**
+     * @internal
+     */
     subtract(this: NonNullable<this>, decrement: NonNullable<FiniteNumber>): NonNullable<Chroma>
     {
         return new Chroma(this.value.subtract(decrement))
     }
-
+    
+    /**
+     * @internal
+     */
     divide(this: NonNullable<this>, denominator: NonNullable<FiniteNumber>): NonNullable<Chroma>
     {
         return new Chroma(this.value.divide(denominator))
     }
-
+    
+    /**
+     * @internal
+     */
+    absolute_difference(this: NonNullable<this>, other: NonNullable<this>): NonNullable<FiniteNumber>
+    {
+        return this.value.absolute_difference(other.value)
+    }
+    
+    /**
+     * @internal
+     */
     max(this: NonNullable<this>, other: NonNullable<this>): NonNullable<Chroma>
     {
         return new Chroma(this.value.max(other.value))
     }
-
+    
+    /**
+     * @internal
+     */
     min(this: NonNullable<this>, other: NonNullable<this>): NonNullable<Chroma>
     {
         return new Chroma(this.value.min(other.value))

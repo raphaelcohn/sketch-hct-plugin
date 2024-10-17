@@ -28,6 +28,9 @@ export class Hue extends AbstractValue<FiniteNumber>
 		return new Hue(degrees)
 	}
 	
+	/**
+	 * @internal
+	 */
 	round(this: NonNullable<this>): NonNullable<Hue>
 	{
 		return new Hue(this.value.round())

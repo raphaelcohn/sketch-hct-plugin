@@ -1,7 +1,7 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-import { ContrastRatio } from "./ContrastRatio";
+import { ContrastRatio } from "../../contrast";
 import { CielabCoordinates } from "../cielab";
 import { LStar } from "../cielab";
 import {FiniteNumber} from "../../number";
@@ -31,6 +31,9 @@ export class Y extends AbstractValue<FiniteNumber>
 		return new LStar(CielabCoordinates.lab_f(t).multiply(FiniteNumber.OneHundredAndSixteen).subtract(FiniteNumber.Sixteen))
 	}
 	
+	/**
+	 * @internal
+	 */
 	add_contrast_threshold(this: NonNullable<this>): NonNullable<FiniteNumber>
 	{
 		return this.value.add(ContrastRatio.ContrastThreshold)
@@ -47,6 +50,9 @@ export class Y extends AbstractValue<FiniteNumber>
 		return left > right ? [left, right] : [right, left]
 	}
 	
+	/**
+	 * @internal
+	 */
 	static is_out_of_range(value: NonNullable<FiniteNumber>): boolean
 	{
 		return value.is_out_of_range(Y.#range)

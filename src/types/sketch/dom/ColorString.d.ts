@@ -6,7 +6,7 @@ declare module "sketch/dom"
 	namespace dom
 	{
 		/**
-		 * A hexadecimal string with a leading number sign (hash) in lower case, eg `#ff000000` for opaque pure black.
+		 * A hexadecimal string with red, green, blue and alpha components with a leading number sign (hash) in lower case, eg `#000000ff` for opaque pure black.
 		 */
 		export type ColorString = string
 	}

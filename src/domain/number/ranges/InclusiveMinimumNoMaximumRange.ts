@@ -9,13 +9,15 @@ export class InclusiveMinimumNoMaximumRange implements Range
 {
 	public static readonly ZeroToInfinity = new InclusiveMinimumNoMaximumRange(FiniteNumber.Zero)
 	
+	public static readonly OneToInfinity = new InclusiveMinimumNoMaximumRange(FiniteNumber.One)
+	
 	public readonly MinimumDescription: InclusiveOrExclusive = "inclusive"
 	
 	public readonly MaximumDescription: InclusiveOrExclusive = "inclusive"
 	
 	readonly #inclusive_minimum: NonNullable<FiniteNumber>
 	
-	constructor(inclusive_minimum: NonNullable<FiniteNumber>)
+	public constructor(inclusive_minimum: NonNullable<FiniteNumber>)
 	{
 		this.#inclusive_minimum = inclusive_minimum
 	}

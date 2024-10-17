@@ -4,5 +4,6 @@
 export const enum Sign
 {
 	Negative = -1,
+	
 	Positive = 1,
 }

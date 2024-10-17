@@ -16,10 +16,19 @@ export class LStar extends AbstractValue<FiniteNumber>
 {
 	static readonly #range: NonNullable<InclusiveMinimumInclusiveMaximumRange> = InclusiveMinimumInclusiveMaximumRange.ZeroToOneHundred
 	
+	/**
+	 * @internal
+	 */
 	static readonly InclusiveMinimum: NonNullable<LStar> = new LStar(LStar.#range.inclusive_minimum)
 	
+	/**
+	 * @internal
+	 */
 	static readonly InclusiveMaximum: NonNullable<LStar> = new LStar(LStar.#range.inclusive_maximum)
 	
+	/**
+	 * @internal
+	 */
 	static readonly Mid: NonNullable<LStar> = new LStar(FiniteNumber.Fifty)
 	
 	public constructor(percentage: FiniteNumber)
@@ -39,32 +48,66 @@ export class LStar extends AbstractValue<FiniteNumber>
 		return new Y(FiniteNumber.OneHundred.multiply(denominator))
 	}
 	
+	/**
+	 * @internal
+	 */
 	round(this: NonNullable<this>): NonNullable<LStar>
 	{
 		return new LStar(this.value.round())
 	}
 	
+	/**
+	 * @internal
+	 */
 	add(this: NonNullable<this>, increment: NonNullable<FiniteNumber>): NonNullable<LStar>
 	{
 		return new LStar(this.value.add(increment))
 	}
 	
+	/**
+	 * @internal
+	 */
+	add_clamp_to_inclusive_minimum_and_inclusive_maximum(this: NonNullable<this>, increment: NonNullable<FiniteNumber>): NonNullable<LStar>
+	{
+		return new LStar(this.value.add_clamp_to_inclusive_minimum_and_inclusive_maximum(increment, LStar.#range))
+	}
+	
+	/**
+	 * @internal
+	 */
+	subtract_clamp_to_inclusive_minimum_and_inclusive_maximum(this: NonNullable<this>, decrement: NonNullable<FiniteNumber>): NonNullable<LStar>
+	{
+		return new LStar(this.value.subtract_clamp_to_inclusive_minimum_and_inclusive_maximum(decrement, LStar.#range))
+	}
+	
+	/**
+	 * @internal
+	 */
 	difference(this: NonNullable<this>, other: NonNullable<this>): NonNullable<FiniteNumber>
 	{
 		return this.value.subtract(other.value)
 	}
 	
+	/**
+	 * @internal
+	 */
 	average(this: NonNullable<this>, other: NonNullable<this>): NonNullable<LStar>
 	{
 		return new LStar(this.value.average(other.value))
 	}
 	
+	/**
+	 * @internal
+	 */
 	static from_alpha_srgb_space(alpha_srgb_space: NonNullable<AlphaSRgbCoordinates>): NonNullable<LStar>
 	{
 		const value = lstarFromArgb(argbFromRgba(alpha_srgb_space.into_rgba()))
 		return new LStar(FiniteNumber.try_from(value))
 	}
 	
+	/**
+	 * @internal
+	 */
 	static is_out_of_range(value: NonNullable<FiniteNumber>): boolean
 	{
 		return value.is_out_of_range(LStar.#range)

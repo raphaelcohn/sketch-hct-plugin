@@ -3,4 +3,5 @@
 
 export * from "./FiniteNumber"
 export * from "./Sign"
+export * from "./Sign.choose_if_sign_is_positive"
 export * from "./Ordering"

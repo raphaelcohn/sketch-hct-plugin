@@ -19,7 +19,7 @@ export class InclusiveMinimumInclusiveMaximumRange implements Range
 	
 	readonly #inclusive_maximum: NonNullable<FiniteNumber>
 	
-	constructor(inclusive_minimum: NonNullable<FiniteNumber>, inclusive_maximum: NonNullable<FiniteNumber>)
+	public constructor(inclusive_minimum: NonNullable<FiniteNumber>, inclusive_maximum: NonNullable<FiniteNumber>)
 	{
 		this.#inclusive_minimum = inclusive_minimum
 		this.#inclusive_maximum = inclusive_maximum
@@ -53,5 +53,18 @@ export class InclusiveMinimumInclusiveMaximumRange implements Range
 	public get inclusive_maximum(): NonNullable<FiniteNumber>
 	{
 		return this.#inclusive_maximum
+	}
+	
+	public clamp(this: NonNullable<this>, value: NonNullable<FiniteNumber>): NonNullable<FiniteNumber>
+	{
+		if (value < this.inclusive_minimum)
+		{
+			return this.inclusive_minimum
+		}
+		if (value > this.inclusive_maximum)
+		{
+			return this.inclusive_maximum
+		}
+		return value
 	}
 }
