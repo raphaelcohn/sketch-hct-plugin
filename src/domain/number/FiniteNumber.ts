@@ -20,8 +20,6 @@ export class FiniteNumber implements Value<number>
 	
 	public static readonly ZeroPointFour: NonNullable<FiniteNumber> = new FiniteNumber(0.4)
 	
-	public static readonly NegativeOne: NonNullable<FiniteNumber> = new FiniteNumber(-1)
-	
 	public static readonly Zero: NonNullable<FiniteNumber> = new FiniteNumber(0)
 	
 	public static readonly One: NonNullable<FiniteNumber> = new FiniteNumber(1)
@@ -34,27 +32,61 @@ export class FiniteNumber implements Value<number>
 	
 	public static readonly Five: NonNullable<FiniteNumber> = new FiniteNumber(5)
 	
+	public static readonly Six: NonNullable<FiniteNumber> = new FiniteNumber(6)
+	
+	public static readonly Eight: NonNullable<FiniteNumber> = new FiniteNumber(8)
+	
+	public static readonly Ten: NonNullable<FiniteNumber> = new FiniteNumber(10)
+	
 	public static readonly Twelve: NonNullable<FiniteNumber> = new FiniteNumber(12)
+	
+	public static readonly Fifteen: NonNullable<FiniteNumber> = new FiniteNumber(15)
 	
 	public static readonly Sixteen: NonNullable<FiniteNumber> = new FiniteNumber(16)
 	
+	public static readonly Eighteen: NonNullable<FiniteNumber> = new FiniteNumber(18)
+	
+	public static readonly Twenty: NonNullable<FiniteNumber> = new FiniteNumber(20)
+	
 	public static readonly TwentyOne: NonNullable<FiniteNumber> = new FiniteNumber(21)
 	
+	public static readonly TwentyFive: NonNullable<FiniteNumber> = new FiniteNumber(25)
+	
 	public static readonly TwentySeven: NonNullable<FiniteNumber> = new FiniteNumber(27)
+	
+	public static readonly Thirty: NonNullable<FiniteNumber> = new FiniteNumber(30)
+	
+	public static readonly ThirtyTwo: NonNullable<FiniteNumber> = new FiniteNumber(32)
+	
+	public static readonly ThirtyFive: NonNullable<FiniteNumber> = new FiniteNumber(35)
+	
+	public static readonly FourtyFive: NonNullable<FiniteNumber> = new FiniteNumber(45)
 	
 	public static readonly Fifty: NonNullable<FiniteNumber> = new FiniteNumber(50)
 	
 	public static readonly Sixty: NonNullable<FiniteNumber> = new FiniteNumber(60)
 	
+	public static readonly Ninety: NonNullable<FiniteNumber> = new FiniteNumber(90)
+	
+	public static readonly NinetyFive: NonNullable<FiniteNumber> = new FiniteNumber(95)
+	
 	public static readonly OneHundred: NonNullable<FiniteNumber> = new FiniteNumber(100)
 	
 	public static readonly OneHundredAndSixteen: NonNullable<FiniteNumber> = FiniteNumber.OneHundred.add(FiniteNumber.Sixteen)
 	
+	public static readonly OneHundredAndTwenty: NonNullable<FiniteNumber> = FiniteNumber.OneHundred.add(FiniteNumber.Twenty)
+	
 	public static readonly TwoHundred: NonNullable<FiniteNumber> = new FiniteNumber(200)
+	
+	public static readonly TwoHundredAndForty: NonNullable<FiniteNumber> = new FiniteNumber(240)
 	
 	public static readonly TwoHundredAndFiftyFive: NonNullable<FiniteNumber> = new FiniteNumber(255)
 	
 	public static readonly ThreeHundredAndSixty: NonNullable<FiniteNumber> = new FiniteNumber(360)
+	
+	public static readonly NegativeOne: NonNullable<FiniteNumber> = FiniteNumber.One.negate()
+	
+	public static readonly NegativeFifty: NonNullable<FiniteNumber> = FiniteNumber.Fifty.negate()
 	
 	readonly #value: number
 	
@@ -311,6 +343,11 @@ export class FiniteNumber implements Value<number>
 	{
 		// Checks against zero work because we eliminate the value `-0.0` in the constructor.
 		return this.value < 0
+	}
+	
+	public negate(this: NonNullable<this>): NonNullable<FiniteNumber>
+	{
+		return FiniteNumber.try_from(-this.value)
 	}
 	
 	public shift_left(this: NonNullable<this>, shift: NonNullable<this>): NonNullable<FiniteNumber>

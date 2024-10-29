@@ -2,19 +2,37 @@
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
 import {ui} from "sketch/ui";
-import {sketch} from "sketch"
-import ColorSpace = sketch.Document.ColorSpace;
+import INPUT_TYPE = ui.INPUT_TYPE;
+import StringInputOptions = ui.StringInputOptions;
 
-export default function(_context: SketchContext)
+export function get_string_from_user(message: string, description: string, initial_value: string): string
 {
-	// @ts-ignore
-	const document: sketch.Document = sketch.fromNative(context.document)
-	if (document.colorSpace != ColorSpace.sRGB)
+	const string_input_options =
 	{
-		ui.alert("Sketch HCT Plugin", "Document color space is not sRGB")
-		return
+		description,
+		type: INPUT_TYPE.string,
+		initialValue: initial_value
+	} as StringInputOptions<string>
+	
+	let result: string | null = null
+	const callback = (err: any, value?: string) =>
+	{
+		if (err)
+		{
+			return
+		}
+		if (value === undefined)
+		{
+			return
+		}
+		result = value
 	}
 	
-	const material_theme_configuration = MaterialThemeConfiguration.from_user_string()
+	ui.getInputFromUser(message, string_input_options, callback)
 	
+	if (result === null)
+	{
+		throw new Error("Could not get string from user")
+	}
+	return result
 }

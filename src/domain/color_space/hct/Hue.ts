@@ -4,6 +4,8 @@
 import {AbstractValue} from "../../number/values";
 import {FiniteNumber} from "../../number";
 import {InclusiveMinimumExclusiveMaximumRange} from "../../number/ranges";
+import {TonalPalette} from "./TonalPalette";
+import {Chroma} from "./Chroma";
 
 export class Hue extends AbstractValue<FiniteNumber>
 {
@@ -26,6 +28,11 @@ export class Hue extends AbstractValue<FiniteNumber>
 		const positive_or_negative_degrees = this.value.add(increment).modulus(ExclusiveMaximumDegrees)
 		const degrees = positive_or_negative_degrees.is_negative() ? ExclusiveMaximumDegrees.add(positive_or_negative_degrees) : positive_or_negative_degrees
 		return new Hue(degrees)
+	}
+	
+	public with_chroma(this: NonNullable<this>, chroma: NonNullable<Chroma>): NonNullable<TonalPalette>
+	{
+		return new TonalPalette(this, chroma)
 	}
 	
 	/**

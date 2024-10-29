@@ -7,8 +7,7 @@ import {Chroma} from "./Chroma";
 import {Hue} from "./Hue";
 import {Cam16} from "@material/material-color-utilities";
 import {AlphaSRgbCoordinates} from "../srgb";
-import {FiniteNumber, Sign} from "../../number";
-import {TonalPalettePair} from "./TonalPalettePair";
+import {FiniteNumber} from "../../number";
 
 export class TonalPalette
 {
@@ -168,48 +167,68 @@ export class TonalPalette
 		return this.#maximum_chroma_cache.cached(this.hue, tone)
 	}
 	
-	public primary(this: NonNullable<this>): NonNullable<TonalPalettePair>
+	public primary(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
 	{
-		return this.colourful_color_tones()
+		if (is_content)
+		{
+			return this
+		}
+		else
+		{
+			return new TonalPalette(this.hue, this.chroma.max(Chroma.try_from(48)))
+		}
 	}
 	
-	public secondary(this: NonNullable<this>): NonNullable<TonalPalettePair>
+	public secondary(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
 	{
 		const hue = this.hue
-		return new TonalPalettePair(new TonalPalette(hue, this.chroma.divide(FiniteNumber.Three)), new TonalPalette(hue, Chroma.try_from(16)))
+		if (is_content)
+		{
+			return new TonalPalette(hue, this.chroma.divide(FiniteNumber.Three))
+		}
+		else
+		{
+			return new TonalPalette(hue, Chroma.try_from(16))
+		}
 	}
 	
-	public tertiary(this: NonNullable<this>): NonNullable<TonalPalettePair>
+	public tertiary(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
 	{
 		const hue = this.hue.rotate(FiniteNumber.Sixty)
-		return new TonalPalettePair(new TonalPalette(hue, this.chroma.divide(FiniteNumber.Two)), new TonalPalette(hue, Chroma.try_from(24)))
+		if (is_content)
+		{
+			return new TonalPalette(hue, this.chroma.divide(FiniteNumber.Two))
+		}
+		else
+		{
+			return new TonalPalette(hue, Chroma.try_from(24))
+		}
 	}
 	
-	public neutral(this: NonNullable<this>): NonNullable<TonalPalettePair>
-	{
-		return this.neutral_color_tones()
-	}
-	
-	public neutral_variant(this: NonNullable<this>): NonNullable<TonalPalettePair>
-	{
-		return this.variant_neutral_color_tones()
-	}
-	
-	public neutral_color_tones(this: NonNullable<this>): NonNullable<TonalPalettePair>
+	public neutral(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
 	{
 		const hue = this.hue
-		return new TonalPalettePair(new TonalPalette(hue, this.chroma.divide(FiniteNumber.Twelve).min(Chroma.try_from(0.4))), new TonalPalette(hue, Chroma.try_from(4)))
+		if (is_content)
+		{
+			return new TonalPalette(hue, this.chroma.divide(FiniteNumber.Twelve).min(Chroma.try_from(0.4)))
+		}
+		else
+		{
+			return new TonalPalette(hue, Chroma.try_from(4))
+		}
 	}
 	
-	public variant_neutral_color_tones(this: NonNullable<this>): NonNullable<TonalPalettePair>
+	public neutral_variant(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
 	{
 		const hue = this.hue
-		return new TonalPalettePair(new TonalPalette(hue, this.chroma.divide(FiniteNumber.Twelve).min(Chroma.try_from(0.4))), new TonalPalette(hue, Chroma.try_from(8)))
-	}
-	
-	public colourful_color_tones(this: NonNullable<this>): NonNullable<TonalPalettePair>
-	{
-		return new TonalPalettePair(this, new TonalPalette(this.hue, this.chroma.max(Chroma.try_from(48))))
+		if (is_content)
+		{
+			return new TonalPalette(hue, this.chroma.divide(FiniteNumber.Twelve).min(Chroma.try_from(0.4)))
+		}
+		else
+		{
+			return new TonalPalette(hue, Chroma.try_from(8))
+		}
 	}
 	
 	public static readonly Error: NonNullable<TonalPalette> = new TonalPalette(Hue.try_from(25), Chroma.try_from(84))

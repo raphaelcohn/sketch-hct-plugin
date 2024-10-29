@@ -9,7 +9,33 @@ export class Chroma extends AbstractValue<FiniteNumber>
 {
     static readonly #range: NonNullable<InclusiveMinimumNoMaximumRange> = InclusiveMinimumNoMaximumRange.ZeroToInfinity
     
-    static readonly PreferredInclusiveMaximum: NonNullable<Chroma> = new Chroma(FiniteNumber.TwoHundred)
+    public static readonly Zero: NonNullable<Chroma> = new Chroma(FiniteNumber.Zero)
+    
+    public static readonly Two: NonNullable<Chroma> = new Chroma(FiniteNumber.Two)
+    
+    public static readonly Six: NonNullable<Chroma> = new Chroma(FiniteNumber.Six)
+    
+    public static readonly Eight: NonNullable<Chroma> = new Chroma(FiniteNumber.Eight)
+    
+    public static readonly Ten: NonNullable<Chroma> = new Chroma(FiniteNumber.Ten)
+    
+    public static readonly Twelve: NonNullable<Chroma> = new Chroma(FiniteNumber.Twelve)
+    
+    public static readonly Sixteen: NonNullable<Chroma> = new Chroma(FiniteNumber.Sixteen)
+    
+    public static readonly TwentyFour: NonNullable<Chroma> = Chroma.try_from(24)
+    
+    public static readonly ThirtyTwo: NonNullable<Chroma> = Chroma.try_from(32)
+    
+    public static readonly ThirtySix: NonNullable<Chroma> = Chroma.try_from(36)
+    
+    public static readonly Forty: NonNullable<Chroma> = Chroma.try_from(40)
+    
+    public static readonly FortyEight: NonNullable<Chroma> = Chroma.try_from(48)
+    
+    public static readonly TwoHundred: NonNullable<Chroma> = new Chroma(FiniteNumber.TwoHundred)
+    
+    static readonly PreferredInclusiveMaximum: NonNullable<Chroma> = Chroma.TwoHundred
     
     public constructor(value: NonNullable<FiniteNumber>)
     {
@@ -27,6 +53,14 @@ export class Chroma extends AbstractValue<FiniteNumber>
     round(this: NonNullable<this>): NonNullable<Chroma>
     {
         return new Chroma(this.value.round())
+    }
+    
+    /**
+     * @internal
+     */
+    add(this: NonNullable<this>, decrement: NonNullable<FiniteNumber>): NonNullable<Chroma>
+    {
+        return new Chroma(this.value.add(decrement))
     }
     
     /**

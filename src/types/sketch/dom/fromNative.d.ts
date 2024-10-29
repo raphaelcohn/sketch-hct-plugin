@@ -24,7 +24,6 @@ declare module "sketch/dom"
 		import MSSymbolMaster = sketchInternal.MSSymbolMaster
 		import MSTextLayer = sketchInternal.MSTextLayer
 		
-		export function fromNative(nativeObject: ImportableNative): ImportableObject
 		export function fromNative(nativeObject: MSArtboardGroup): Artboard
 		export function fromNative(nativeObject: MSAssetLibrary): Library
 		export function fromNative(nativeObject: MSAvailableOverride): SymbolOverride
@@ -43,6 +42,7 @@ declare module "sketch/dom"
 		export function fromNative(nativeObject: MSSymbolInstance): SymbolInstance
 		export function fromNative(nativeObject: MSSymbolMaster): SymbolMaster
 		export function fromNative(nativeObject: MSTextLayer): Text
+		export function fromNative(nativeObject: ImportableNative): ImportableObject
 		
 		/**
 		 * A utility function to get a wrapped object from a native Sketch model object.

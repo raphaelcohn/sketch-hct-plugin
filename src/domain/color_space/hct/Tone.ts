@@ -7,6 +7,7 @@ import {ContrastRatio} from "../../contrast";
 import {AlphaSRgbCoordinates} from "../srgb";
 import {FiniteNumber, Sign} from "../../number";
 import {AbstractValue} from "../../number/values";
+import {PossiblyOutOfRangeTone} from "./PossiblyOutOfRangeTone";
 
 // HCT Tone.
 // Perceptual Luminance.
@@ -132,20 +133,20 @@ export class Tone extends AbstractValue<LStar>
 		return Y.contrast_ratio(this.to_ciexyz_y(), other.to_ciexyz_y())
 	}
 	
-	public lighter(contrast_ratio: NonNullable<ContrastRatio>): NonNullable<Tone>
+	public lighter(contrast_ratio: NonNullable<ContrastRatio>): NonNullable<PossiblyOutOfRangeTone>
 	{
 		const dark_y = this.to_ciexyz_y()
 		const raw_light_y = contrast_ratio.lighten(dark_y)
 		
-		return Tone.#darker_or_lighter_common(contrast_ratio, dark_y, raw_light_y, Tone.InclusiveMinimum, Sign.Positive)
+		return Tone.#darker_or_lighter_common(contrast_ratio, dark_y, raw_light_y, PossiblyOutOfRangeTone.OutOfRangeMaximum, Sign.Positive)
 	}
 	
-	public darker(contrast_ratio: NonNullable<ContrastRatio>): NonNullable<Tone>
+	public darker(contrast_ratio: NonNullable<ContrastRatio>): NonNullable<PossiblyOutOfRangeTone>
 	{
 		const light_y = this.to_ciexyz_y()
 		const raw_dark_y = contrast_ratio.darken(light_y)
 		
-		return Tone.#darker_or_lighter_common(contrast_ratio, light_y, raw_dark_y, Tone.InclusiveMaximum, Sign.Negative)
+		return Tone.#darker_or_lighter_common(contrast_ratio, light_y, raw_dark_y, PossiblyOutOfRangeTone.OutOfRangeMinimum, Sign.Negative)
 	}
 	
 	public to_cielab_lstar(this: NonNullable<this>): NonNullable<LStar>
@@ -167,12 +168,12 @@ export class Tone extends AbstractValue<LStar>
 	 */
 	foreground(this: NonNullable<this>, desired_contrast_ratio: ContrastRatio): NonNullable<Tone>
 	{
-		const lighter_tone = this.lighter(desired_contrast_ratio)
-		const darker_tone = this.darker(desired_contrast_ratio)
+		const lighter_tone = this.lighter(desired_contrast_ratio).into_range()
+		const darker_tone = this.darker(desired_contrast_ratio).into_range()
 		const lighter_actual_contrast_ratio = lighter_tone.contrast_ratio(this)
 		const darker_actual_contrast_ratio = darker_tone.contrast_ratio(this)
 		
-		if (this.#prefers_light_foreground())
+		if (this.prefers_light_foreground())
 		{
 			// This handles an edge case.
 			//
@@ -191,22 +192,6 @@ export class Tone extends AbstractValue<LStar>
 		else
 		{
 			return (darker_actual_contrast_ratio >= desired_contrast_ratio || darker_actual_contrast_ratio >= lighter_actual_contrast_ratio) ? darker_tone : lighter_tone
-		}
-	}
-	
-	/**
-	 * Adjust a tone such that white has a contrast ratio of 4.5:1, if the tone is reasonably close to supporting it.
-	 * @internal
-	 */
-	enable_light_foreground(this: NonNullable<this>): NonNullable<Tone>
-	{
-		if (this.#prefers_light_foreground() && !this.#allows_light_foreground())
-		{
-			return Tone.T49
-		}
-		else
-		{
-			return this
 		}
 	}
 	
@@ -230,6 +215,23 @@ export class Tone extends AbstractValue<LStar>
 	}
 	
 	/**
+	 * Adjust a tone such that white has a contrast ratio of 4.5:1, if the tone is reasonably close to supporting it.
+	 * @internal
+	 */
+	enable_light_foreground(this: NonNullable<this>): NonNullable<Tone>
+	{
+		if (this.prefers_light_foreground() && !this.#allows_light_foreground())
+		{
+			return Tone.T49
+		}
+		else
+		{
+			return this
+		}
+	}
+	
+	/**
+	 * @internal
 	 * @return whether this tone prefers a light foreground.
 	 *
 	 * People prefer white foregrounds on ~T60-70.
@@ -239,7 +241,7 @@ export class Tone extends AbstractValue<LStar>
 	 * Since `tertiaryContainer` in dark monochrome variant requires a tone of 60, it should not be adjusted.
 	 * Therefore, 60 is excluded here.
 	 */
-	#prefers_light_foreground(this: NonNullable<this>): boolean
+	prefers_light_foreground(this: NonNullable<this>): boolean
 	{
 		return this.round() < Tone.T60
 	}
@@ -308,7 +310,7 @@ export class Tone extends AbstractValue<LStar>
 		return new Tone(this.value.average(other.value))
 	}
 
-	static #darker_or_lighter_common(contrast_ratio: NonNullable<ContrastRatio>, before_y: NonNullable<Y>, raw_after_y: NonNullable<FiniteNumber>, out_of_range_tone: NonNullable<Tone>, tolerance_sign: Sign): NonNullable<Tone>
+	static #darker_or_lighter_common(contrast_ratio: NonNullable<ContrastRatio>, before_y: NonNullable<Y>, raw_after_y: NonNullable<FiniteNumber>, out_of_range_tone: NonNullable<PossiblyOutOfRangeTone>, tolerance_sign: Sign): NonNullable<PossiblyOutOfRangeTone>
 	{
 		if (Y.is_out_of_range(raw_after_y))
 		{
@@ -329,7 +331,7 @@ export class Tone extends AbstractValue<LStar>
 		}
 		const after_l_star = new LStar(raw_after_l_star)
 
-		return new Tone(after_l_star)
+		return PossiblyOutOfRangeTone.in_range(new Tone(after_l_star))
 	}
 	
 	static #tolerance(tolerance_sign: Sign): NonNullable<FiniteNumber>

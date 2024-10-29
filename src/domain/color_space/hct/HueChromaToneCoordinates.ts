@@ -7,6 +7,7 @@ import { Tone } from "./Tone"
 import {Chroma} from "./Chroma"
 import {HctSolver} from "@material/material-color-utilities/hct/hct_solver"
 import {AlphaSRgbCoordinates} from "../srgb";
+import {Hct, TemperatureCache} from "@material/material-color-utilities";
 
 export class HueChromaToneCoordinates
 {
@@ -44,6 +45,11 @@ export class HueChromaToneCoordinates
 	public static from_alpha_srgb_space(alpha_srgb_space: NonNullable<AlphaSRgbCoordinates>): NonNullable<HueChromaToneCoordinates>
 	{
 		return new HueChromaToneCoordinates(alpha_srgb_space.into_tonal_palette(), alpha_srgb_space.into_tone())
+	}
+	
+	static #from_hct(hct: NonNullable<Hct>): NonNullable<HueChromaToneCoordinates>
+	{
+		return HueChromaToneCoordinates.try_from(hct.hue, hct.chroma, hct.tone)
 	}
 	
 	public toString(this: NonNullable<this>): string
@@ -96,6 +102,41 @@ export class HueChromaToneCoordinates
 		{
 			return this
 		}
+	}
+	
+	public complement_by_temperature(this: NonNullable<this>): NonNullable<HueChromaToneCoordinates>
+	{
+		const result = this.#temperature_cache().complement
+		return HueChromaToneCoordinates.#from_hct(result)
+	}
+	
+	public analogous_by_temperature_last(this: NonNullable<this>, non_zero_integer_count: number, non_zero_number_of_divisions_of_the_colour_wheel: number): NonNullable<HueChromaToneCoordinates>
+	{
+		if (!Number.isInteger(non_zero_integer_count) || non_zero_integer_count < 1)
+		{
+			throw new RangeError(`non_zero_integer_count is not a positive integer (${non_zero_integer_count}`)
+		}
+		if (!Number.isInteger(non_zero_number_of_divisions_of_the_colour_wheel) || non_zero_number_of_divisions_of_the_colour_wheel < 1)
+		{
+			throw new RangeError(`non_zero_number_of_divisions_of_the_colour_wheel is not a positive integer (${non_zero_number_of_divisions_of_the_colour_wheel}`)
+		}
+		const result = this.#temperature_cache().analogous(non_zero_integer_count, non_zero_number_of_divisions_of_the_colour_wheel)
+		
+		const last_unsafe: Hct | undefined = result[non_zero_integer_count - 1]
+		// @ts-ignore
+		const last: Hct = last_unsafe
+		return HueChromaToneCoordinates.#from_hct(last)
+	}
+	
+	#temperature_cache(this: NonNullable<this>): NonNullable<TemperatureCache>
+	{
+		const input = this.#into_hct()
+		return new TemperatureCache(input)
+	}
+	
+	#into_hct(this: NonNullable<this>): NonNullable<Hct>
+	{
+		return Hct.from(this.hue.valueOf(), this.chroma.valueOf(), this.tone.valueOf())
 	}
 	
 	/**
