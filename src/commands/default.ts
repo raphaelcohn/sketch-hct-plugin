@@ -3,7 +3,14 @@
 
 import {ui} from "sketch/ui";
 import {sketch} from "sketch"
+import {MaterialThemeBuilderUrlParser} from "../domain/theme/material-theme-builder-url-parser/MaterialThemeBuilderUrlParser";
+import {get_string_from_user} from "../domain/sketch/get_string_from_user";
+import {get_selection_from_user} from "../domain/sketch/get_selection_from_user";
 import ColorSpace = sketch.Document.ColorSpace;
+import {SwatchGenerator} from "../domain/sketch/SwatchGenerator";
+import {SketchAddSwatch} from "../domain/sketch/SketchAddSwatch";
+
+const YesNo: Map<string, boolean> = new Map<string, boolean>([["Yes", true], ["No", false]])
 
 export default function(_context: SketchContext)
 {
@@ -11,10 +18,19 @@ export default function(_context: SketchContext)
 	const document: sketch.Document = sketch.fromNative(context.document)
 	if (document.colorSpace != ColorSpace.sRGB)
 	{
-		ui.alert("Sketch HCT Plugin", "Document color space is not sRGB")
+		ui.alert("Material Theme Builder", "Document color space is not sRGB")
 		return
 	}
 	
-	const material_theme_configuration = MaterialThemeConfiguration.from_user_string()
+	const url_string = get_string_from_user("Material Theme Builder", "Supply the material design theme URL that is copied to the clipboard (from https://material-foundation.github.io/material-theme-builder/)", MaterialThemeBuilderUrlParser.DefaultUrlString)
+	const harmonize_custom_colors = get_selection_from_user("Material Theme Builder", "Harmonize custom colors (not preserved by Material Theme Builder URL)?", YesNo, "Yes")
 	
+	const parser = MaterialThemeBuilderUrlParser.from_url_string(url_string)
+	const material_theme_input = parser.parse(harmonize_custom_colors)
+	
+	//const static_theme = material_theme_input.into_static_theme()
+	const dynamic_theme = material_theme_input.into_dynamic_theme()
+	
+	const swatch_generator = new SwatchGenerator(dynamic_theme, new SketchAddSwatch(document))
+	swatch_generator.generate()
 }

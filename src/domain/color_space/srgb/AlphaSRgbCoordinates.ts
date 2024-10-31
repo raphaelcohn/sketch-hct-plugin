@@ -7,6 +7,8 @@ import {argbFromRgba, Cam16, Rgba, rgbaFromArgb} from "@material/material-color-
 import {HueChromaToneCoordinates} from "../hct";
 import {TonalPalette} from "../hct";
 import {Tone} from "../hct";
+import {argb} from "./argb";
+import {Blend} from "@material/material-color-utilities/blend/blend";
 
 export class AlphaSRgbCoordinates extends SRgbCoordinates
 {
@@ -25,7 +27,7 @@ export class AlphaSRgbCoordinates extends SRgbCoordinates
 	
 	public override valueOf(this: NonNullable<this>): number
 	{
-		return this.#into_argb()
+		return this.into_argb()
 	}
 	
 	public override to_upper_case_hexadecimal_string(this: NonNullable<this>): string
@@ -71,6 +73,17 @@ export class AlphaSRgbCoordinates extends SRgbCoordinates
 	public into_tone(this: NonNullable<this>): NonNullable<Tone>
 	{
 		return Tone.from_alpha_srgb_space(this)
+	}
+	
+	/**
+	 * Also known as blend.
+	 */
+	public harmonize(this: NonNullable<this>, into: NonNullable<AlphaSRgbCoordinates>): NonNullable<AlphaSRgbCoordinates>
+	{
+		const from_design_color = this.into_argb()
+		const to_source_color = into.into_argb()
+		const blended: argb = Blend.harmonize(from_design_color, to_source_color)
+		return AlphaSRgbCoordinates.from_argb(blended)
 	}
 	
 	public static override try_from_css_hex_color_or_hex_color(hex_color: string): NonNullable<AlphaSRgbCoordinates>
@@ -126,7 +139,7 @@ export class AlphaSRgbCoordinates extends SRgbCoordinates
 	/**
 	 * @internal
 	 */
-	static from_argb(argb: number): NonNullable<AlphaSRgbCoordinates>
+	static from_argb(argb: argb): NonNullable<AlphaSRgbCoordinates>
 	{
 		return AlphaSRgbCoordinates.from_rgba(rgbaFromArgb(argb))
 	}
@@ -147,7 +160,10 @@ export class AlphaSRgbCoordinates extends SRgbCoordinates
 		return {r: this.red.valueOf(), g: this.green.valueOf(), b: this.blue.valueOf(), a: this.alpha.valueOf()}
 	}
 	
-	#into_argb(this: NonNullable<this>): number
+	/**
+	 * @internal
+	 */
+	override into_argb(this: NonNullable<this>): argb
 	{
 		return argbFromRgba(this.into_rgba())
 	}
@@ -157,6 +173,6 @@ export class AlphaSRgbCoordinates extends SRgbCoordinates
 	 */
 	into_cam16(this: NonNullable<this>): NonNullable<Cam16>
 	{
-		return Cam16.fromInt(this.#into_argb())
+		return Cam16.fromInt(this.into_argb())
 	}
 }

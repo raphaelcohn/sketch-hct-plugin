@@ -6,11 +6,11 @@ import {DualForegroundTonePair} from "./tone_pair";
 import {ContrastLevelToContrastRatio} from "../../contrast";
 import {ThemePair} from "../ThemePair";
 import {PrimarySecondaryTertiaryPalette} from "./PrimarySecondaryTertiaryPalette";
-import {PaletteChoice} from "../PaletteChoice";
+import {PaletteChoice} from "../palettes/PaletteChoice";
 import {SurfaceSwatch} from "./SurfaceSwatch";
-import {Variant} from "../Variant";
+import {Variant} from "../palettes/Variant";
 import {Tone} from "../../color_space/hct";
-import {Scheme} from "../Scheme";
+import {Scheme} from "./Scheme";
 import {ViewingConditions} from "../ViewingConditions";
 
 export class FixedSwatch extends AbstractWithBackgroundSwatch<SurfaceSwatch>

@@ -5,26 +5,19 @@ import {ui} from "sketch/ui";
 import INPUT_TYPE = ui.INPUT_TYPE;
 import SelectionInputOptions = ui.SelectionInputOptions
 
-export function get_selection_from_user<A extends {}, Z extends string>(message: string, description: string, initial_value_index: number, possible_values_object: { [key in keyof A]: string }): keyof Z
+export function get_selection_from_user<T>(message: string, description: string, possible_values: Map<string, T>, initial_value: string): T
 {
-	if (!Number.isInteger(initial_value_index) || Number.isNaN(initial_value_index) || initial_value_index < 0)
+	if (!possible_values.has(initial_value))
 	{
-		throw new RangeError(`initial_value_index ${initial_value_index} is not a zero or positive integer`)
-	}
-	
-	const keys = Object.keys(possible_values_object)
-	const number_of_keys = keys.length
-	if (number_of_keys >= initial_value_index)
-	{
-		throw new RangeError(`initial_value_index ${initial_value_index} exceeds number of keys ${number_of_keys}`)
+		throw new Error(`initial_value ${initial_value} is not a key in ${possible_values}`);
 	}
 	
 	const selection_input_options =
 	{
 		description: description,
 		type: INPUT_TYPE.selection,
-		initialValue: keys[initial_value_index],
-		possibleValues: keys,
+		initialValue: initial_value,
+		possibleValues: Array.from(possible_values.keys()),
 	} as SelectionInputOptions
 	
 	let result: string | null = null
@@ -48,6 +41,10 @@ export function get_selection_from_user<A extends {}, Z extends string>(message:
 		throw new Error("Could not get selection from user")
 	}
 	
-	const key = result as keyof Z
-	return key
+	const value = possible_values.get(result)
+	if (value === undefined)
+	{
+		throw new Error("Sketch UI selection failed")
+	}
+	return value
 }

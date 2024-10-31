@@ -77,7 +77,7 @@ export class Component extends AbstractValue<FiniteNumber>
 	 */
 	static alpha_from_rgba(rgba: NonNullable<Rgba>): NonNullable<Component>
 	{
-		return Component.from_rgba_component(rgba.a)
+		return Component.#from_rgba_component(rgba.a)
 	}
 	
 	/**
@@ -85,7 +85,7 @@ export class Component extends AbstractValue<FiniteNumber>
 	 */
 	static red_from_rgba(rgba: NonNullable<Rgba>): NonNullable<Component>
 	{
-		return Component.from_rgba_component(rgba.r)
+		return Component.#from_rgba_component(rgba.r)
 	}
 	
 	/**
@@ -93,7 +93,7 @@ export class Component extends AbstractValue<FiniteNumber>
 	 */
 	static green_from_rgba(rgba: NonNullable<Rgba>): NonNullable<Component>
 	{
-		return Component.from_rgba_component(rgba.g)
+		return Component.#from_rgba_component(rgba.g)
 	}
 	
 	/**
@@ -101,12 +101,11 @@ export class Component extends AbstractValue<FiniteNumber>
 	 */
 	static blue_from_rgba(rgba: NonNullable<Rgba>): NonNullable<Component>
 	{
-		return Component.from_rgba_component(rgba.b)
+		return Component.#from_rgba_component(rgba.b)
 	}
 	
-	private static from_rgba_component(rgba_component: number): NonNullable<Component>
+	static #from_rgba_component(rgba_component: number): NonNullable<Component>
 	{
 		return new Component(FiniteNumber.try_from(rgba_component))
 	}
-	
 }

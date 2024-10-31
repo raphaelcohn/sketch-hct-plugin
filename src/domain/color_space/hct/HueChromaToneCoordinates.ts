@@ -130,13 +130,25 @@ export class HueChromaToneCoordinates
 	
 	#temperature_cache(this: NonNullable<this>): NonNullable<TemperatureCache>
 	{
-		const input = this.#into_hct()
+		const input = this.into_hct()
 		return new TemperatureCache(input)
 	}
 	
-	#into_hct(this: NonNullable<this>): NonNullable<Hct>
+	/**
+	 * @internal
+	 */
+	into_hct(this: NonNullable<this>): NonNullable<Hct>
 	{
 		return Hct.from(this.hue.valueOf(), this.chroma.valueOf(), this.tone.valueOf())
+	}
+	
+	/**
+	 * @internal
+	 */
+	into_alpha_srgb_space_coordinate(this: NonNullable<this>): NonNullable<AlphaSRgbCoordinates>
+	{
+		const argb = this.into_hct().toInt()
+		return AlphaSRgbCoordinates.from_argb(argb)
 	}
 	
 	/**

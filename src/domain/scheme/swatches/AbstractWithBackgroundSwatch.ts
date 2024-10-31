@@ -3,7 +3,7 @@
 
 import {AbstractSwatch} from "./AbstractSwatch";
 import {ContrastLevel, ContrastLevelToContrastRatio, ContrastRatio} from "../../contrast";
-import {PaletteChoice} from "../PaletteChoice";
+import {PaletteChoice} from "../palettes/PaletteChoice";
 import {ThemeMode} from "../ThemeMode";
 import {ThemePair} from "../ThemePair";
 import {WithBackgroundSwatch} from "./WithBackgroundSwatch";

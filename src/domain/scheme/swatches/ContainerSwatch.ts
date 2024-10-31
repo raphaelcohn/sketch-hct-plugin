@@ -3,7 +3,7 @@
 
 import {TonalPalette, Tone} from "../../color_space/hct";
 import {ContrastLevelToContrastRatio} from "../../contrast";
-import {PaletteChoice} from "../PaletteChoice";
+import {PaletteChoice} from "../palettes/PaletteChoice";
 import {DualForegroundTonePair} from "./tone_pair";
 import {ThemePair} from "../ThemePair";
 import {ThemeMode} from "../ThemeMode";

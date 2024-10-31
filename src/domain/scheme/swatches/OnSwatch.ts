@@ -10,8 +10,8 @@ import {MainSwatch} from "./MainSwatch";
 import {ContainerSwatch} from "./ContainerSwatch";
 import {ContainerPaletteChoice} from "./ContainerPaletteChoice";
 import {AbstractOnSwatch} from "./AbstractOnSwatch";
-import {PaletteChoice} from "../PaletteChoice";
-import {Variant} from "../Variant";
+import {PaletteChoice} from "../palettes/PaletteChoice";
+import {Variant} from "../palettes/Variant";
 import {ThemeMode} from "../ThemeMode";
 
 export class OnSwatch extends AbstractOnSwatch<SurfaceSwatch | SimpleSwatch | MainSwatch | ContainerSwatch>

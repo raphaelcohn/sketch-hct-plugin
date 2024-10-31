@@ -11,7 +11,7 @@ import {FixedSwatch} from "./FixedSwatch";
 import {OnFixedSwatch} from "./OnFixedSwatch";
 import {SwatchName} from "./SwatchName";
 import {Swatch} from "./Swatch";
-import {PaletteChoice} from "../PaletteChoice";
+import {PaletteChoice} from "../palettes/PaletteChoice";
 import {Tone} from "../../color_space/hct";
 import {ThemePair} from "../ThemePair";
 
@@ -31,8 +31,6 @@ export class Swatches
 	private constructor()
 	{
 		// Information on default colors and tones sourced from <https://m3.material.io/styles/color/static/baseline#d3170e61-484c-4c35-a847-2aae11803ccb>.
-		// Information on adding additional colors: <https://herrbert74.github.io/posts/custom-color-scheme-with-m3-compose/>.
-		// Material theme builder: <https://material-foundation.github.io/material-theme-builder/>
 		
 		this.#swatches = new Map<SwatchName, SwatchUsage>()
 		
@@ -62,7 +60,7 @@ export class Swatches
 		this.#set_surface_container_n(SwatchName.SurfaceContainerHighest, SurfaceSwatch.SurfaceContainerHighest, Tone.T22, Tone.T90)
 		
 		this.#set_surface_add_on_scrim_like(SwatchName.Shadow, SimpleSwatch.Shadow, "For shadows applied to elevated components")
-		this.#set_surface_add_on_scrim_like(SwatchName.Scrim, SimpleSwatch.Scrim, "Used for scrims which help separate floating components from the background")
+		this.#set_surface_add_on_scrim_like(SwatchName.Scrim,  SimpleSwatch.Scrim,  "Used for scrims which help separate floating components from the background")
 		
 		this.#set_surface_deprecated(SwatchName.Background,   SurfaceSwatch.Background,  Tone.T6,  Tone.T98, "Note: Background is a legacy color role. It is recommended to use Surface instead of Background")
 		this.#set_surface_deprecated(SwatchName.OnBackground, OnSwatch.OnBackground,     Tone.T90, Tone.T10, "Used for text and icons shown against the background color")
@@ -226,6 +224,7 @@ export class Swatches
 		const is_variant = Swatches.#swatch_is_variant(swatch_name)
 		this.#swatches.set(swatch_name, new SwatchUsage(swatch, palette_choice, ThemePair.fixed(tone_fixed), null, false, true, is_on, is_container, is_variant, true))
 	}
+	
 	static #swatch_is_fixed(swatch_name: SwatchName): boolean
 	{
 		return swatch_name.endsWith("/Fixed") || swatch_name.includes("/Fixed/")

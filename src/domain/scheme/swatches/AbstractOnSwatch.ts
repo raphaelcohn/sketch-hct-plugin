@@ -3,11 +3,11 @@
 
 import {Swatch} from "./Swatch";
 import {AbstractWithBackgroundSwatch} from "./AbstractWithBackgroundSwatch";
-import {PaletteChoice} from "../PaletteChoice";
+import {PaletteChoice} from "../palettes/PaletteChoice";
 import {ContrastLevelToContrastRatio, ContrastRatio, is_decreasing} from "../../contrast";
 import {ThemePair} from "../ThemePair";
 import {Tone} from "../../color_space/hct";
-import {Scheme} from "../Scheme";
+import {Scheme} from "./Scheme";
 import {ViewingConditions} from "../ViewingConditions";
 
 /**

@@ -6,8 +6,9 @@ import {Tone} from "./Tone";
 import {Chroma} from "./Chroma";
 import {Hue} from "./Hue";
 import {Cam16} from "@material/material-color-utilities";
-import {AlphaSRgbCoordinates} from "../srgb";
+import {AlphaSRgbCoordinates, SRgbCoordinates} from "../srgb";
 import {FiniteNumber} from "../../number";
+import {TonalPalette as MaterialDesignTonalPalette} from "@material/material-color-utilities";
 
 export class TonalPalette
 {
@@ -29,6 +30,16 @@ export class TonalPalette
 		return new TonalPalette(Hue.try_from(hue_degrees), Chroma.try_from(chroma))
 	}
 	
+	public static try_from_material_design_tonal_palette(material_design_tonal_palette: MaterialDesignTonalPalette): NonNullable<TonalPalette>
+	{
+		return TonalPalette.try_from(material_design_tonal_palette.hue, material_design_tonal_palette.chroma)
+	}
+	
+	public into_material_design_tonal_palette(this: NonNullable<this>): NonNullable<MaterialDesignTonalPalette>
+	{
+		return MaterialDesignTonalPalette.fromHueAndChroma(this.hue.valueOf(), this.chroma.valueOf())
+	}
+	
 	public toString(this: NonNullable<this>): string
 	{
 		return `(${this.hue}, ${this.chroma})`
@@ -42,6 +53,11 @@ export class TonalPalette
 	public get chroma(): NonNullable<Chroma>
 	{
 		return this.#chroma
+	}
+	
+	public with_tone_in_alpha_srgb_space(this: NonNullable<this>, tone: NonNullable<Tone>): NonNullable<AlphaSRgbCoordinates>
+	{
+		return this.with_tone(tone).into_alpha_srgb_space_coordinate()
 	}
 	
 	public with_tone(this: NonNullable<this>, tone: NonNullable<Tone>): NonNullable<HueChromaToneCoordinates>
@@ -167,6 +183,19 @@ export class TonalPalette
 		return this.#maximum_chroma_cache.cached(this.hue, tone)
 	}
 	
+	/**
+	 * Assumes `this` is a source color.
+	 * @param is_content
+	 */
+	public container(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
+	{
+		return this.primary(is_content)
+	}
+	
+	/**
+	 * Assumes `this` is a source color.
+	 * @param is_content
+	 */
 	public primary(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
 	{
 		if (is_content)
@@ -179,6 +208,10 @@ export class TonalPalette
 		}
 	}
 	
+	/**
+	 * Assumes `this` is a source color.
+	 * @param is_content
+	 */
 	public secondary(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
 	{
 		const hue = this.hue
@@ -192,6 +225,10 @@ export class TonalPalette
 		}
 	}
 	
+	/**
+	 * Assumes `this` is a source color.
+	 * @param is_content
+	 */
 	public tertiary(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
 	{
 		const hue = this.hue.rotate(FiniteNumber.Sixty)
@@ -205,6 +242,10 @@ export class TonalPalette
 		}
 	}
 	
+	/**
+	 * Assumes `this` is a source color.
+	 * @param is_content
+	 */
 	public neutral(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
 	{
 		const hue = this.hue
@@ -218,6 +259,10 @@ export class TonalPalette
 		}
 	}
 	
+	/**
+	 * Assumes `this` is a source color.
+	 * @param is_content
+	 */
 	public neutral_variant(this: NonNullable<this>, is_content: boolean): NonNullable<TonalPalette>
 	{
 		const hue = this.hue
@@ -232,6 +277,14 @@ export class TonalPalette
 	}
 	
 	public static readonly Error: NonNullable<TonalPalette> = new TonalPalette(Hue.try_from(25), Chroma.try_from(84))
+	
+	/**
+	 * @internal
+	 */
+	static from_srgb_space(srgb_space: NonNullable<SRgbCoordinates>)
+	{
+		return TonalPalette.from_alpha_srgb_space(srgb_space.into_opaque())
+	}
 	
 	/**
 	 * @internal

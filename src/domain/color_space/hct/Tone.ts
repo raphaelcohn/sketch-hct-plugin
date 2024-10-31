@@ -101,6 +101,8 @@ export class Tone extends AbstractValue<LStar>
 	
 	public static readonly T98: NonNullable<Tone> = new Tone(new LStar(FiniteNumber.try_from(98)))
 	
+	public static readonly T99: NonNullable<Tone> = new Tone(new LStar(FiniteNumber.try_from(99)))
+	
 	public static readonly T100: NonNullable<Tone> = Tone.InclusiveMaximum
 	
 	public constructor(cielab_l_star: LStar)

@@ -1,48 +1,62 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-import {Chroma, Hue, HueChromaToneCoordinates, TonalPalette} from "../color_space/hct";
-import {CorePalettesSourceColors} from "./CorePalettesSourceColors";
+import {Chroma, Hue, HueChromaToneCoordinates, TonalPalette} from "../../color_space/hct";
+import {PaletteSourceOverrides} from "./PaletteSourceOverrides";
 import {PaletteChoice} from "./PaletteChoice";
-import {FiniteNumber} from "../number";
+import {FiniteNumber} from "../../number";
 import {Variant} from "./Variant";
+import {DynamicScheme} from "@material/material-color-utilities/dynamiccolor/dynamic_scheme";
 
 export class Palettes
 {
 	readonly #primary: NonNullable<TonalPalette>
 	readonly #secondary: NonNullable<TonalPalette>
 	readonly #tertiary: NonNullable<TonalPalette>
+	readonly #error: NonNullable<TonalPalette>
 	readonly #neutral: NonNullable<TonalPalette>
 	readonly #neutral_variant: NonNullable<TonalPalette>
-	readonly #error: NonNullable<TonalPalette>
 	
-	public constructor(primary: NonNullable<TonalPalette>, secondary: NonNullable<TonalPalette>, tertiary: NonNullable<TonalPalette>, neutral: NonNullable<TonalPalette>, neutral_variant: NonNullable<TonalPalette>, error: NonNullable<TonalPalette>)
+	public constructor(primary: NonNullable<TonalPalette>, secondary: NonNullable<TonalPalette>, tertiary: NonNullable<TonalPalette>, error: NonNullable<TonalPalette>, neutral: NonNullable<TonalPalette>, neutral_variant: NonNullable<TonalPalette>)
 	{
 		this.#primary = primary
 		this.#secondary = secondary
 		this.#tertiary = tertiary
+		this.#error = error
 		this.#neutral = neutral
 		this.#neutral_variant = neutral_variant
-		this.#error = error
+	}
+	
+	public static from_dynamic(dynamic_scheme: NonNullable<DynamicScheme>): NonNullable<Palettes>
+	{
+		return new Palettes
+		(
+			TonalPalette.try_from_material_design_tonal_palette(dynamic_scheme.primaryPalette),
+			TonalPalette.try_from_material_design_tonal_palette(dynamic_scheme.secondaryPalette),
+			TonalPalette.try_from_material_design_tonal_palette(dynamic_scheme.tertiaryPalette),
+			TonalPalette.try_from_material_design_tonal_palette(dynamic_scheme.errorPalette),
+			TonalPalette.try_from_material_design_tonal_palette(dynamic_scheme.neutralPalette),
+			TonalPalette.try_from_material_design_tonal_palette(dynamic_scheme.neutralVariantPalette)
+		)
 	}
 	
 	/**
 	 * Useful only for legacy static schemes used in Android 12.
 	 * @param source_color
 	 * @param is_content
-	 * @param source_colors
+	 * @param palette_source_overrides
 	 */
-	public static from_source_colors(source_color: NonNullable<TonalPalette>, is_content: boolean, source_colors: CorePalettesSourceColors): [NonNullable<Palettes>, Variant.Ordinary | Variant.Fidelity]
+	public static from_static(source_color: NonNullable<TonalPalette>, is_content: boolean, palette_source_overrides: PaletteSourceOverrides): [NonNullable<Palettes>, Variant.Ordinary | Variant.Fidelity]
 	{
 		return [
 			new Palettes
 			(
 				source_color.primary(is_content),
-				(source_colors.secondary === undefined ? source_color.secondary(is_content) : source_colors.secondary.primary(is_content)),
-				(source_colors.tertiary === undefined ? source_color.tertiary(is_content) : source_colors.tertiary.primary(is_content)),
-				(source_colors.neutral === undefined ? source_color.neutral(is_content) : source_colors.neutral.neutral(is_content)),
-				(source_colors.neutral_variant === undefined ? source_color.neutral_variant(is_content) : source_colors.neutral_variant.neutral_variant(is_content)),
-				(source_colors.error === undefined ? TonalPalette.Error : source_colors.error.primary(is_content))
+				palette_source_overrides.static_secondary(is_content, source_color),
+				palette_source_overrides.static_tertiary(is_content, source_color),
+				palette_source_overrides.static_error(is_content),
+				palette_source_overrides.static_neutral(is_content, source_color),
+				palette_source_overrides.static_neutral_variant(is_content, source_color)
 			),
 			is_content ? Variant.Fidelity : Variant.Ordinary
 		]
@@ -50,7 +64,7 @@ export class Palettes
 	
 	static #with_default_error_palette(primary: NonNullable<TonalPalette>, secondary: NonNullable<TonalPalette>, tertiary: NonNullable<TonalPalette>, neutral: NonNullable<TonalPalette>, neutral_variant: NonNullable<TonalPalette>): NonNullable<Palettes>
 	{
-		return new Palettes(primary, secondary, tertiary, neutral, neutral_variant, TonalPalette.Error)
+		return new Palettes(primary, secondary, tertiary, TonalPalette.Error, neutral, neutral_variant)
 	}
 	
 	static #with_default_error_palette_ordinary(primary: NonNullable<TonalPalette>, secondary: NonNullable<TonalPalette>, tertiary: NonNullable<TonalPalette>, neutral: NonNullable<TonalPalette>, neutral_variant: NonNullable<TonalPalette>): [NonNullable<Palettes>, Variant.Ordinary]
@@ -96,26 +110,6 @@ export class Palettes
 			neutral,
 			neutral_variant
 		)
-	}
-	
-	/**
-	 * @internal
-	 * @param source_color
-	 */
-	static scheme_palettes(source_color: NonNullable<TonalPalette>): [NonNullable<Palettes>, Variant.Ordinary]
-	{
-		// @ts-ignore
-		return Palettes.from_source_colors(source_color, false, {})
-	}
-	
-	/**
-	 * @internal
-	 * @param source_color
-	 */
-	static scheme_palettes_content(source_color: NonNullable<TonalPalette>): [NonNullable<Palettes>, Variant.Fidelity]
-	{
-		// @ts-ignore
-		return Palettes.from_source_colors(source_color, true, {})
 	}
 	
 	/**
@@ -283,7 +277,7 @@ export class Palettes
 				return this.neutral
 			
 			case PaletteChoice.NeutralVariant:
-				return this.slightly_more_colorful_than_neutral
+				return this.neutral_variant
 			
 			case PaletteChoice.Error:
 				return this.error
@@ -311,6 +305,11 @@ export class Palettes
 		return this.#tertiary
 	}
 	
+	public get error(): NonNullable<TonalPalette>
+	{
+		return this.#error
+	}
+	
 	/// Usually not colorful at all, intended for background & surface colors.
 	public get neutral(): NonNullable<TonalPalette>
 	{
@@ -318,14 +317,9 @@ export class Palettes
 	}
 	
 	/// Usually not colorful, but slightly more colorful than neutral; intended for backgrounds & surfaces.
-	public get slightly_more_colorful_than_neutral(): NonNullable<TonalPalette>
+	public get neutral_variant(): NonNullable<TonalPalette>
 	{
 		return this.#neutral_variant
-	}
-	
-	public get error(): NonNullable<TonalPalette>
-	{
-		return this.#error
 	}
 	
 	static #ExpressiveHueRotations: NonEmptyArray<HueAndSecondaryRotationAndTertiaryRotation> =

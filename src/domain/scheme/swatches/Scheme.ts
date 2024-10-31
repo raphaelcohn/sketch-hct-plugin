@@ -1,14 +1,14 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-import {Palettes} from "./Palettes";
-import {Variant} from "./Variant";
-import {HueChromaToneCoordinates, TonalPalette, Tone} from "../color_space/hct";
+import {Palettes} from "../palettes/Palettes";
+import {Variant} from "../palettes/Variant";
+import {HueChromaToneCoordinates, TonalPalette, Tone} from "../../color_space/hct";
 import {SchemeGenerationRule} from "./SchemeGenerationRule";
-import {ViewingConditions} from "./ViewingConditions";
-import {Swatch} from "./swatches";
-import {ContrastLevel} from "../contrast";
-import {ThemePair} from "./ThemePair";
+import {ViewingConditions} from "../ViewingConditions";
+import {Swatch} from "./index";
+import {ContrastLevel} from "../../contrast";
+import {ThemePair} from "../ThemePair";
 
 /**
  * Conventionally, primary and tertiary colors are the most visually prominent in the scheme, with tertiary appearing complementary to primary by changing its hue.
@@ -43,6 +43,9 @@ export class Scheme
 		return color.with_tone(tone)
 	}
 	
+	/**
+	 * @internal
+	 */
 	as_fidelity(this: NonNullable<this>): NonNullable<Scheme>
 	{
 		return new Scheme(this.source_color_tone, this.palettes, Variant.Fidelity)
@@ -56,16 +59,6 @@ export class Scheme
 		
 		switch (scheme_generation_rule)
 		{
-			case SchemeGenerationRule.CorePalettes:
-				palettes_generator = generate_tonal_palette
-				palette_scheme_function = Palettes.scheme_palettes
-				break
-			
-			case SchemeGenerationRule.CorePalettesContent:
-				palettes_generator = generate_tonal_palette
-				palette_scheme_function = Palettes.scheme_palettes_content
-				break
-			
 			case SchemeGenerationRule.Content:
 				palettes_generator = generate_temperature
 				palette_scheme_function = Palettes.scheme_content

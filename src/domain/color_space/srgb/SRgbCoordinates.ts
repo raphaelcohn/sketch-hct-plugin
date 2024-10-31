@@ -3,6 +3,7 @@
 
 import {Component} from "./Component.js";
 import {AlphaSRgbCoordinates} from "./AlphaSRgbCoordinates";
+import {argb} from "./argb";
 
 export class SRgbCoordinates
 {
@@ -94,6 +95,20 @@ export class SRgbCoordinates
 	public with_alpha(this: NonNullable<this>, alpha: NonNullable<Component>): NonNullable<AlphaSRgbCoordinates>
 	{
 		return new AlphaSRgbCoordinates(this.red, this.green, this.blue, alpha)
+	}
+	
+	public into_opaque(this: NonNullable<this>): NonNullable<AlphaSRgbCoordinates>
+	{
+		return this.with_alpha(Component.TwoHundredAndFiftyFive)
+	}
+	
+	/**
+	 *
+	 * @internal
+	 */
+	into_argb(this: NonNullable<this>): argb
+	{
+		return this.into_opaque().into_argb()
 	}
 	
 	protected red_green_blue_hexadecimal_upper_case_string(this: NonNullable<this>): string

@@ -2,9 +2,9 @@
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
 import {TonalPalette, Tone} from "../../color_space/hct";
-import {Scheme} from "../Scheme";
+import {Scheme} from "./Scheme";
 import {ViewingConditions} from "../ViewingConditions";
-import {Palettes} from "../Palettes";
+import {Palettes} from "../palettes/Palettes";
 
 export interface Swatch
 {

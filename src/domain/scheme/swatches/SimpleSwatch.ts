@@ -2,10 +2,10 @@
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
 import {AbstractSwatch} from "./AbstractSwatch";
-import {PaletteChoice} from "../PaletteChoice";
+import {PaletteChoice} from "../palettes/PaletteChoice";
 import {Tone} from "../../color_space/hct";
 import {ThemePair} from "../ThemePair";
-import {Scheme} from "../Scheme";
+import {Scheme} from "./Scheme";
 import {ViewingConditions} from "../ViewingConditions";
 
 export class SimpleSwatch extends AbstractSwatch
