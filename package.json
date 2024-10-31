@@ -30,8 +30,8 @@
 		"build-online": "./libexec/nodejs/npm-install-online && tsc && skpm-build",
 		"build-offline": "./libexec/nodejs/npm-install-offline && tsc && skpm-build",
 		
-		"watch": "./libexec/nodejs/npm-install-online && skpm-build --watch",
-		"start": "./libexec/nodejs/npm-install-online && skpm-build --watch --run",
+		"watch": "./libexec/nodejs/npm-install-online && tsc && skpm-build --watch",
+		"start": "./libexec/nodejs/npm-install-online && tsc && skpm-build --watch --run",
 		"was_postinstall": "./libexec/nodejs/npm-install-online && skpm-link"
 	},
 	"dependencies":

@@ -11,6 +11,19 @@ npm_run_script()
 	cd - 1>/dev/null 2>/dev/null
 }
 
+_npm_install_patch()
+{
+	depends cp
+
+	cd "$root_folder_path" 1>/dev/null 2>/dev/null
+
+		if [ -d node_modules.patches ]; then
+			cp -R -f node_modules.patches/ node_modules/
+		fi
+
+	cd - 1>/dev/null 2>/dev/null
+}
+
 npm_install_online()
 {
 	local tool_version_value
@@ -18,13 +31,15 @@ npm_install_online()
 	local -r npm_before_iso_date_time="$tool_version_value"
 
 	cd "$root_folder_path" 1>/dev/null 2>/dev/null
-		npm cache clean --force && rm -rf node_modules && npm install --silent --package-lock-only --before="$npm_before_iso_date_time" && npm ci --silent
+		npm cache clean --force && rm -rf node_modules && npm install --package-lock-only --before="$npm_before_iso_date_time" && npm ci
 	cd - 1>/dev/null 2>/dev/null
+
+	_npm_install_patch
 }
 
 npm_install_offline()
 {
 	cd "$root_folder_path" 1>/dev/null 2>/dev/null
-		npm ci --silent --offline
+		npm ci --offline
 	cd - 1>/dev/null 2>/dev/null
 }
