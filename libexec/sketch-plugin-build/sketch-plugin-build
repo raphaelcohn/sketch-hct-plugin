@@ -123,7 +123,7 @@ main()
 
 	sketch_plugin_build_source_functions
 	clean_environment ''
-	exec "$root_folder_path"/libexec/nodejs/node "$root_folder_path"/libexec/skpm/sketch-plugin-build.mjs "$@"
+	exec "$root_folder_path"/libexec/nodejs/node "$program_folder_path"/sketch-plugin-build.mjs "$@"
 }
 
 main "$@"
