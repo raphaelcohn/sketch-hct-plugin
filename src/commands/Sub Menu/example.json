@@ -1,0 +1,5 @@
+{
+	"name": "Example",
+	"description": "Example command to run",
+	"shortcut": "ctrl d"
+}

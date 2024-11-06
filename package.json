@@ -1,7 +1,12 @@
 {
 	"name": "sketch-hct-plugin",
-	"description": "A simple plugin to work with the HCT (Hue-Color-Tone) perceptual color space",
-	"author": "Raphael Cohn <raphael.cohn@stormmq.com>",
+	"description": "A sketch plugin to work with the HCT (Hue-Color-Tone) perceptual color space",
+	"author":
+	{
+		"name": "Raphael Cohn",
+		"email": "raphael.cohn@stormmq.com",
+		"homepage": "https://github.com/raphaelcohn"
+	},
 	"license": "AGPL-3.0-or-later",
 	"keywords":
 	[
@@ -17,22 +22,21 @@
 	},
 	"skpm":
 	{
-		"name": "sketch-hct-plugin",
-		"manifest": "src/manifest.json",
-		"main": "tmp/plugin.sketchplugin",
+		"name": "Sketch HCT Plugin",
+		"manifest": "tmp/typescript/transpiled/manifest.json",
+		"main": "tmp/sketch-hct-plugin.sketchplugin",
 		"assets":
 		[
-			"assets/**/*"
+			"assets/**/*.png"
 		]
 	},
 	"scripts":
 	{
-		"build-online": "./libexec/nodejs/npm-install-online && tsc && skpm-build",
-		"build-offline": "./libexec/nodejs/npm-install-offline && tsc && skpm-build",
+		"build-online": "./bin/sketch-plugin-build online sketch-hct-plugin",
+		"build-offline": "./bin/sketch-plugin-build offline sketch-hct-plugin",
 		
-		"watch": "./libexec/nodejs/npm-install-online && tsc && skpm-build --watch",
-		"start": "./libexec/nodejs/npm-install-online && tsc && skpm-build --watch --run",
-		"was_postinstall": "./libexec/nodejs/npm-install-online && skpm-link"
+		"watch": "./bin/sketch-plugin-build online sketch-hct-plugin --watch",
+		"start": "./bin/sketch-plugin-build online sketch-hct-plugin --watch --run"
 	},
 	"dependencies":
 	{

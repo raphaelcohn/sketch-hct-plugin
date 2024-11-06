@@ -1,9 +1,11 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-import {ui} from "sketch/ui";
-import INPUT_TYPE = ui.INPUT_TYPE;
-import SelectionInputOptions = ui.SelectionInputOptions
+const ui = require("sketch/ui")
+const INPUT_TYPE = ui.INPUT_TYPE
+
+import {ui as typescript_ui} from "sketch/ui";
+type SelectionInputOptions = typescript_ui.SelectionInputOptions;
 
 export function get_selection_from_user<T>(message: string, description: string, possible_values: Map<string, T>, initial_value: string): T
 {

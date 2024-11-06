@@ -42,4 +42,6 @@ npm_install_offline()
 	cd "$root_folder_path" 1>/dev/null 2>/dev/null
 		npm ci --offline
 	cd - 1>/dev/null 2>/dev/null
+
+	_npm_install_patch
 }
