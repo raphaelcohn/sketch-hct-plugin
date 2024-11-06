@@ -32,11 +32,11 @@
 	},
 	"scripts":
 	{
-		"build-online": "./bin/sketch-plugin-build online sketch-hct-plugin",
-		"build-offline": "./bin/sketch-plugin-build offline sketch-hct-plugin",
+		"build-online": "./bin/sketch-plugin-build online",
+		"build-offline": "./bin/sketch-plugin-build offline",
 		
-		"watch": "./bin/sketch-plugin-build online sketch-hct-plugin --watch",
-		"start": "./bin/sketch-plugin-build online sketch-hct-plugin --watch --run"
+		"watch": "./bin/sketch-plugin-build online --watch",
+		"start": "./bin/sketch-plugin-build online --watch --run"
 	},
 	"dependencies":
 	{

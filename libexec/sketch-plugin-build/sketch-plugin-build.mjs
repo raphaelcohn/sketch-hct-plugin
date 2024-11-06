@@ -6,7 +6,6 @@
 
 import {find_root_folder_path} from "../../lib/nodejs/functions/find_root_folder_path.mjs";
 import {assert} from "../../lib/nodejs/functions/common/assert.mjs";
-import {PackageJson} from "../../lib/nodejs/functions/PackageJson.mjs";
 import {SketchPluginBuildActions} from "./modules/SketchPluginBuildActions.mjs";
 import {exit_error} from "../../lib/nodejs/functions/common/exit_error.mjs";
 
@@ -22,15 +21,7 @@ function main()
 		exit_error(15, `Please supply at least 1 command line argument, online or offline`)
 	}
 
-	const sketch_plugin_name = PackageJson.new(root_folder_path).package_name
-	new SketchPluginBuildActions(root_folder_path, sketch_plugin_name)
-		.install_dependencies_reproducibly(online_or_offline)
-		.compile_typescript()
-		.remove_sketch_plugin_previous_build_output()
-		.generate_manifest()
-		.execute_skpm_build(skpm_build_arguments)
-		.tidy_up_after_skpm_build()
-		.link_build_output()
+	SketchPluginBuildActions.build(root_folder_path, online_or_offline, skpm_build_arguments)
 }
 
 main()

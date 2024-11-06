@@ -53,8 +53,6 @@ export class SketchPluginManifestGenerator
 
 			menu:
 			{
-				title: this._manifest_json.name,
-
 				isRoot: false,
 
 				items: [],
@@ -62,11 +60,11 @@ export class SketchPluginManifestGenerator
 		}
 	}
 
-	static generate(root_folder_path)
+	static generate(root_folder_path, package_json)
 	{
 		assert.is_absolute_path(root_folder_path)
+		assert.is_instance_of(package_json, PackageJson)
 
-		const package_json = PackageJson.new(root_folder_path)
 		new SketchPluginManifestGenerator(root_folder_path).add_from_package_json(package_json).add_essentials().add_typescript_commands().write_manifest(root_folder_path)
 	}
 	
@@ -107,20 +105,24 @@ export class SketchPluginManifestGenerator
 		this._manifest_json.license = package_json.license
 		this._manifest_json.version = package_json.version
 		this._manifest_json.homepage = package_json.homepage
-		[this._manifest_json.author, this._manifest_json.authorEmail] = package_json.author_name_and_email
+
+		const [author_name, author_email] = package_json.author_name_and_email
+		this._manifest_json.author = author_name
+		this._manifest_json.authorEmail = author_email
+
+		this._manifest_json.menu.title = this._manifest_json.name
 
 		return this
 	}
 
-	add_essentials(package_name, identifier_prefix = "com.stormmq", supplies_data_boolean = false, scope = "document")
+	add_essentials(identifier_prefix = "com.stormmq", supplies_data_boolean = false, scope = "document")
 	{
 		assert.is_instance_of(this, SketchPluginManifestGenerator)
-		assert.is_non_empty_string(package_name)
 		assert.is_non_empty_string(identifier_prefix)
 		assert.is_boolean(supplies_data_boolean)
 		assert.is_string_enum(scope, "application", "document")
 
-		this._manifest_json.identifier = `${identifier_prefix}.${package_name}`
+		this._manifest_json.identifier = `${identifier_prefix}.${this._manifest_json.name}`
 		this._manifest_json.bundleVersion = 1
 		this._manifest_json.compatibleVersion = `${SketchMajorVersion}.${SketchMinorVersion}`
 		this._manifest_json.maxCompatibleVersion = `${SketchMajorVersion}.${SketchMinorVersion}`
