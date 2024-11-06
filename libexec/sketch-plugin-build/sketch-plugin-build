@@ -102,32 +102,28 @@ _program_path_find()
 	fi
 }
 
-main()
+sketch_plugin_build_source_functions()
 {
-	cd "$(_program_path_find)" 1>/dev/null 2>/dev/null
-		local -r program_folder_path="$(pwd)"
-	cd -  1>/dev/null 2>/dev/null
-
-	cd "$program_folder_path"/../.. 1>/dev/null 2>/dev/null
-		local -r root_folder_path="$(pwd)"
-	cd -  1>/dev/null 2>/dev/null
-
 	local -r functions_folder_path="$root_folder_path"/lib/posix-shell/functions
 
 	. "$functions_folder_path"/essential.sh
 	. "$functions_folder_path"/clean-environment.sh
-	. "$functions_folder_path"/npm.sh
+	. "$functions_folder_path"/nodejs.sh
+}
+
+main()
+{
+	cd "$(_program_path_find)" 1>/dev/null 2>/dev/null
+		local -r program_folder_path="$(pwd)"
+	cd - 1>/dev/null 2>/dev/null
+
+	cd "$program_folder_path"/../.. 1>/dev/null 2>/dev/null
+		local -r root_folder_path="$(pwd)"
+	cd - 1>/dev/null 2>/dev/null
+
+	sketch_plugin_build_source_functions
 	clean_environment ''
-
-	local invocation_name
-	set_invocation_name
-	local -r invocation_name
-
-	if [ "$invocation_name" = 'npm-run-script-wrapper' ]; then
-		return 0
-	fi
-
-	npm_run_script "$invocation_name" "$@"
+	exec "$root_folder_path"/libexec/nodejs/node "$root_folder_path"/libexec/skpm/sketch-plugin-build.mjs "$@"
 }
 
 main "$@"
