@@ -3,8 +3,7 @@
 
 'use strict'
 
-const { basename, extname, isAbsolute, join, posix, resolve, sep } = require('node:path')
-
+import { basename, extname, isAbsolute, join, posix, resolve, sep } from 'node:path';
 import {JsonValidator} from "../../../lib/nodejs/functions/JsonValidator.mjs";
 import {read_folder} from "../../../lib/nodejs/functions/file_system/read_folder.mjs";
 import {write_json_to_file} from "../../../lib/nodejs/functions/file_system/write_json_to_file.mjs";

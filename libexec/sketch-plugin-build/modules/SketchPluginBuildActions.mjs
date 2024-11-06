@@ -1,9 +1,9 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-const { unlinkSync } = require("node:fs")
-const { join } = require('node:path')
-const { homedir, tempdir } = require('node:os')
+import { unlinkSync } from "node:fs"
+import { join } from 'node:path'
+import { homedir, tmpdir } from 'node:os'
 
 import {SketchPluginManifestGenerator} from "./SketchPluginManifestGenerator.mjs";
 import {symlink} from "../../../lib/nodejs/functions/file_system/symlink.mjs";
@@ -28,7 +28,7 @@ export class SketchPluginBuildActions
 		this._root_folder_path = root_folder_path
 		this._sketch_plugin_name = sketch_plugin_name
 		this._sketch_plugin_main = `${this._sketch_plugin_name}.sketchplugin`
-		this._sketch_plugin_build_output = join(tempdir(), this._sketch_plugin_main)
+		this._sketch_plugin_build_output = join(tmpdir(), this._sketch_plugin_main)
 	}
 
 	install_dependencies_reproducibly(online_or_offline)
