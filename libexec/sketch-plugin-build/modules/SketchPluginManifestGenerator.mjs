@@ -8,7 +8,7 @@ import {JsonValidator} from "../../../lib/nodejs/functions/JsonValidator.mjs";
 import {read_folder} from "../../../lib/nodejs/functions/file_system/read_folder.mjs";
 import {write_json_to_file} from "../../../lib/nodejs/functions/file_system/write_json_to_file.mjs";
 import {stat_file} from "../../../lib/nodejs/functions/file_system/stat_file.mjs";
-import {assert} from "../../../lib/nodejs/functions/assert.mjs";
+import {assert} from "../../../lib/nodejs/functions/common/assert.mjs";
 import {PackageJson} from "../../../lib/nodejs/functions/PackageJson.mjs";
 
 const SketchMajorVersion = 3

@@ -9,7 +9,7 @@ import {SketchPluginManifestGenerator} from "./SketchPluginManifestGenerator.mjs
 import {symlink} from "../../../lib/nodejs/functions/file_system/symlink.mjs";
 import {compile_typescript} from "../../../lib/nodejs/functions/execute/typescript/index.mjs";
 import {execute_npm_binary} from "../../../lib/nodejs/functions/execute/npm/index.mjs";
-import {assert} from "../../../lib/nodejs/functions/assert.mjs";
+import {assert} from "../../../lib/nodejs/functions/common/assert.mjs";
 import {remove_file} from "../../../lib/nodejs/functions/file_system/remove_file.mjs";
 import {mkdir_700_p} from "../../../lib/nodejs/functions/file_system/mkdir_700_p.mjs";
 import {read_folder} from "../../../lib/nodejs/functions/file_system/read_folder.mjs";

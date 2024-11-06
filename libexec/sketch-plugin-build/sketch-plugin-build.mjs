@@ -5,9 +5,10 @@
 'use strict'
 
 import {find_root_folder_path} from "../../lib/nodejs/functions/find_root_folder_path.mjs";
-import {assert} from "../../lib/nodejs/functions/assert.mjs";
+import {assert} from "../../lib/nodejs/functions/common/assert.mjs";
 import {PackageJson} from "../../lib/nodejs/functions/PackageJson.mjs";
 import {SketchPluginBuildActions} from "./modules/SketchPluginBuildActions.mjs";
+import {exit_error} from "../../lib/nodejs/functions/common/exit_error.mjs";
 
 function main()
 {
@@ -15,6 +16,11 @@ function main()
 	const { script_arguments } = assert.argv_has_at_least_two_arguments()
 
 	const [ online_or_offline, ...skpm_build_arguments ] = script_arguments
+
+	if (online_or_offline === undefined)
+	{
+		exit_error(15, `Please supply at least 1 command line argument, online or offline`)
+	}
 
 	const sketch_plugin_name = PackageJson.new(root_folder_path).package_name
 	new SketchPluginBuildActions(root_folder_path, sketch_plugin_name)
