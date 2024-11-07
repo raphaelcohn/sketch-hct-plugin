@@ -1,43 +1,30 @@
 {
 	"name": "sketch-hct-plugin",
-	"description": "A sketch plugin to work with the HCT (Hue-Color-Tone) perceptual color space",
-	"author":
-	{
-		"name": "Raphael Cohn",
-		"email": "raphael.cohn@stormmq.com",
-		"homepage": "https://github.com/raphaelcohn"
-	},
-	"license": "AGPL-3.0-or-later",
-	"keywords":
+	"main": "./src/commands/generate.js",
+	"packageManger": "npm@10.8.2",
+	"type": "commonjs",
+	"exports":
 	[
-		"sketch",
-		"HCT",
-		"Color"
+		"./src/commands/generate.js",
+		"./src/commands/Sub Menu/example.js"
 	],
-	"homepage": "https://github.com/raphaelcohn/sketch-hct-plugin",
+	"imports":
+	{
+	},
+	
 	"version": "0.0.0",
-	"engines":
-	{
-		"sketch": ">=3.0"
-	},
-	"skpm":
-	{
-		"name": "Sketch HCT Plugin",
-		"manifest": "tmp/typescript/transpiled/manifest.json",
-		"main": "tmp/sketch-hct-plugin.sketchplugin",
-		"assets":
-		[
-			"assets/**/*.png"
-		]
-	},
-	"scripts":
-	{
-		"build-online": "./bin/sketch-plugin-build online",
-		"build-offline": "./bin/sketch-plugin-build offline",
-		
-		"watch": "./bin/sketch-plugin-build online --watch",
-		"start": "./bin/sketch-plugin-build online --watch --run"
-	},
+	"license": "AGPL-3.0-or-later",
+	"private": true,
+	"os":
+	[
+		"darwin",
+		"linux"
+	],
+	"cpu":
+	[
+		"arm64",
+		"x64"
+	],
 	"dependencies":
 	{
 		"@material/material-color-utilities": "0.3.0"
@@ -48,5 +35,91 @@
 		"@types/node": "20.16.11",
 		"typescript": "5.6.2",
 		"@sketch-hq/sketch-file-format-ts": "6.5.0"
+	},
+	"engines":
+	{
+		"node": "20.17.0",
+		"npm": "10.8.2",
+		"sketch": ">=3.0"
+	},
+	"devEngines":
+	{
+		"runtime":
+		{
+			"name": "node",
+			"version": "20.17.0",
+			"onFail": "warn"
+		},
+		"packageManager":
+		{
+			"name": "npm",
+			"version": "10.8.2",
+			"onFail": "warn"
+		},
+		"cpu":
+		[
+			{
+				"name": "arm64",
+				"onFail": "warn"
+			},
+			{
+				"name": "x64",
+				"onFail": "warn"
+			}
+		],
+		"os":
+		[
+			{
+				"name": "darwin",
+				"onFail": "warn"
+			},
+			{
+				"name": "linux",
+				"onFail": "warn"
+			}
+		]
+	},
+	"description": "A sketch plugin to work with the HCT (Hue-Color-Tone) perceptual color space",
+	"keywords":
+	[
+		"sketch",
+		"HCT",
+		"Color"
+	],
+	"author":
+	{
+		"name": "Raphael Cohn",
+		"email": "raphael.cohn@stormmq.com",
+		"homepage": "https://github.com/raphaelcohn"
+	},
+	"homepage": "https://github.com/raphaelcohn/sketch-hct-plugin",
+	"bugs":
+	{
+		"url": "https://github.com/raphaelcohn/sketch-hct-plugin",
+		"email": "bugs@example.org"
+	},
+	"repository":
+	{
+		"type": "git",
+		"url": "git+https://github.com/raphaelcohn/sketch-hct-plugin.git"
+	},
+	"scripts":
+	{
+		"build-online": "./bin/sketch-plugin-build online",
+		"build-offline": "./bin/sketch-plugin-build offline",
+		
+		"watch": "./bin/sketch-plugin-build online --watch",
+		"start": "./bin/sketch-plugin-build online --watch --run"
+	},
+	
+	"skpm":
+	{
+		"name": "Sketch HCT Plugin",
+		"manifest": "tmp/typescript/transpiled/manifest.json",
+		"main": "tmp/sketch-hct-plugin.sketchplugin",
+		"assets":
+		[
+			"assets/**/*.png"
+		]
 	}
 }

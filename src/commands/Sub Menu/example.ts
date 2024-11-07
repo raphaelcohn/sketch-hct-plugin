@@ -3,7 +3,7 @@
 
 const ui = require('sketch/ui')
 
-export function example(_context: SketchContext)
+export function example(_context: SketchContext): void
 {
 	ui.alert("Sketch HCT Plugin", "HELLO WORLD")
 }
