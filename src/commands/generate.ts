@@ -7,14 +7,13 @@ const sketch: typeof sketch_ = require('sketch')
 import type { ui as ui_ } from "sketch/ui";
 const ui: typeof ui_ = require('sketch/ui')
 
-//import {MaterialThemeBuilderUrlParser} from "../domain/theme/material-theme-builder-url-parser/MaterialThemeBuilderUrlParser";
-//import {document_setting_or_get_selection_from_user} from "../domain/sketch";
-//import {MaterialThemeBuilderUrlParser} from "../domain/theme/material-theme-builder-url-parser/MaterialThemeBuilderUrlParser";
-// import {document_setting_or_get_string_from_user} from "../domain/sketch/document_setting_get_string_from_user";
-// import {SwatchGenerator} from "../domain/sketch/SwatchGenerator";
-// import {SketchAddSwatch} from "../domain/sketch/SketchAddSwatch";
+import {MaterialThemeBuilderUrlParser} from "../domain/theme/material-theme-builder-url-parser/MaterialThemeBuilderUrlParser.mjs";
+import {document_setting_or_get_selection_from_user} from "../domain/sketch/document_setting_or_get_selection_from_user.mjs";
+import {document_setting_or_get_string_from_user} from "../domain/sketch/document_setting_get_string_from_user.mjs";
+import {SwatchGenerator} from "../domain/sketch/SwatchGenerator.mjs";
+import {SketchAddSwatch} from "../domain/sketch/SketchAddSwatch.mjs";
 
-//const YesNo: Map<string, boolean> = new Map<string, boolean>([["Yes", true], ["No", false]])
+const YesNo: Map<string, boolean> = new Map<string, boolean>([["Yes", true], ["No", false]])
 
 const ColorSpace: typeof sketch.Document.ColorSpace = sketch.Document.ColorSpace
 export function generate(_context: SketchContext): void
@@ -26,18 +25,18 @@ export function generate(_context: SketchContext): void
 		return
 	}
 	
-	// const url_string = document_setting_or_get_string_from_user("url_string", "Material Theme Builder", "Supply the material design theme URL that is copied to the clipboard (from https://material-foundation.github.io/material-theme-builder/)", MaterialThemeBuilderUrlParser.DefaultUrlString)
-	// const harmonize_custom_colors = document_setting_or_get_selection_from_user("harmonize_custom_colors", "Material Theme Builder", "Harmonize custom colors (not preserved by Material Theme Builder URL)?", YesNo, "Yes")
-	//
-	// ui.alert("Debugging", `${url_string}`)
-	// ui.alert("Debugging", `${harmonize_custom_colors}`)
+	const url_string = document_setting_or_get_string_from_user(document, "url_string", "Material Theme Builder", "Supply the material design theme URL that is copied to the clipboard (from https://material-foundation.github.io/material-theme-builder/)", MaterialThemeBuilderUrlParser.DefaultUrlString)
+	const harmonize_custom_colors = document_setting_or_get_selection_from_user(document, "harmonize_custom_colors", "Material Theme Builder", "Harmonize custom colors (not preserved by Material Theme Builder URL)?", YesNo, "Yes")
+
+	ui.alert("Debugging", `${url_string}`)
+	ui.alert("Debugging", `${harmonize_custom_colors}`)
 	
-	// const parser = MaterialThemeBuilderUrlParser.from_url_string(url_string)
-	// const material_theme_input = parser.parse(harmonize_custom_colors)
-	//
-	// //const static_theme = material_theme_input.into_static_theme()
-	// const dynamic_theme = material_theme_input.into_dynamic_theme()
-	//
-	// const swatch_generator = new SwatchGenerator(dynamic_theme, new SketchAddSwatch(document))
-	// swatch_generator.generate()
+	const parser = MaterialThemeBuilderUrlParser.from_url_string(url_string)
+	const material_theme_input = parser.parse(harmonize_custom_colors)
+
+	//const static_theme = material_theme_input.into_static_theme()
+	const dynamic_theme = material_theme_input.into_dynamic_theme()
+
+	const swatch_generator = new SwatchGenerator(dynamic_theme, new SketchAddSwatch(document))
+	swatch_generator.generate()
 }

@@ -11,7 +11,6 @@
 	"imports":
 	{
 	},
-	
 	"version": "0.0.0",
 	"license": "AGPL-3.0-or-later",
 	"private": true,
@@ -31,10 +30,10 @@
 	},
 	"devDependencies":
 	{
+		"@sketch-hq/sketch-file-format-ts": "6.5.0",
 		"@skpm/builder": "0.9.5",
-		"@types/node": "20.16.11",
-		"typescript": "5.6.2",
-		"@sketch-hq/sketch-file-format-ts": "6.5.0"
+		"esbuild": "0.24.0",
+		"typescript": "5.6.2"
 	},
 	"engines":
 	{
@@ -67,8 +66,7 @@
 				"onFail": "warn"
 			}
 		],
-		"os":
-		[
+		"os": [
 			{
 				"name": "darwin",
 				"onFail": "warn"
@@ -106,16 +104,12 @@
 	"scripts":
 	{
 		"build-online": "./bin/sketch-plugin-build online",
-		"build-offline": "./bin/sketch-plugin-build offline",
-		
-		"watch": "./bin/sketch-plugin-build online --watch",
-		"start": "./bin/sketch-plugin-build online --watch --run"
+		"build-offline": "./bin/sketch-plugin-build offline"
 	},
-	
 	"skpm":
 	{
 		"name": "Sketch HCT Plugin",
-		"manifest": "tmp/typescript/transpiled/manifest.json",
+		"manifest": "manifest.json",
 		"main": "tmp/sketch-hct-plugin.sketchplugin",
 		"assets":
 		[

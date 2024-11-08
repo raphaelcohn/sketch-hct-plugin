@@ -16,26 +16,25 @@ import {is_folder_or_symlink_and_is_readable_and_is_searchable} from "../../../l
 import {BuildActions} from "../../../lib/nodejs/functions/BuildActions.mjs";
 import {remove_recursively_forcibly} from "../../../lib/nodejs/functions/file_system/remove_recursively_forcibly.mjs";
 import {PackageJson} from "./functions/PackageJson.mjs";
+import {copy_recursive_forcibly} from "./functions/file_system/copy_recursive_forcibly.mjs";
 
 export class SketchPluginBuildActions
 {
 	static _SketchPluginHomeFolderPath = join(homedir(), "Library", "Application Support", "com.bohemiancoding.sketch3", "Plugins")
 
-	static build(root_folder_path, online_or_offline, skpm_build_arguments)
+	static build(root_folder_path, online_or_offline)
 	{
 		assert.is_absolute_path(root_folder_path)
 		assert.is_string_enum(online_or_offline, "online", "offline")
-		assert.is_string_array(skpm_build_arguments)
 
 		const package_json = PackageJson.new(root_folder_path);
 		const sketch_plugin_name = package_json.package_name
 
 		new SketchPluginBuildActions(root_folder_path, sketch_plugin_name)
 			.install_dependencies_reproducibly(online_or_offline)
-			.compile_typescript()
-			.remove_sketch_plugin_previous_build_output()
+			.create_sketch_plugin()
+			.bundle_typescript_into_sketch_plugin()
 			.generate_manifest(package_json)
-			.execute_skpm_build(skpm_build_arguments)
 			.link_build_output()
 	}
 
@@ -48,6 +47,16 @@ export class SketchPluginBuildActions
 		this._sketch_plugin_name = sketch_plugin_name
 		this._sketch_plugin_main = `${this._sketch_plugin_name}.sketchplugin`
 		this._sketch_plugin_build_output = join(tmpdir(), this._sketch_plugin_main)
+
+
+		SketchPluginBuildActions.#discover_commands()
+	}
+
+	static #discover_commands(root_folder_path)
+	{
+		assert.is_absolute_path(root_folder_path)
+
+		const commands_path = join(root_folder_path, "src", "commands")
 	}
 
 	install_dependencies_reproducibly(online_or_offline)
@@ -60,20 +69,32 @@ export class SketchPluginBuildActions
 		return this
 	}
 
-	compile_typescript()
+	create_sketch_plugin()
 	{
 		assert.is_instance_of(this, SketchPluginBuildActions)
 
-		compile_typescript(this._root_folder_path, this._root_folder_path)
+		remove_recursively_forcibly(this._sketch_plugin_build_output)
+		const _ = mkdir_700_p(this._sketch_plugin_build_output, "Contents")
+
 
 		return this
 	}
 
-	remove_sketch_plugin_previous_build_output()
+	bundle_typescript_into_sketch_plugin()
 	{
-		remove_recursively_forcibly(this._sketch_plugin_build_output)
+		assert.is_instance_of(this, SketchPluginBuildActions)
+
+		// ./node_modules/.bin/esbuild commands_generate=src/commands/generate.ts 'commands_Sub Menu_example.js'='src/commands/Sub Menu/example.ts' --bundle --platform=node --outdir=./tmp/esbuild/sketch-hct-plugin.sketchplugin/Contents/Sketch  --external:sketch --external:sketch/ui --external:sketch/dom
 
 		return this
+	}
+
+	copy_sketch_plugin_resources()
+	{
+		assert.is_instance_of(this, SketchPluginBuildActions)
+
+		const [resources_folder_path, _] = mkdir_700_p(this._sketch_plugin_build_output, "Contents", "Sketch", "Resources")
+		copy_recursive_forcibly([this._root_folder_path, "assets"], resources_folder_path)
 	}
 
 	generate_manifest(package_json)
@@ -82,16 +103,6 @@ export class SketchPluginBuildActions
 		assert.is_instance_of(package_json, PackageJson)
 
 		SketchPluginManifestGenerator.generate(this._root_folder_path, package_json)
-
-		return this
-	}
-
-	execute_skpm_build(skpm_build_arguments)
-	{
-		assert.is_instance_of(this, SketchPluginBuildActions)
-		assert.is_string_array(skpm_build_arguments)
-
-		execute_npm_binary(this._root_folder_path, "@skpm/builder", "skpm-build", this._root_folder_path, ...skpm_build_arguments)
 
 		return this
 	}
@@ -118,7 +129,7 @@ export class SketchPluginBuildActions
 			}
 		})
 
-		const _x = symlink(this._sketch_plugin_build_output, sketch_plugin_parent_folder, this._sketch_plugin_main)
+		const __ = symlink(this._sketch_plugin_build_output, sketch_plugin_parent_folder, this._sketch_plugin_main)
 
 		return this
 	}

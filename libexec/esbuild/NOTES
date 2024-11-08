@@ -1,0 +1,45 @@
+Using esbuild not as a npm package (quite a good idea)
+
+https://registry.npmjs.org/@esbuild/darwin-arm64/-/darwin-arm64-0.24.0.tgz
+https://registry.npmjs.org/@esbuild/darwin-x64/-/darwin-x64-0.24.0.tgz
+https://registry.npmjs.org/@esbuild/linux-arm64/-/linux-arm64-0.24.0.tgz
+https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.24.0.tgz
+
+tar xzf ./darwin-x64-0.24.0.tgz
+./package/bin/esbuild
+
+# Building using go (to be considered if we get a go hosting going again)
+git clone --depth 1 --branch v0.24.0 https://github.com/evanw/esbuild.git
+cd esbuild
+go build ./cmd/esbuild
+
+CLI
+
+=./tmp/esbuild/sketch-hct-plugin.sketchplugin/Contents/Resources/*.png
+
+./node_modules/.bin/esbuild commands_generate=src/commands/generate.ts 'commands_Sub Menu_example.js'='src/commands/Sub Menu/example.ts' --bundle --platform=node --outdir=./tmp/esbuild/sketch-hct-plugin.sketchplugin/Contents/Sketch  --external:sketch --external:sketch/ui --external:sketch/dom
+
+# Note adjustments to manifest.json
+
+
+  "commands": [
+    {
+      "identifier": "com.stormmq.Sketch HCT Plugin.commands.sub-menu.example",
+      "name": "Example",
+      "description": "Example command to run",
+      "shortcut": "ctrl d",
+      "script": "commands_Sub Menu_example.js",
+      "handler": "example",
+      "icon": "commands.sub-menu.example.light.icon.128x128.png",
+      "darkIcon": "commands.sub-menu.example.dark.icon.128x128.png"
+    },
+    {
+      "identifier": "com.stormmq.Sketch HCT Plugin.commands.generate",
+      "name": "Generate",
+      "description": "Generate command to run",
+      "shortcut": "ctrl c",
+      "script": "commands_generate.js",
+      "handler": "generate",
+      "icon": "commands.generate.light.icon.128x128.png",
+      "darkIcon": "commands.generate.dark.icon.128x128.png"
+    }

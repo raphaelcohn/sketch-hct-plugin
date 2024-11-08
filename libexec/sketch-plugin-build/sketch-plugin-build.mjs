@@ -14,14 +14,19 @@ function main()
 	const root_folder_path = find_root_folder_path(2)
 	const { script_arguments } = assert.argv_has_at_least_two_arguments()
 
-	const [ online_or_offline, ...skpm_build_arguments ] = script_arguments
+	const [ online_or_offline, ...extra ] = script_arguments
 
 	if (online_or_offline === undefined)
 	{
-		exit_error(15, `Please supply at least 1 command line argument, online or offline`)
+		exit_error(15, `Please supply 1 command line argument, online or offline`)
 	}
 
-	SketchPluginBuildActions.build(root_folder_path, online_or_offline, skpm_build_arguments)
+	if (extra.length > 0)
+	{
+		exit_error(15, `Please supply only 1 command line argument, not more`)
+	}
+
+	SketchPluginBuildActions.build(root_folder_path, online_or_offline)
 }
 
 main()
