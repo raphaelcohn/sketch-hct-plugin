@@ -67,7 +67,7 @@ _bun_set_variables_internal()
 	extract_folder_path="$TMPDIR"/extract/"$distribution_name"/"$bun_version"
 
 	binary_folder_path="$extract_folder_path"/"$relative_binary_folder_path"
-	main_binary_file_path="$bun_binary_folder_path"/"$main_binary_file_name"
+	main_binary_file_path="$binary_folder_path"/"$main_binary_file_name"
 }
 
 _bun_initialise()

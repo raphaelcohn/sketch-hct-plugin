@@ -3,60 +3,48 @@
 	"main": "./src/commands/generate.js",
 	"packageManger": "npm@10.8.2",
 	"type": "commonjs",
-	"exports":
-	[
+	"exports": [
 		"./src/commands/generate.js",
 		"./src/commands/Sub Menu/example.js"
 	],
-	"imports":
-	{
-	},
+	"imports": {},
 	"version": "0.0.0",
 	"license": "AGPL-3.0-or-later",
 	"private": true,
-	"os":
-	[
+	"os": [
 		"darwin",
 		"linux"
 	],
-	"cpu":
-	[
+	"cpu": [
 		"arm64",
 		"x64"
 	],
-	"dependencies":
-	{
+	"dependencies": {
 		"@material/material-color-utilities": "0.3.0"
 	},
-	"devDependencies":
-	{
+	"devDependencies": {
 		"@sketch-hq/sketch-file-format-ts": "6.5.0",
 		"@skpm/builder": "0.9.5",
 		"esbuild": "0.24.0",
 		"typescript": "5.6.2"
 	},
-	"engines":
-	{
+	"engines": {
 		"node": "20.17.0",
 		"npm": "10.8.2",
 		"sketch": ">=3.0"
 	},
-	"devEngines":
-	{
-		"runtime":
-		{
+	"devEngines": {
+		"runtime": {
 			"name": "node",
 			"version": "20.17.0",
 			"onFail": "warn"
 		},
-		"packageManager":
-		{
+		"packageManager": {
 			"name": "npm",
 			"version": "10.8.2",
 			"onFail": "warn"
 		},
-		"cpu":
-		[
+		"cpu": [
 			{
 				"name": "arm64",
 				"onFail": "warn"
@@ -78,41 +66,34 @@
 		]
 	},
 	"description": "A sketch plugin to work with the HCT (Hue-Color-Tone) perceptual color space",
-	"keywords":
-	[
+	"keywords": [
 		"sketch",
 		"HCT",
 		"Color"
 	],
-	"author":
-	{
+	"author": {
 		"name": "Raphael Cohn",
 		"email": "raphael.cohn@stormmq.com",
 		"homepage": "https://github.com/raphaelcohn"
 	},
 	"homepage": "https://github.com/raphaelcohn/sketch-hct-plugin",
-	"bugs":
-	{
+	"bugs": {
 		"url": "https://github.com/raphaelcohn/sketch-hct-plugin",
 		"email": "bugs@example.org"
 	},
-	"repository":
-	{
+	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/raphaelcohn/sketch-hct-plugin.git"
 	},
-	"scripts":
-	{
+	"scripts": {
 		"build-online": "./bin/sketch-plugin-build online",
 		"build-offline": "./bin/sketch-plugin-build offline"
 	},
-	"skpm":
-	{
+	"skpm": {
 		"name": "Sketch HCT Plugin",
 		"manifest": "manifest.json",
 		"main": "tmp/sketch-hct-plugin.sketchplugin",
-		"assets":
-		[
+		"assets": [
 			"assets/**/*.png"
 		]
 	}

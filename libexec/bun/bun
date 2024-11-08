@@ -102,6 +102,35 @@ _program_path_find()
 	fi
 }
 
+main_bun()
+{
+	local -r local_bunfig_file_path="$HOME"/.bunfig.toml
+	if is_readable_file "$local_bunfig_file_path"; then
+		exit_error "Remove $local_bunfig_file_path; this file overrides global configuration in an undesirable way"
+	fi
+
+	local -r bun_home_folder_path="$root_folder_path"/lib/bun
+	local -r dot_bun_folder_path="$bun_home_folder_path"/.bun
+	local -r install_dot_bun_folder_path="$dot_bun_folder_path"/install
+
+	#unset NODE_TLS_REJECT_UNAUTHORIZED
+	export BUN_CONFIG_VERBOSE_FETCH=curl
+	export BUN_RUNTIME_TRANSPILER_CACHE_PATH="$TMPDIR"/bun-transpiler-cache
+	export BUN_CONFIG_MAX_HTTP_REQUESTS=256
+	export BUN_CONFIG_NO_CLEAR_TERMINAL_ON_RELOAD=true
+	export DO_NOT_TRACK=1
+	export NO_COLOR=1
+	export FORCE_COLOR=0
+	export XDG_CONFIG_HOME="$root_folder_path"/libexec/bun
+
+	# Undocumented; override .bunfig.toml which does not support environment variables and for which globalCacheDir is ignored!
+	export BUN_INSTALL_GLOBAL_DIR="$install_dot_bun_folder_path"/global
+	export BUN_INSTALL_BIN="$root_folder_path"/bin
+	export BUN_INSTALL_CACHE_DIR="$install_dot_bun_folder_path"/cache
+
+	bun_run true "$@"
+}
+
 main()
 {
 	cd "$(_program_path_find)" 1>/dev/null 2>/dev/null
@@ -118,8 +147,8 @@ main()
 	. "$functions_folder_path"/clean-environment.sh
 	. "$functions_folder_path"/bun.sh
 	clean_environment ''
-	
-	bun_run true "$@"
+
+	main_bun "$@"
 }
 
 main "$@"
