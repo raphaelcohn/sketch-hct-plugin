@@ -8,11 +8,12 @@ declare module "sketch/dom"
 		/**
 		 * Basic Component class.
 		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any,@typescript-eslint/no-unnecessary-type-parameters
 		class Component<NativeType = any>
 		{
 			static fromNative<NativeType>(nativeObject: NativeType): Component<NativeType>
 			
-			toJSON(): any
+			toJSON(): string | number | boolean | null | object | string[] | number[] | boolean[] | null[] | object[]
 			
 			/**
 			 * The native Sketch model object.

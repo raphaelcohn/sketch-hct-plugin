@@ -6,10 +6,15 @@
  * A near perceptually uniform color space, which is device independent.
  */
 import {FiniteNumber} from "../../number/FiniteNumber.mjs";
+import type { LStar } from "./LStar.mjs"
 
 export class CielabCoordinates
 {
     private static readonly _24389: NonNullable<FiniteNumber> = FiniteNumber.try_from(24389);
+    
+    private constructor(readonly l_star: LStar)
+    {
+    }
     
     /**
      * @internal

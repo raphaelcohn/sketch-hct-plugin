@@ -5,6 +5,7 @@ declare module "sketch/dom"
 {
 	import ExportResult = dom.ExportResult
 	
+	// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 	class dom
 	{
 		/**

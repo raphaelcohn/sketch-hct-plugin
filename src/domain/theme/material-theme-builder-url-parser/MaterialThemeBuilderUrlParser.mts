@@ -39,10 +39,12 @@ export class MaterialThemeBuilderUrlParser
 		switch (number)
 		{
 			case 0:
-				const is_mandatory = core_color_name === "primary"
-				if (is_mandatory)
 				{
-					throw new RangeError(`${core_color_name} not present`)
+					const is_mandatory = core_color_name === "primary"
+					if (is_mandatory)
+					{
+						throw new RangeError(`${core_color_name} not present`)
+					}
 				}
 				return null
 			
@@ -63,7 +65,7 @@ export class MaterialThemeBuilderUrlParser
 		const ExpectedLength = 7
 		if (length != ExpectedLength)
 		{
-			throw new RangeError(`color_string length was ${length} and not ${ExpectedLength}`)
+			throw new RangeError(`color_string length was ${length.toString(10)} and not ${ExpectedLength.toString(10)}`)
 		}
 		if (color_string.charAt(0) != '#')
 		{
@@ -76,7 +78,7 @@ export class MaterialThemeBuilderUrlParser
 			{
 				continue
 			}
-			throw new RangeError(`core_color_string ${color_string} character at zero-based index ${index} was not an uppercase hexadecimal digit`)
+			throw new RangeError(`core_color_string ${color_string} character at zero-based index ${index.toString(10)} was not an uppercase hexadecimal digit`)
 		}
 		return SRgbCoordinates.try_from_css_hex_color(color_string)
 	}
@@ -84,7 +86,7 @@ export class MaterialThemeBuilderUrlParser
 	static readonly #CustomColorKeyPrefix: string = "custom:"
 	parse_custom_colors(this: NonNullable<this>, harmonize_custom_colors: boolean): Map<string, CustomColorValue>
 	{
-		const custom_colors = new Map()
+		const custom_colors = new Map<string, CustomColorValue>()
 		
 		this.#search_parameters.forEach((value: string, key: string, _parent: URLSearchParams): void =>
 		{
@@ -109,12 +111,12 @@ export class MaterialThemeBuilderUrlParser
 	{
 		const color_match_strings = this.#search_parameters.getAll("colorMatch")
 		const number = color_match_strings.length
-		if (number != 1)
+		if (number !== 1)
 		{
-			throw new RangeError(`colorMatch present 0 or ${number} times, not once`)
+			throw new RangeError(`colorMatch present 0 or ${number.toString(10)} times, not once`)
 		}
 		
-		const color_match_string = color_match_strings[0]
+		const color_match_string = color_match_strings[0] as string
 		switch (color_match_string)
 		{
 			case "true":
@@ -141,9 +143,9 @@ export class MaterialThemeBuilderUrlParser
 		{
 			url = new URL(url_string)
 		}
-		catch(type_error: any)
+		catch(cause)
 		{
-			throw new Error(`Material Theme Builder URL was not a URL (${type_error.message})`)
+			throw new Error(`Material Theme Builder URL was not a URL`, {cause})
 		}
 		
 		const protocol = url.protocol

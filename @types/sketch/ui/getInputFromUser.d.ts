@@ -13,6 +13,7 @@ declare module "sketch/ui"
 		 * @param callback A function called after the user entered the input
 		 * It is called with an Error if the user canceled the input and a string or number depending on the input type (or undefined).
 		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		export function getInputFromUser<T extends string | number>(message: string, options: StringInputOptions<T>, callback: (err: any, value?: T) => void): void
 		
 		/**
@@ -23,6 +24,7 @@ declare module "sketch/ui"
 		 * @param callback A function called after the user entered the input.
 		 * It is called with an Error if the user canceled the input and a string or number depending on the input type (or undefined).
 		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		export function getInputFromUser(message: string, options: SelectionInputOptions, callback: (err: any, value?: string) => void): void
 	}
 }

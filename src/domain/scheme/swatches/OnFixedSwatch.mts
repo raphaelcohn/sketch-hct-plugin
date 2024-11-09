@@ -65,7 +65,7 @@ export class OnFixedSwatch extends AbstractOnSwatch<FixedSwatch>
 	
 	protected override raw_tone_adjusted_for_dual_backgrounds(this: NonNullable<this>, after_adjustment_for_primary_background_tone: NonNullable<Tone>, desired_contrast_ratio: NonNullable<ContrastRatio>, scheme: NonNullable<Scheme>, viewing_conditions: NonNullable<ViewingConditions>): NonNullable<Tone>
 	{
-		let answer = after_adjustment_for_primary_background_tone
+		const answer = after_adjustment_for_primary_background_tone
 		
 		const background_1 = this.primary_background(viewing_conditions.theme_mode)
 		const background_2 = this.#secondary_background

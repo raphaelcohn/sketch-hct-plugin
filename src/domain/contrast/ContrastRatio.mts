@@ -49,7 +49,7 @@ export class ContrastRatio extends AbstractValue<FiniteNumber>
 	
 	public override toString(this: NonNullable<this>): string
 	{
-		return `1:${this.value}`
+		return `1:${this.value.toString(10)}`
 	}
 	
 	/**

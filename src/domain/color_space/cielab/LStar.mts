@@ -43,8 +43,8 @@ export class LStar extends AbstractValue<FiniteNumber>
 	
 	public to_ciexyz_y(this: NonNullable<this>): NonNullable<Y>
 	{
-		let ft = this.value.add(FiniteNumber.Sixteen).divide(FiniteNumber.OneHundredAndSixteen);
-		let denominator = CielabCoordinates.lab_inv_f(ft);
+		const ft = this.value.add(FiniteNumber.Sixteen).divide(FiniteNumber.OneHundredAndSixteen);
+		const denominator = CielabCoordinates.lab_inv_f(ft);
 		return new Y(FiniteNumber.OneHundred.multiply(denominator))
 	}
 	

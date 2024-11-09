@@ -43,7 +43,7 @@ export class TonalPalette
 	
 	public toString(this: NonNullable<this>): string
 	{
-		return `(${this.hue}, ${this.chroma})`
+		return `(${this.hue.toString(10)}, ${this.chroma.toString(10)})`
 	}
 	
 	public get hue(): NonNullable<Hue>

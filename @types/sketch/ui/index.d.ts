@@ -9,6 +9,7 @@
 /// <reference path="./message.d.ts" />
 /// <reference path="./SelectionInputOptions.d.ts" />
 /// <reference path="./StringInputOptions.d.ts" />
+/// <reference path="./getStringFromUser.d.ts" />
 
 declare module "sketch/ui"
 {

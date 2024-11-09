@@ -67,6 +67,7 @@ declare module "sketch/dom"
 			 * @param cb A function called after the library is added.
 			 * It is called with an Error if adding the Library was unsuccessful and a Library (or undefined).
 			 */
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			static getRemoteLibraryWithRSS(url: string, cb: (err?: any, library?: Library) => void): void
 			
 			/**

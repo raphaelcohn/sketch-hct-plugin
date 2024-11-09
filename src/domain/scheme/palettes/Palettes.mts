@@ -1,15 +1,15 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-import {DynamicScheme} from "@material/material-color-utilities";
-import {Chroma} from "../../color_space/hct/Chroma.mjs";
-import {Hue} from "../../color_space/hct/Hue.mjs";
-import {HueChromaToneCoordinates} from "../../color_space/hct/HueChromaToneCoordinates.mjs";
-import {TonalPalette} from "../../color_space/hct/TonalPalette.mjs";
-import {PaletteSourceOverrides} from "./PaletteSourceOverrides.mjs";
-import {PaletteChoice} from "./PaletteChoice.mjs";
-import {FiniteNumber} from "../../number/FiniteNumber.mjs";
-import {Variant} from "./Variant.mjs";
+import { DynamicScheme } from "@material/material-color-utilities";
+import { Chroma } from "../../color_space/hct/Chroma.mjs";
+import { Hue } from "../../color_space/hct/Hue.mjs";
+import { HueChromaToneCoordinates } from "../../color_space/hct/HueChromaToneCoordinates.mjs";
+import { TonalPalette } from "../../color_space/hct/TonalPalette.mjs";
+import { PaletteSourceOverrides } from "./PaletteSourceOverrides.mjs";
+import { PaletteChoice } from "./PaletteChoice.mjs";
+import { FiniteNumber } from "../../number/FiniteNumber.mjs";
+import { Variant } from "./Variant.mjs";
 
 export class Palettes
 {
@@ -326,32 +326,32 @@ export class Palettes
 	}
 	
 	static #ExpressiveHueRotations: NonEmptyArray<HueAndSecondaryRotationAndTertiaryRotation> =
-	[
-		[Hue.try_from(0),   FiniteNumber.FourtyFive, FiniteNumber.OneHundredAndTwenty],
-		[Hue.try_from(21),  FiniteNumber.NinetyFive, FiniteNumber.OneHundredAndTwenty],
-		[Hue.try_from(51),  FiniteNumber.FourtyFive, FiniteNumber.Twenty             ],
-		[Hue.try_from(121), FiniteNumber.Twenty,     FiniteNumber.FourtyFive         ],
-		[Hue.try_from(151), FiniteNumber.FourtyFive, FiniteNumber.Twenty             ],
-		[Hue.try_from(191), FiniteNumber.Ninety,     FiniteNumber.Fifteen            ],
-		[Hue.try_from(271), FiniteNumber.FourtyFive, FiniteNumber.Twelve             ],
-		[Hue.try_from(321), FiniteNumber.FourtyFive, FiniteNumber.OneHundredAndTwenty],
-		[Hue.try_from(0),   FiniteNumber.FourtyFive, FiniteNumber.OneHundredAndTwenty],
-	]
+		[
+			[Hue.try_from(0), FiniteNumber.FourtyFive, FiniteNumber.OneHundredAndTwenty],
+			[Hue.try_from(21), FiniteNumber.NinetyFive, FiniteNumber.OneHundredAndTwenty],
+			[Hue.try_from(51), FiniteNumber.FourtyFive, FiniteNumber.Twenty],
+			[Hue.try_from(121), FiniteNumber.Twenty, FiniteNumber.FourtyFive],
+			[Hue.try_from(151), FiniteNumber.FourtyFive, FiniteNumber.Twenty],
+			[Hue.try_from(191), FiniteNumber.Ninety, FiniteNumber.Fifteen],
+			[Hue.try_from(271), FiniteNumber.FourtyFive, FiniteNumber.Twelve],
+			[Hue.try_from(321), FiniteNumber.FourtyFive, FiniteNumber.OneHundredAndTwenty],
+			[Hue.try_from(0), FiniteNumber.FourtyFive, FiniteNumber.OneHundredAndTwenty],
+		]
 	static #ExpressiveHueSecondaryRotations: NonEmptyArray<HueAndRotation> = Palettes.#get_hue_and_rotations(Palettes.#ExpressiveHueRotations, true)
 	static #ExpressiveHueTertiaryRotations: NonEmptyArray<HueAndRotation> = Palettes.#get_hue_and_rotations(Palettes.#ExpressiveHueRotations, false)
 	
 	static #VibrantHueRotations: NonEmptyArray<HueAndSecondaryRotationAndTertiaryRotation> =
-	[
-		[Hue.try_from(0),   FiniteNumber.Eighteen, FiniteNumber.ThirtyFive],
-		[Hue.try_from(41),  FiniteNumber.Fifteen,  FiniteNumber.Thirty    ],
-		[Hue.try_from(61),  FiniteNumber.Ten,      FiniteNumber.Twenty    ],
-		[Hue.try_from(101), FiniteNumber.Twelve,   FiniteNumber.TwentyFive],
-		[Hue.try_from(131), FiniteNumber.Fifteen,  FiniteNumber.Thirty    ],
-		[Hue.try_from(181), FiniteNumber.Eighteen, FiniteNumber.ThirtyFive],
-		[Hue.try_from(251), FiniteNumber.Fifteen,  FiniteNumber.Thirty    ],
-		[Hue.try_from(301), FiniteNumber.Twelve,   FiniteNumber.TwentyFive],
-		[Hue.try_from(0),   FiniteNumber.Twelve,   FiniteNumber.TwentyFive],
-	]
+		[
+			[Hue.try_from(0), FiniteNumber.Eighteen, FiniteNumber.ThirtyFive],
+			[Hue.try_from(41), FiniteNumber.Fifteen, FiniteNumber.Thirty],
+			[Hue.try_from(61), FiniteNumber.Ten, FiniteNumber.Twenty],
+			[Hue.try_from(101), FiniteNumber.Twelve, FiniteNumber.TwentyFive],
+			[Hue.try_from(131), FiniteNumber.Fifteen, FiniteNumber.Thirty],
+			[Hue.try_from(181), FiniteNumber.Eighteen, FiniteNumber.ThirtyFive],
+			[Hue.try_from(251), FiniteNumber.Fifteen, FiniteNumber.Thirty],
+			[Hue.try_from(301), FiniteNumber.Twelve, FiniteNumber.TwentyFive],
+			[Hue.try_from(0), FiniteNumber.Twelve, FiniteNumber.TwentyFive],
+		]
 	static #VibrantHueSecondaryRotations: NonEmptyArray<HueAndRotation> = Palettes.#get_hue_and_rotations(Palettes.#VibrantHueRotations, true)
 	static #VibrantHueTertiaryRotations: NonEmptyArray<HueAndRotation> = Palettes.#get_hue_and_rotations(Palettes.#VibrantHueRotations, false)
 	
@@ -413,7 +413,7 @@ function safe_array_access<T>(values: NonEmptyArray<T>, index: number): T
 	const value = values[index]
 	if (value === undefined)
 	{
-		throw new RangeError(`invalid array index ${index}`)
+		throw new RangeError(`invalid array index ${index.toString(10)}`)
 	}
 	return value
 }

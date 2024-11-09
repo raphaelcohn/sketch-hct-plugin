@@ -2,6 +2,7 @@
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
 import {HctSolver} from "@material/material-color-utilities"
+import type {argb} from "../srgb/argb.mts"
 import {TonalPalette} from "./TonalPalette.mjs"
 import {Hue} from "./Hue.mjs"
 import {Tone} from "./Tone.mjs"
@@ -38,7 +39,7 @@ export class HueChromaToneCoordinates
 	 */
 	static from_with_maximum_chroma(hue: NonNullable<Hue>, chroma: NonNullable<Chroma>, tone: NonNullable<Tone>): NonNullable<HueChromaToneCoordinates>
 	{
-		const argb = HctSolver.solveToInt(hue.valueOf(), chroma.valueOf(), tone.to_cielab_lstar().valueOf())
+		const argb = HctSolver.solveToInt(hue.valueOf(), chroma.valueOf(), tone.to_cielab_lstar().valueOf()) as argb
 		return AlphaSRgbCoordinates.from_argb(argb).into_hue_chroma_tone_coordinates()
 	}
 	
@@ -54,7 +55,7 @@ export class HueChromaToneCoordinates
 	
 	public toString(this: NonNullable<this>): string
 	{
-		return `(${this.hue}, ${this.chroma}, ${this.tone})`
+		return `(${this.hue.toString()}, ${this.chroma.toString()}, ${this.tone.toString()})`
 	}
 	
 	public get tonal_palette(): NonNullable<TonalPalette>
@@ -114,11 +115,11 @@ export class HueChromaToneCoordinates
 	{
 		if (!Number.isInteger(non_zero_integer_count) || non_zero_integer_count < 1)
 		{
-			throw new RangeError(`non_zero_integer_count is not a positive integer (${non_zero_integer_count}`)
+			throw new RangeError(`non_zero_integer_count is not a positive integer (${non_zero_integer_count.toString(10)}`)
 		}
 		if (!Number.isInteger(non_zero_number_of_divisions_of_the_colour_wheel) || non_zero_number_of_divisions_of_the_colour_wheel < 1)
 		{
-			throw new RangeError(`non_zero_number_of_divisions_of_the_colour_wheel is not a positive integer (${non_zero_number_of_divisions_of_the_colour_wheel}`)
+			throw new RangeError(`non_zero_number_of_divisions_of_the_colour_wheel is not a positive integer (${non_zero_number_of_divisions_of_the_colour_wheel.toString(10)}`)
 		}
 		const result = this.#temperature_cache().analogous(non_zero_integer_count, non_zero_number_of_divisions_of_the_colour_wheel)
 		

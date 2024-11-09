@@ -17,7 +17,7 @@ declare namespace cocoascript
 		array(): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1460122-arraywitharray
-		arrayWithArray(array: any): NSArray
+		arrayWithArray(array: unknown): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1460099-arraywithcontentsoffile
 		arrayWithContentsOfFile(path: string | NSString): NSArray
@@ -26,22 +26,22 @@ declare namespace cocoascript
 		arrayWithContentsOfURL(url: NSURL): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1411981-arraywithobject
-		arrayWithObject(anObject: any): NSArray
+		arrayWithObject(anObject: unknown): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1460145-arraywithobjects
-		arrayWithObjects(...firstObj: Array<any>): NSArray
+		arrayWithObjects(...firstObj: Array<unknown>): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1460096-arraywithobjects
-		arrayWithObjects_count(objects: any, cnt: NSUInteger): NSArray
+		arrayWithObjects_count(objects: unknown, cnt: NSUInteger): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1414315-init
 		init(): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1412169-initwitharray
-		initWithArray(array: any): NSArray
+		initWithArray(array: unknown): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1408557-initwitharray
-		initWithArray_copyItems(array: any, flag: boolean): NSArray
+		initWithArray_copyItems(array: unknown, flag: boolean): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1413844-initwithcontentsoffile
 		initWithContentsOfFile(path: string | NSString): NSArray
@@ -50,31 +50,31 @@ declare namespace cocoascript
 		initWithContentsOfURL(url: NSURL): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1460068-initwithobjects
-		initWithObjects(...firstObj: Array<any>): NSArray
+		initWithObjects(...firstObj: Array<unknown>): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1415056-initwithobjects
-		initWithObjects_count(objects: any, cnt: NSUInteger): NSArray
+		initWithObjects_count(objects: unknown, cnt: NSUInteger): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1407477-containsobject
-		containsObject(anObject: any): boolean
+		containsObject(anObject: unknown): boolean
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1409982-count
 		count(): NSUInteger
 		setCount(value: NSUInteger): void
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1410317-getobjects
-		getObjects(objects: any): void
+		getObjects(objects: unknown): void
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1414725-getobjects
-		getObjects_range(objects: any, range: NSRange): void
+		getObjects_range(objects: unknown, range: NSRange): void
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1412852-firstobject
-		firstObject(): any
-		setFirstObject(value: any): void
+		firstObject(): unknown
+		setFirstObject(value: unknown): void
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1408316-lastobject
-		lastObject(): any
-		setLastObject(value: any): void
+		lastObject(): unknown
+		setLastObject(value: unknown): void
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1417555-objectatindex
 		objectAtIndex(index: NSUInteger): void
@@ -92,16 +92,16 @@ declare namespace cocoascript
 		// reverseObjectEnumerator(): NSEnumerator
 
 		// https://developer.apple.com/documentation/foundation/nsarray/1417076-indexofobject
-		indexOfObject(anObject: any): NSUInteger
+		indexOfObject(anObject: unknown): NSUInteger
 
 		// https://developer.apple.com/documentation/foundation/nsarray/1415248-indexofobject
-		indexOfObject_inRange(anObject: any, range: NSRange): NSUInteger
+		indexOfObject_inRange(anObject: unknown, range: NSRange): NSUInteger
 
 		// https://developer.apple.com/documentation/foundation/nsarray/1410847-indexofobjectidenticalto
-		indexOfObjectIdenticalTo(anObject: any): NSUInteger
+		indexOfObjectIdenticalTo(anObject: unknown): NSUInteger
 
 		// https://developer.apple.com/documentation/foundation/nsarray/1415805-indexofobjectidenticalto
-		indexOfObjectIdenticalTo_inRange(anObject: any, range: NSRange): NSUInteger
+		indexOfObjectIdenticalTo_inRange(anObject: unknown, range: NSRange): NSUInteger
 
 		// https://developer.apple.com/documentation/foundation/nsarray/1408043-indexofobjectpassingtest
 		indexOfObjectPassingTest(predicate: boolean): NSUInteger
@@ -122,7 +122,7 @@ declare namespace cocoascript
 		// indexesOfObjectsAtIndexes_options_passingTest(s: NSIndexSet, opts: NSEnumerationOptions, predicate: boolean): NSIndexSet
 		//
 		// // https://developer.apple.com/documentation/foundation/nsarray/1412722-indexofobject
-		// indexOfObject_inSortedRange_options_usingComparator(obj: any, r: NSRange, opts: NSBinarySearchingOptions, cmp: NSComparator): NSUInteger
+		// indexOfObject_inSortedRange_options_usingComparator(obj: unknown, r: NSRange, opts: NSBinarySearchingOptions, cmp: NSComparator): NSUInteger
 
 		// https://developer.apple.com/documentation/foundation/nsarray/1460115-makeobjectsperformselector
 		makeObjectsPerformSelector(aSelector: SEL): void
@@ -140,16 +140,16 @@ declare namespace cocoascript
 		// enumerateObjectsAtIndexes_options_usingBlock(s: NSIndexSet, opts: NSEnumerationOptions, block: boolean): void
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1408825-firstobjectcommonwitharray
-		firstObjectCommonWithArray(otherArray: any): void
+		firstObjectCommonWithArray(otherArray: unknown): void
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1411770-isequaltoarray
-		isEqualToArray(otherArray: any): boolean
+		isEqualToArray(otherArray: unknown): boolean
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1408534-arraybyaddingobject
-		arrayByAddingObject(anObject: any): NSArray
+		arrayByAddingObject(anObject: unknown): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1412087-arraybyaddingobjectsfromarray
-		arrayByAddingObjectsFromArray(otherArray: any): NSArray
+		arrayByAddingObjectsFromArray(otherArray: unknown): NSArray
 		
 		// // https://developer.apple.com/documentation/foundation/nsarray/1411033-filteredarrayusingpredicate
 		// filteredArrayUsingPredicate(predicate: NSPredicate): NSArray
@@ -163,10 +163,10 @@ declare namespace cocoascript
 		setSortedArrayHint(value: NSData): void
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1408213-sortedarrayusingfunction
-		sortedArrayUsingFunction_context(comparator: void, context: void): NSArray
+		sortedArrayUsingFunction_context(comparator: unknown, context: unknown): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1414839-sortedarrayusingfunction
-		sortedArrayUsingFunction_context_hint(comparator: void, context: void, hint: NSData): NSArray
+		sortedArrayUsingFunction_context_hint(comparator: unknown, context: unknown, hint: NSData): NSArray
 		
 		// // https://developer.apple.com/documentation/foundation/nsarray/1415069-sortedarrayusingdescriptors
 		// sortedArrayUsingDescriptors(sortDescriptors: NSSortDescriptor): NSArray
@@ -209,7 +209,7 @@ declare namespace cocoascript
 		removeObserver_forKeyPath(observer: NSObject, keyPath: string | NSString): void
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/1418441-removeobserver
-		removeObserver_forKeyPath_context(observer: NSObject, keyPath: string | NSString, context: void): void
+		removeObserver_forKeyPath_context(observer: NSObject, keyPath: string | NSString, context: unknown): void
 		
 		// // https://developer.apple.com/documentation/foundation/nsarray/1408305-removeobserver
 		// removeObserver_fromObjectsAtIndexes_forKeyPath_context(observer: NSObject, indexes: NSIndexSet, keyPath: string | NSString, context: void): void
@@ -233,13 +233,13 @@ declare namespace cocoascript
 		// shuffledArrayWithRandomSource(randomSource: GKRandomSource): NSArray
 		//
 		// // https://developer.apple.com/documentation/foundation/nsarray/3152166-differencefromarray
-		// differenceFromArray(other: any): NSOrderedCollectionDifference
+		// differenceFromArray(other: unknown): NSOrderedCollectionDifference
 		//
 		// // https://developer.apple.com/documentation/foundation/nsarray/3152167-differencefromarray
-		// differenceFromArray_withOptions(other: any, options: NSOrderedCollectionDifferenceCalculationOptions): NSOrderedCollectionDifference
+		// differenceFromArray_withOptions(other: unknown, options: NSOrderedCollectionDifferenceCalculationOptions): NSOrderedCollectionDifference
 		//
 		// // https://developer.apple.com/documentation/foundation/nsarray/3152168-differencefromarray
-		// differenceFromArray_withOptions_usingEquivalenceTest(other: any, options: NSOrderedCollectionDifferenceCalculationOptions, block: any): NSOrderedCollectionDifference
+		// differenceFromArray_withOptions_usingEquivalenceTest(other: unknown, options: NSOrderedCollectionDifferenceCalculationOptions, block: unknown): NSOrderedCollectionDifference
 		
 		// // https://developer.apple.com/documentation/foundation/nsarray/1407810-initwithcoder
 		// initWithCoder(coder: NSCoder): NSArray
@@ -251,7 +251,7 @@ declare namespace cocoascript
 		writeToURL_error(url: NSURL, error: NSError): boolean
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/3152165-arraybyapplyingdifference
-		arrayByApplyingDifference(difference: any): NSArray
+		arrayByApplyingDifference(difference: unknown): NSArray
 		
 		// https://developer.apple.com/documentation/foundation/nsarray/2879153-arraywithcontentsofurl
 		arrayWithContentsOfURL_error(url: NSURL, error: NSError): NSArray

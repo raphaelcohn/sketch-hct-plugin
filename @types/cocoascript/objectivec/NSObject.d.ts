@@ -40,7 +40,7 @@ declare namespace cocoascript
 		dealloc(): void
 
 		// https://developer.apple.com/documentation/objectivec/nsobject/1571948-new
-		new(): NSObject
+		new(): NSObject // eslint-disable-line @typescript-eslint/no-misused-new
 
 		// https://developer.apple.com/documentation/objectivec/nsobject/1571950-class
 		class(): Class
@@ -58,10 +58,10 @@ declare namespace cocoascript
 		conformsToProtocol(protocol: Protocol): boolean
 
 		// https://developer.apple.com/documentation/objectivec/nsobject/1418863-methodforselector
-		methodForSelector(aSelector: SEL): any
+		methodForSelector(aSelector: SEL): unknown
 
 		// https://developer.apple.com/documentation/objectivec/nsobject/1418713-instancemethodforselector
-		instanceMethodForSelector(aSelector: SEL): any
+		instanceMethodForSelector(aSelector: SEL): unknown
 
 		// // https://developer.apple.com/documentation/objectivec/nsobject/1571959-instancemethodsignatureforselect
 		// instanceMethodSignatureForSelector(aSelector: SEL): NSMethodSignature
@@ -175,8 +175,8 @@ declare namespace cocoascript
 		setToOneRelationshipKeys(value: string | NSString): void
 
 		// https://developer.apple.com/documentation/objectivec/nsobject/1413991-classcode
-		classCode(): any
-		setClassCode(value: any): void
+		classCode(): unknown
+		setClassCode(value: unknown): void
 
 		// https://developer.apple.com/documentation/objectivec/nsobject/1411337-classname
 		className(): string | NSString
@@ -217,7 +217,7 @@ declare namespace cocoascript
 		attemptRecoveryFromError_optionIndex(error: NSError, recoveryOptionIndex: NSUInteger): boolean
 
 		// https://developer.apple.com/documentation/objectivec/nsobject/1411071-attemptrecoveryfromerror
-		attemptRecoveryFromError_optionIndex_delegate_didRecoverSelector_contextInfo(error: NSError, recoveryOptionIndex: NSUInteger, delegate: NSObject, didRecoverSelector: SEL, contextInfo: void): void
+		attemptRecoveryFromError_optionIndex_delegate_didRecoverSelector_contextInfo(error: NSError, recoveryOptionIndex: NSUInteger, delegate: NSObject, didRecoverSelector: SEL, contextInfo: unknown): void
 
 		// // https://developer.apple.com/documentation/objectivec/nsobject/1411010-authorizationviewcreatedauthoriz
 		// authorizationViewCreatedAuthorization(view: SFAuthorizationView): void
@@ -421,7 +421,7 @@ declare namespace cocoascript
 		prepareForInterfaceBuilder(): void
 
 		// https://developer.apple.com/documentation/objectivec/nsobject/1438175-provideimagedata
-		provideImageData_bytesPerRow_origin__size__userInfo(data: void, rowbytes: any, x: any, y: any, width: any, height: any, info: NSObject): void
+		provideImageData_bytesPerRow_origin__size__userInfo(data: unknown, rowbytes: unknown, x: unknown, y: unknown, width: unknown, height: unknown, info: NSObject): void
 
 		// // https://developer.apple.com/documentation/objectivec/nsobject/1504951-quartzfiltermanager
 		// quartzFilterManager_didAddFilter(sender: QuartzFilterManager, filter: QuartzFilter): void
@@ -487,7 +487,7 @@ declare namespace cocoascript
 		commitEditingAndReturnError(error: NSError): boolean
 
 		// https://developer.apple.com/documentation/objectivec/nsobject/1458179-commiteditingwithdelegate
-		commitEditingWithDelegate_didCommitSelector_contextInfo(delegate: NSObject, didCommitSelector: SEL, contextInfo: void): void
+		commitEditingWithDelegate_didCommitSelector_contextInfo(delegate: NSObject, didCommitSelector: SEL, contextInfo: unknown): void
 
 		// // https://developer.apple.com/documentation/objectivec/nsobject/1428934-controltextdidbeginediting
 		// controlTextDidBeginEditing(obj: NSNotification): void

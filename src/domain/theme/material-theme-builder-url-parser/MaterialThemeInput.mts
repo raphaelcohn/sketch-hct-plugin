@@ -80,7 +80,7 @@ export class MaterialThemeInput
 		const source = this.source
 		const is_content = this.#is_content
 		const custom_color_colors = []
-		for (let entry of this.#custom_colors.entries())
+		for (const entry of this.#custom_colors.entries())
 		{
 			const custom_color_name = entry[0]
 			const custom_color_value = entry[1]

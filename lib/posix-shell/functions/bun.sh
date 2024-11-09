@@ -85,7 +85,6 @@ _bun_initialise()
 	local distribution_file_name
 	local extract_folder_path
 	_bun_set_variables_internal
-	readonly bun_binary_folder_path="$binary_folder_path"
 	readonly bun_main_binary_file_path="$main_binary_file_path"
 
 	if is_file_readable_and_executable "$bun_main_binary_file_path"; then
@@ -109,6 +108,30 @@ bun_run()
 	shift 1
 
 	_bun_initialise
+
+	local -r local_bunfig_file_path="$HOME"/.bunfig.toml
+	if is_readable_file "$local_bunfig_file_path"; then
+		exit_error "Remove $local_bunfig_file_path; this file overrides global configuration in an undesirable way and introduces non-reproducibility"
+	fi
+
+	local -r bun_home_folder_path="$root_folder_path"/lib/bun
+	local -r dot_bun_folder_path="$bun_home_folder_path"/.bun
+	local -r install_dot_bun_folder_path="$dot_bun_folder_path"/install
+
+	#unset NODE_TLS_REJECT_UNAUTHORIZED
+	export BUN_CONFIG_VERBOSE_FETCH=curl
+	export BUN_RUNTIME_TRANSPILER_CACHE_PATH="$TMPDIR"/bun-transpiler-cache
+	export BUN_CONFIG_MAX_HTTP_REQUESTS=256
+	export BUN_CONFIG_NO_CLEAR_TERMINAL_ON_RELOAD=true
+	export DO_NOT_TRACK=1
+	export NO_COLOR=1
+	export FORCE_COLOR=0
+	export XDG_CONFIG_HOME="$root_folder_path"/libexec/bun
+
+	# Undocumented; override .bunfig.toml which does not support environment variables and for which globalCacheDir in .bunfig.toml is ignored!
+	export BUN_INSTALL_GLOBAL_DIR="$install_dot_bun_folder_path"/global
+	export BUN_INSTALL_BIN="$root_folder_path"/bin
+	export BUN_INSTALL_CACHE_DIR="$install_dot_bun_folder_path"/cache
 
 	child_process_or_exec "$execute" "$bun_main_binary_file_path" "$@"
 }

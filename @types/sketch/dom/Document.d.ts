@@ -66,7 +66,8 @@ declare module "sketch/dom"
 			 * Asks the user to select a file to open.
 			 * @param cb A function called after the document is opened. It is called with an Error if opening the Document was unsuccessful and a Document (or undefined).
 			 */
-			static open(cb: (err: any, document?: Document | undefined) => void): void
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			static open(cb: (err: any, document?: Document) => void): void
 			
 			/**
 			 * A method to open an existing sketch document or ask the user to open one.
@@ -74,7 +75,8 @@ declare module "sketch/dom"
 			 * @param path The path to the document to open. If undefined, the user will be asked to select one.
 			 * @param cb A function called after the document is opened. It is called with an Error if opening the Document was unsuccessful and a Document (or undefined).
 			 */
-			static open(path: string, cb: (err: any, document?: Document | undefined) => void): void
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
+			static open(path: string, cb: (err: any, document?: Document) => void): void
 			
 			/**
 			 * The unique ID of the document.
@@ -127,6 +129,7 @@ declare module "sketch/dom"
 			{
 				saveMode: Document.SaveMode
 				iKnowThatImOverwritingAFolder?: boolean
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			}, cb?: (err: any) => void): void
 			
 			/**
@@ -135,6 +138,7 @@ declare module "sketch/dom"
 			 * @param path The path where the document will be saved. If undefined, the user will be asked to select one.
 			 * @param cb A function called after the document is saved. It is called with an Error if saving the Document was unsuccessful.
 			 */
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			save(path?: string, cb?: (err: any) => void): void
 			
 			/**
@@ -142,6 +146,7 @@ declare module "sketch/dom"
 			 * The method is asynchronous so if you want to do something after the document is saved, make sure that you pass a callback and continue your script there.
 			 * @param cb A function called after the document is saved. It is called with an Error if saving the Document was unsuccessful.
 			 */
+			// eslint-disable-next-line @typescript-eslint/no-explicit-any
 			save(cb?: (err: any) => void): void
 			
 			/**

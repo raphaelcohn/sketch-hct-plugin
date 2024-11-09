@@ -14,6 +14,7 @@ declare module "sketch/settings"
 		 * @return The setting that was stored for the given key.
 		 * undefined if there was nothing.
 		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		export function documentSettingForKey(document: dom.Document, key: string): any
 	}
 }

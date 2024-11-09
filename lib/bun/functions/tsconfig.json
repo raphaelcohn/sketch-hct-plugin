@@ -1,0 +1,167 @@
+{
+	"include":
+	[
+		"**/*"
+	],
+	
+	"compilerOptions":
+	{
+		/* Source paths */
+		
+		"rootDir": ".",
+		// "rootDirs": [],
+		"forceConsistentCasingInFileNames": true,
+		
+		
+		/* Compilation */
+		
+		"outDir": "./tmp/typescript/transpiled",
+		// "outFile": "out.js"                             // Note, "outFile" is not compatible with CommonJS or ECMAScript (ES6) modules, and so cannot be specified for modern code generation.
+		"incremental": true,
+		"tsBuildInfoFile": "./tmp/typescript/.tsbuildinfo.json",
+		
+		
+		/* Composite Projects */
+		
+		"composite": false,
+		"disableReferencedProjectLoad": false,
+		"disableSolutionSearching": false,
+		"disableSourceOfProjectReferenceRedirect": false,
+		
+		
+		/* Compilation Debugging */
+		
+		"diagnostics": false,
+		"extendedDiagnostics": false,
+		"explainFiles": true,
+		"listFiles": true,
+		"listEmittedFiles": true,
+		"traceResolution": false,
+		"pretty": false,
+		"noErrorTruncation": true,
+		
+		
+		/* Input */
+		
+		
+		/* Resolution of module imports */
+		
+		"moduleDetection": "auto",
+		"moduleResolution": "bundler",
+		"moduleSuffixes":
+		[
+			""
+		],
+		"allowImportingTsExtensions": false,
+		"allowArbitraryExtensions": false,
+		"allowSyntheticDefaultImports": false,
+		"resolveJsonModule": true,                         // Allows JSON files to be used as modules, eg for configuration settings.
+		"allowUmdGlobalAccess": false,
+		"resolvePackageJsonImports": true,
+		"resolvePackageJsonExports": true,
+		// "customConditions": [],                         // Used to match package.json "exports" rules.
+		// "baseUrl": "./",                                // Import path location remapping.
+		// "paths": {},                                    // Import path location remapping.
+		
+		
+		/* Input JavaScript support */
+		
+		"allowJs": true,                                   // Allow JavaScript files to be a part of your program. Use the 'checkJS' option to get errors from these files.
+		"checkJs": true,                                   // Enable error reporting in type-checked JavaScript files.
+		"maxNodeModuleJsDepth": 1,                         // Specify the maximum folder depth used for checking JavaScript files from 'node_modules'. Only applicable with 'allowJs'.
+		
+		
+		/* Input JSX support */
+		
+		"jsx": "preserve",
+		"jsxFactory": "React.createElement",
+		"jsxFragmentFactory": "React.Fragment",
+		"jsxImportSource": "react",
+		"reactNamespace": "React",
+		
+		
+		/* Code generation */
+		
+		"noEmit": false,                                   // Should be true when using esbuild.
+		"noEmitOnError": true,
+		
+		
+		/* Javascript code generation */
+		
+		"module": "preserve",
+		"isolatedModules": true,
+		"preserveConstEnums": true,                        // Has to be true for isolated modules, essentially making const enums equivalent to enum and removing any benefit of them.
+		"esModuleInterop": true,
+		"importHelpers": false,
+		"noEmitHelpers": false,
+		"verbatimModuleSyntax": true,
+		// "preserveSymlinks": true
+		"emitBOM": false,
+		"newLine": "lf",
+		"removeComments": true,
+		"target": "ES2022",
+		"lib":
+		[
+			"ES2022"
+		],
+		"useDefineForClassFields": true,
+		"downlevelIteration": true,                        // Javascript code generation for older javascript language levels (this setting maximises compatibility at the expense of code bloat and performance).
+		"noImplicitUseStrict": false,                      // Always emit "use strict" where relevant (this is the default).
+		"noLib": false,
+		"experimentalDecorators": false,
+		"emitDecoratorMetadata": false,
+		
+		
+		/* Typescript .d.ts generation */
+		
+		"declaration": true,
+		"declarationDir": "../../../libexec/sketch-plugin-build",
+		"stripInternal": true,
+		"declarationMap": true,
+		"emitDeclarationOnly": false,
+		"isolatedDeclarations": true,                      // Force modules exports to declare their type signature, or at least enable it to be trivially computed, thereby ensuring public methods, etc do not rely on type inference and creating more stable APIs.
+		
+		
+		/* Source map generation */
+		
+		"sourceMap": true,
+		"inlineSourceMap": false,
+		"inlineSources": true,
+		// "mapRoot": "https://example.org/source-maps/",
+		// "sourceRoot": "https://example.org/source/",
+		
+		
+		/* Type Checking */
+		
+		"alwaysStrict": true,
+		"strict": true,
+		"noCheck": false,
+		"noImplicitAny": true,
+		"strictNullChecks": true,
+		"strictFunctionTypes": true,
+		"strictBindCallApply": true,
+		"strictPropertyInitialization": true,
+		"strictBuiltinIteratorReturn": true,
+		"noImplicitThis": true,
+		"useUnknownInCatchVariables": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"exactOptionalPropertyTypes": true,
+		"noImplicitReturns": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUncheckedIndexedAccess": true,
+		"noImplicitOverride": true,
+		"noPropertyAccessFromIndexSignature": true,
+		"allowUnusedLabels": false,
+		"allowUnreachableCode": false,
+		"noUncheckedSideEffectImports": true,
+		"noStrictGenericChecks": false,
+		"noResolve": false,
+		"typeRoots":
+		[
+			"../../../libexec/sketch-plugin-build/node_modules/@types"
+		],
+		"skipDefaultLibCheck": true,
+		"skipLibCheck": true
+	}
+}

@@ -22,7 +22,7 @@ enum Hierarchy
 	
 	Main = "Main",
 
-	Main_On = "Main/On",
+	Main_On = "Main/On Top",
 	
 	Main_Inverse = "Main/Inverse",
 
@@ -30,9 +30,9 @@ enum Hierarchy
 
 	Container_On = "Container/On Top",
 
-	Surface = "Main",
+	Surface = "Surface",
 
-	Surface_On = "Main/On Top",
+	Surface_On = "Surface/On Top",
 
 	Surface_Variant = "Lower Emphasis",
 	
@@ -160,7 +160,7 @@ class ColorsMap
 	
 	public iterate(this: NonNullable<this>, entry_callback: (hierarchy: Hierarchy, swatch_palette_name: SwatchPaletteName, property: SchemeKey) => void)
 	{
-		for (let entry of this.#entries.entries())
+		for (const entry of this.#entries.entries())
 		{
 			const swatch_palette_name = entry[0]
 			const property = entry[1]

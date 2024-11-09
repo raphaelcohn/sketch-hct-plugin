@@ -13,6 +13,7 @@ declare module "sketch/settings"
 		 * @param key The setting to set.
 		 * @param value The value to set it to.
 		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		export function setDocumentSettingForKey(document: dom.Document, key: string, value: any): void
 	}
 }

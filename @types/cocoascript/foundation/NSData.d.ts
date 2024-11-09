@@ -17,28 +17,28 @@ declare namespace cocoascript
 		data(): NSData
 		
 		// https://developer.apple.com/documentation/foundation/nsdata/1547231-datawithbytes
-		dataWithBytes_length(bytes: void, length: NSUInteger): NSData
+		dataWithBytes_length(bytes: unknown, length: NSUInteger): NSData
 
 		// https://developer.apple.com/documentation/foundation/nsdata/1547229-datawithbytesnocopy
-		dataWithBytesNoCopy_length(bytes: void, length: NSUInteger): NSData
+		dataWithBytesNoCopy_length(bytes: unknown, length: NSUInteger): NSData
 
 		// https://developer.apple.com/documentation/foundation/nsdata/1547240-datawithbytesnocopy
-		dataWithBytesNoCopy_length_freeWhenDone(bytes: void, length: NSUInteger, b: boolean): NSData
+		dataWithBytesNoCopy_length_freeWhenDone(bytes: unknown, length: NSUInteger, b: boolean): NSData
 		
 		// https://developer.apple.com/documentation/foundation/nsdata/1547230-datawithdata
 		dataWithData(data: NSData): NSData
 
 		// https://developer.apple.com/documentation/foundation/nsdata/1412793-initwithbytes
-		initWithBytes_length(bytes: void, length: NSUInteger): NSData
+		initWithBytes_length(bytes: unknown, length: NSUInteger): NSData
 
 		// https://developer.apple.com/documentation/foundation/nsdata/1409454-initwithbytesnocopy
-		initWithBytesNoCopy_length(bytes: void, length: NSUInteger): NSData
+		initWithBytesNoCopy_length(bytes: unknown, length: NSUInteger): NSData
 
 		// https://developer.apple.com/documentation/foundation/nsdata/1417337-initwithbytesnocopy
-		initWithBytesNoCopy_length_deallocator(bytes: void, length: NSUInteger, deallocator: NSUInteger): NSData
+		initWithBytesNoCopy_length_deallocator(bytes: unknown, length: NSUInteger, deallocator: NSUInteger): NSData
 
 		// https://developer.apple.com/documentation/foundation/nsdata/1416020-initwithbytesnocopy
-		initWithBytesNoCopy_length_freeWhenDone(bytes: void, length: NSUInteger, b: boolean): NSData
+		initWithBytesNoCopy_length_freeWhenDone(bytes: unknown, length: NSUInteger, b: boolean): NSData
 		
 		// https://developer.apple.com/documentation/foundation/nsdata/1417055-initwithdata
 		initWithData(data: NSData): NSData
@@ -106,19 +106,19 @@ declare namespace cocoascript
 		// https://developer.apple.com/documentation/foundation/nsdata/1410616-bytes
 		bytes(): void
 		
-		setBytes(value: void): void
+		setBytes(value: unknown): void
 		
 		// https://developer.apple.com/documentation/foundation/nsdata/1408400-enumeratebyterangesusingblock
 		enumerateByteRangesUsingBlock(block: boolean): void
 		
 		// https://developer.apple.com/documentation/foundation/nsdata/1416532-getbytes
-		getBytes(buffer: void): void
+		getBytes(buffer: unknown): void
 		
 		// https://developer.apple.com/documentation/foundation/nsdata/1411450-getbytes
-		getBytes_length(buffer: void, length: NSUInteger): void
+		getBytes_length(buffer: unknown, length: NSUInteger): void
 		
 		// https://developer.apple.com/documentation/foundation/nsdata/1407224-getbytes
-		getBytes_range(buffer: void, range: NSRange): void
+		getBytes_range(buffer: unknown, range: NSRange): void
 		
 		// https://developer.apple.com/documentation/foundation/nsdata/1410128-subdatawithrange
 		subdataWithRange(range: NSRange): NSData

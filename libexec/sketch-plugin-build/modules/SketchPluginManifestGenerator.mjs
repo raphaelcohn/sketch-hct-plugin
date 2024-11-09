@@ -4,10 +4,10 @@
 'use strict'
 
 import { basename, extname, join, posix, sep } from 'node:path';
-import {JsonValidator} from "../../../lib/nodejs/functions/JsonValidator.mjs";
-import {read_folder} from "../../../lib/nodejs/functions/file_system/read_folder.mjs";
-import {assert} from "../../../lib/nodejs/functions/common/assert.mjs";
-import {PackageJson} from "../../../lib/nodejs/functions/PackageJson.mjs";
+import {JsonValidator} from "../../../lib/bun/functions/JsonValidator.mts";
+import {read_folder} from "../../../lib/bun/functions/file_system/read_folder.mjs";
+import {assert} from "../../../lib/bun/functions/common/assert.mts";
+import {PackageJson} from "../../../lib/bun/functions/PackageJson.mjs";
 import {SketchManifestIconsHelper} from "./SketchManifestIconsHelper.mjs";
 import {SketchPluginFolders} from "./SketchPluginFolders.mjs";
 import {AbsoluteFolderPath} from "./functions/file_system/AbsoluteFolderPath.mjs";

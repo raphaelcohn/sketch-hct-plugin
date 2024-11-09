@@ -11,6 +11,7 @@ declare module "sketch/settings"
 		 * @param key The variable to look up
 		 * @return The variable that was saved.
 		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		export function sessionVariable(key: string): any
 	}
 }

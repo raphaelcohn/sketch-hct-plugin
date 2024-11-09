@@ -102,15 +102,6 @@ _program_path_find()
 	fi
 }
 
-sketch_plugin_build_source_functions()
-{
-	local -r functions_folder_path="$root_folder_path"/lib/posix-shell/functions
-
-	. "$functions_folder_path"/essential.sh
-	. "$functions_folder_path"/clean-environment.sh
-	. "$functions_folder_path"/nodejs.sh
-}
-
 main()
 {
 	cd "$(_program_path_find)" 1>/dev/null 2>/dev/null
@@ -121,9 +112,7 @@ main()
 		local -r root_folder_path="$(pwd)"
 	cd - 1>/dev/null 2>/dev/null
 
-	sketch_plugin_build_source_functions
-	clean_environment ''
-	exec "$root_folder_path"/libexec/nodejs/node "$program_folder_path"/sketch-plugin-build.mjs "$@"
+	exec "$root_folder_path"/libexec/bun/bun "$program_folder_path"/sketch-plugin-build.mjs "$@"
 }
 
 main "$@"

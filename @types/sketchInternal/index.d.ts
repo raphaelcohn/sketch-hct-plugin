@@ -6,3 +6,4 @@
 /// <reference path="./MSAction.d.ts" />
 /// <reference path="./MSColor.d.ts" />
 /// <reference path="./MSPluginCommand.d.ts" />
+/// <reference path="./MSExportRequest.d.ts" />

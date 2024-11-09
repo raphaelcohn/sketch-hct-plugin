@@ -2,7 +2,7 @@
 	"name": "sketch-plugin-build",
 	"main": "./sketch-plugin-build.mjs",
 	"packageManger": "npm@10.8.2",
-	"type": "commonjs",
+	"type": "module",
 	"exports":
 	[
 		"./sketch-plugin-build.mjs"
@@ -26,6 +26,7 @@
 	],
 	"dependencies":
 	{
+		"@types/node": "22.9.0"
 	},
 	"devDependencies":
 	{

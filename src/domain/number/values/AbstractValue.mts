@@ -28,7 +28,7 @@ export abstract class AbstractValue<N extends BuiltInValue> implements Value<N>
 				return this.valueOf()
 			
 			default:
-				throw new RangeError(`hint (${hint}) is not string, number or default`)
+				throw new RangeError(`hint is not string, number or default`)
 		}
 	}
 	

@@ -18,10 +18,10 @@ declare namespace cocoascript
 		string(): NSString
 
 		// https://developer.apple.com/documentation/foundation/nsstring/1407339-initwithbytes
-		initWithBytes_length_encoding(bytes: void, len: NSUInteger, encoding: NSStringEncoding): NSString
+		initWithBytes_length_encoding(bytes: unknown, len: NSUInteger, encoding: NSStringEncoding): NSString
 
 		// https://developer.apple.com/documentation/foundation/nsstring/1413830-initwithbytesnocopy
-		initWithBytesNoCopy_length_encoding_freeWhenDone(bytes: void, len: NSUInteger, encoding: NSStringEncoding, freeBuffer: boolean): NSString
+		initWithBytesNoCopy_length_encoding_freeWhenDone(bytes: unknown, len: NSUInteger, encoding: NSStringEncoding, freeBuffer: boolean): NSString
 
 		// https://developer.apple.com/documentation/foundation/nsstring/1410997-initwithcharacters
 		initWithCharacters_length(characters: unichar, length: NSUInteger): NSString
@@ -115,7 +115,7 @@ declare namespace cocoascript
 		getCharacters_range(buffer: unichar, range: NSRange): void
 
 		// https://developer.apple.com/documentation/foundation/nsstring/1413453-getbytes
-		getBytes_maxLength_usedLength_encoding_options_range_remainingRange(buffer: void, maxBufferCount: NSUInteger, usedBufferCount: NSUInteger, encoding: NSStringEncoding, options: NSStringEncodingConversionOptions, range: NSRange, leftover: NSRangePointer): boolean
+		getBytes_maxLength_usedLength_encoding_options_range_remainingRange(buffer: unknown, maxBufferCount: NSUInteger, usedBufferCount: NSUInteger, encoding: NSStringEncoding, options: NSStringEncodingConversionOptions, range: NSRange, leftover: NSRangePointer): boolean
 
 		// https://developer.apple.com/documentation/foundation/nsstring/1408489-cstringusingencoding
 		cStringUsingEncoding(encoding: NSStringEncoding): string
@@ -582,7 +582,7 @@ declare namespace cocoascript
 		boundingRectWithSize_options_attributes(size: NSSize, options: NSStringDrawingOptions, attributes: string | NSString): NSRect
 
 		// https://developer.apple.com/documentation/foundation/nsstring/3547179-initwithbytesnocopy
-		initWithBytesNoCopy_length_encoding_deallocator(bytes: void, len: NSUInteger, encoding: NSStringEncoding, deallocator: NSUInteger): NSString
+		initWithBytesNoCopy_length_encoding_deallocator(bytes: unknown, len: NSUInteger, encoding: NSStringEncoding, deallocator: NSUInteger): NSString
 
 		// https://developer.apple.com/documentation/foundation/nsstring/3547180-initwithcharactersnocopy
 		initWithCharactersNoCopy_length_deallocator(chars: unichar, len: NSUInteger, deallocator: NSUInteger): NSString

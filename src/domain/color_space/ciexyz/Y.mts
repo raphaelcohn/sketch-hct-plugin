@@ -27,7 +27,7 @@ export class Y extends AbstractValue<FiniteNumber>
 	
 	public to_cielab_lstar(): NonNullable<LStar>
 	{
-		let t = this.value.divide(FiniteNumber.OneHundred)
+		const t = this.value.divide(FiniteNumber.OneHundred)
 		return new LStar(CielabCoordinates.lab_f(t).multiply(FiniteNumber.OneHundredAndSixteen).subtract(FiniteNumber.Sixteen))
 	}
 	

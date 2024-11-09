@@ -20,13 +20,15 @@
 		"x64"
 	],
 	"dependencies": {
-		"@material/material-color-utilities": "0.3.0"
 	},
 	"devDependencies": {
+		"@material/material-color-utilities": "0.3.0",
 		"@sketch-hq/sketch-file-format-ts": "6.5.0",
 		"@skpm/builder": "0.9.5",
-		"esbuild": "0.24.0",
-		"typescript": "5.6.2"
+		"typescript": "5.6.2",
+		"@typescript-eslint/eslint-plugin": "8.13.0",
+		"@typescript-eslint/parser": "8.13.0",
+		"typescript-eslint": "8.13.0"
 	},
 	"engines": {
 		"node": "20.17.0",
@@ -95,6 +97,15 @@
 		"main": "tmp/sketch-hct-plugin.sketchplugin",
 		"assets": [
 			"assets/**/*.png"
+		]
+	},
+	"eslintConfig": {
+		"parser": "@typescript-eslint/parser",
+		"plugins": [
+			"@typescript-eslint"
+		],
+		"extends": [
+			"plugin:@typescript-eslint/recommended"
 		]
 	}
 }

@@ -132,7 +132,7 @@ export class FiniteNumber implements Value<number>
 			}
 			else
 			{
-				throw new RangeError(`character (UTF-16 code point) at index ${index} in value ${value} is not uppercase hexadecimal`)
+				throw new RangeError(`character (UTF-16 code point) at index ${index.toString(10)} in value ${value} is not uppercase hexadecimal`)
 			}
 			result = (result << 4) + (code - subtract)
 		}
@@ -143,7 +143,7 @@ export class FiniteNumber implements Value<number>
 	{
 		if (!Number.isFinite(value))
 		{
-			throw new RangeError(`value must be finite, not '${value}'`)
+			throw new RangeError(`value must be finite, not '${value.toString(10)}'`)
 		}
 		return new FiniteNumber(value)
 	}
@@ -167,11 +167,11 @@ export class FiniteNumber implements Value<number>
 	{
 		if (!range.validate_minimum(this))
 		{
-			throw new RangeError(`value '${this}' is not within the ${range.MinimumDescription} minimum`)
+			throw new RangeError(`value '${this.toString(10)}' is not within the ${range.MinimumDescription} minimum`)
 		}
 		if (!range.validate_maximum(this))
 		{
-			throw new RangeError(`value '${this}' is not within the ${range.MaximumDescription} maximum`)
+			throw new RangeError(`value '${this.toString(10)}' is not within the ${range.MaximumDescription} maximum`)
 		}
 		return this
 	}
@@ -185,7 +185,7 @@ export class FiniteNumber implements Value<number>
 	{
 		if (!this.is_integer())
 		{
-			throw new RangeError(`value '${this}' is an integer`)
+			throw new RangeError(`value '${this.toString(10)}' is an integer`)
 		}
 		return this.guard_in_range(range)
 	}
@@ -204,7 +204,7 @@ export class FiniteNumber implements Value<number>
 				return this.valueOf()
 			
 			default:
-				throw new RangeError(`hint (${hint}) is not string, number or default`)
+				throw new RangeError(`hint is not string, number or default`)
 		}
 	}
 	
@@ -337,7 +337,7 @@ export class FiniteNumber implements Value<number>
 	public is_zero(this: NonNullable<this>): boolean
 	{
 		// Checks against zero work because we eliminate the value `-0.0` in the constructor.
-		return this.value == 0
+		return this.value === 0
 	}
 	
 	public is_negative(this: NonNullable<this>): boolean

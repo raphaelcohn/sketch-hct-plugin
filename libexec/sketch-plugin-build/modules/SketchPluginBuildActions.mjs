@@ -5,16 +5,16 @@ import { join } from 'node:path'
 import { homedir, tmpdir } from 'node:os'
 
 import {SketchPluginManifestGenerator} from "./SketchPluginManifestGenerator.mjs";
-import {symlink} from "../../../lib/nodejs/functions/file_system/symlink.mjs";
-import {compile_typescript} from "../../../lib/nodejs/functions/execute/typescript/index.mjs";
-import {execute_npm_binary} from "../../../lib/nodejs/functions/execute/npm/index.mjs";
-import {assert} from "../../../lib/nodejs/functions/common/assert.mjs";
-import {remove_file} from "../../../lib/nodejs/functions/file_system/remove_file.mjs";
-import {mkdir_700_p} from "../../../lib/nodejs/functions/file_system/mkdir_700_p.mjs";
-import {read_folder} from "../../../lib/nodejs/functions/file_system/read_folder.mjs";
-import {is_folder_or_symlink_and_is_readable_and_is_searchable} from "../../../lib/nodejs/functions/file_system/is_folder_or_symlink_and_is_readable_and_is_searchable.mjs";
-import {BuildActions} from "../../../lib/nodejs/functions/BuildActions.mjs";
-import {remove_recursively_forcibly} from "../../../lib/nodejs/functions/file_system/remove_recursively_forcibly.mjs";
+import {symlink} from "../../../lib/bun/functions/file_system/symlink.mjs";
+import {compile_typescript} from "../../../lib/bun/functions/execute/typescript/index.mjs";
+import {execute_npm_binary} from "../../../lib/bun/functions/execute/npm/index.mjs";
+import {assert} from "../../../lib/bun/functions/common/assert.mts";
+import {remove_file} from "../../../lib/bun/functions/file_system/remove_file.mjs";
+import {mkdir_700_p} from "../../../lib/bun/functions/file_system/mkdir_700_p.mjs";
+import {read_folder} from "../../../lib/bun/functions/file_system/read_folder.mjs";
+import {is_folder_or_symlink_and_is_readable_and_is_searchable} from "../../../lib/bun/functions/file_system/is_folder_or_symlink_and_is_readable_and_is_searchable.mjs";
+import {BuildActions} from "../../../lib/bun/functions/BuildActions.mjs";
+import {remove_recursively_forcibly} from "../../../lib/bun/functions/file_system/remove_recursively_forcibly.mjs";
 import {PackageJson} from "./functions/PackageJson.mjs";
 import {copy_recursive_forcibly} from "./functions/file_system/copy_recursive_forcibly.mjs";
 

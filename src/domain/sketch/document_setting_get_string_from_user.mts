@@ -3,28 +3,27 @@
 
 import type { dom as dom_ } from "sketch/dom"
 import type { settings as settings_ } from "sketch/settings"
-const settings: typeof settings_ = require("sketch/settings");
-import {get_string_from_user} from "./get_string_from_user.mjs";
-import {document_setting_key} from "./document_setting_key.mjs";
+const settings = require("sketch/settings") as typeof settings_
+import {get_string_from_user} from "./get_string_from_user.mjs"
+import {document_setting_key} from "./document_setting_key.mjs"
 
 export function document_setting_or_get_string_from_user(document: dom_.Document, short_key_name: string, message: string, description: string, initial_value: string): string
 {
 	const key = document_setting_key(short_key_name)
 	
-	const setting_value = settings.documentSettingForKey(document, key)
-	if (setting_value !== undefined)
+	const setting_value = settings.documentSettingForKey(document, key) as unknown
+	if (setting_value === undefined)
 	{
-		if (typeof(setting_value) !== "string")
-		{
-			throw new Error(`setting for key ${key} was not a string`)
-		}
-		
+		const setting_value = get_string_from_user(message, description, initial_value)
+		settings.setDocumentSettingForKey(document, key, setting_value)
 		return setting_value
 	}
 	else
 	{
-		const setting_value = get_string_from_user(message, description, initial_value)
-		settings.setDocumentSettingForKey(document, key, setting_value)
+		if (typeof (setting_value) !== "string")
+		{
+			throw new Error(`setting for key ${key} was not a string`)
+		}
 		return setting_value
 	}
 }

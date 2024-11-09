@@ -40,8 +40,8 @@ export class Scheme
 	
 	public swatch_color(this: NonNullable<this>, swatch: NonNullable<Swatch>, viewing_conditions: NonNullable<ViewingConditions>): NonNullable<HueChromaToneCoordinates>
 	{
-		let color = swatch.choose_palette(this.palettes)
-		let tone = swatch.tone(this, viewing_conditions);
+		const color = swatch.choose_palette(this.palettes)
+		const tone = swatch.tone(this, viewing_conditions);
 		return color.with_tone(tone)
 	}
 	
@@ -55,6 +55,7 @@ export class Scheme
 	
 	public static generate(scheme_generation_rule: SchemeGenerationRule, source_color: NonNullable<HueChromaToneCoordinates>): NonNullable<Scheme>
 	{
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		type palette_scheme_function_type = (source_color: any) => [NonNullable<Palettes>, Variant]
 		let palettes_generator: (source_color: NonNullable<HueChromaToneCoordinates>, palette_scheme_function: palette_scheme_function_type) => [NonNullable<Palettes>, Variant]
 		let palette_scheme_function: palette_scheme_function_type

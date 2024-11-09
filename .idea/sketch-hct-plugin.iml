@@ -8,6 +8,8 @@
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/bin" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/libexec/sketch-plugin-build/modules/functions" />
+      <excludeFolder url="file://$MODULE_DIR$/lib/bun/.bun/install/cache" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

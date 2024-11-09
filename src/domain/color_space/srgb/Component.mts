@@ -29,8 +29,10 @@ export class Component extends AbstractValue<FiniteNumber>
 		switch (hex_color_string.length)
 		{
 			case 1:
-				const digit = FiniteNumber.try_from_integer_hexadecimal_eithercase(hex_color_string)
-				value = digit.shift_left(FiniteNumber.Four).add(digit)
+				{
+					const digit = FiniteNumber.try_from_integer_hexadecimal_eithercase(hex_color_string)
+					value = digit.shift_left(FiniteNumber.Four).add(digit)
+				}
 				break
 			
 			case 2:

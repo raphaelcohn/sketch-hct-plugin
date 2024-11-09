@@ -10,6 +10,7 @@ declare module "sketch/settings"
 		 * @param key The setting to look up.
 		 * @return The setting that was stored for the given key. undefined if there was nothing.
 		 */
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		export function globalSettingForKey(key: string): any
 	}
 }

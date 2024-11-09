@@ -13,6 +13,6 @@ declare module "sketch/dom"
 		 * * a Buffer if objectToExport is a single item and `options.formats` is an image format.
 		 * * a Object if objectToExport is a single item and `options.formats` is json.
 		 */
-		export type ExportResult = ArrayBuffer | ArrayBuffer[] | Object[] | Object | void
+		export type ExportResult = ArrayBuffer | ArrayBuffer[] | object[] | object | undefined
 	}
 }

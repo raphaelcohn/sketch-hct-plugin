@@ -11,3 +11,5 @@
 /// <reference path="./NSImageName.d.ts" />
 /// <reference path="./NSImageResizingMode.d.ts" />
 /// <reference path="./NSTIFFCompression.d.ts" />
+/// <reference path="./NSImageHintKey.d.ts" />
+/// <reference path="./NSResponder.d.ts" />

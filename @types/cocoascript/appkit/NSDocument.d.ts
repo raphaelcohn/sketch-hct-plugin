@@ -3,7 +3,6 @@
 
 declare namespace cocoascript
 {
-	
 	/**
 	 * An abstract class that defines the interface for macOS documents.
 	 * https://developer.apple.com/documentation/appkit/nsdocument
@@ -201,7 +200,7 @@ declare namespace cocoascript
 		scheduleAutosaving(): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515225-autosavedocumentwithdelegate
-		autosaveDocumentWithDelegate_didAutosaveSelector_contextInfo(delegate: NSDocument, didAutosaveSelector: SEL, contextInfo: void): void
+		autosaveDocumentWithDelegate_didAutosaveSelector_contextInfo(delegate: NSDocument, didAutosaveSelector: SEL, contextInfo: unknown): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515096-autosavewithimplicitcancellabili
 		autosaveWithImplicitCancellability_completionHandler(autosavingIsImplicitlyCancellable: boolean, completionHandler: NSError): void
@@ -218,7 +217,7 @@ declare namespace cocoascript
 		setBrowsingVersions(value: boolean): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/2177312-stopbrowsingversionswithcompleti
-		stopBrowsingVersionsWithCompletionHandler(completionHandler: void): void
+		stopBrowsingVersionsWithCompletionHandler(completionHandler: unknown): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515210-movedocumenttoubiquitycontainer
 		moveDocumentToUbiquityContainer(sender: NSDocument): void
@@ -292,19 +291,19 @@ declare namespace cocoascript
 		// validateUserInterfaceItem(item: NSValidatedUserInterfaceItem): boolean
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515227-performsynchronousfileaccessusin
-		performSynchronousFileAccessUsingBlock(block: void): void
+		performSynchronousFileAccessUsingBlock(block: unknown): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515124-performasynchronousfileaccessusi
-		performAsynchronousFileAccessUsingBlock(block: void): void
+		performAsynchronousFileAccessUsingBlock(block: unknown): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515066-performactivitywithsynchronouswa
-		performActivityWithSynchronousWaiting_usingBlock(waitSynchronously: boolean, block: void): void
+		performActivityWithSynchronousWaiting_usingBlock(waitSynchronously: boolean, block: unknown): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515151-continueactivityusingblock
-		continueActivityUsingBlock(block: void): void
+		continueActivityUsingBlock(block: unknown): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515069-continueasynchronousworkonmainth
-		continueAsynchronousWorkOnMainThreadUsingBlock(block: void): void
+		continueAsynchronousWorkOnMainThreadUsingBlock(block: unknown): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515154-printdocument
 		printDocument(sender: NSDocument): void
@@ -325,10 +324,10 @@ declare namespace cocoascript
 		saveDocumentTo(sender: NSDocument): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515048-savedocumentwithdelegate
-		saveDocumentWithDelegate_didSaveSelector_contextInfo(delegate: NSDocument, didSaveSelector: SEL, contextInfo: void): void
+		saveDocumentWithDelegate_didSaveSelector_contextInfo(delegate: NSDocument, didSaveSelector: SEL, contextInfo: unknown): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515206-canclosedocumentwithdelegate
-		canCloseDocumentWithDelegate_shouldCloseSelector_contextInfo(delegate: NSDocument, shouldCloseSelector: SEL, contextInfo: void): void
+		canCloseDocumentWithDelegate_shouldCloseSelector_contextInfo(delegate: NSDocument, shouldCloseSelector: SEL, contextInfo: unknown): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515237-close
 		close(): void
@@ -343,7 +342,7 @@ declare namespace cocoascript
 		duplicateDocument(sender: NSDocument): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515133-duplicatedocumentwithdelegate
-		duplicateDocumentWithDelegate_didDuplicateSelector_contextInfo(delegate: NSDocument, didDuplicateSelector: SEL, contextInfo: void): void
+		duplicateDocumentWithDelegate_didDuplicateSelector_contextInfo(delegate: NSDocument, didDuplicateSelector: SEL, contextInfo: unknown): void
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515231-renamedocument
 		renameDocument(sender: NSDocument): void
@@ -396,7 +395,7 @@ declare namespace cocoascript
 		// shouldChangePrintInfo(newPrintInfo: NSPrintInfo): boolean
 
 		// https://developer.apple.com/documentation/appkit/nsdocument/1515058-printdocumentwithsettings
-		printDocumentWithSettings_showPrintPanel_delegate_didPrintSelector_contextInfo(printSettings: NSDocument, showPrintPanel: boolean, delegate: NSDocument, didPrintSelector: SEL, contextInfo: void): void
+		printDocumentWithSettings_showPrintPanel_delegate_didPrintSelector_contextInfo(printSettings: NSDocument, showPrintPanel: boolean, delegate: NSDocument, didPrintSelector: SEL, contextInfo: unknown): void
 
 		// // https://developer.apple.com/documentation/appkit/nsdocument/1515070-printoperationwithsettings
 		// printOperationWithSettings_error(printSettings: NSDocument, outError: NSError): NSPrintOperation

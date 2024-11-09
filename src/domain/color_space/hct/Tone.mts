@@ -123,7 +123,7 @@ export class Tone extends AbstractValue<LStar>
 
     public override toString(this: NonNullable<this>, _radix?: number): string
     {
-        return `${this.value}%`
+        return `${this.value.toString(10)}%`
     }
 	
 	public find_suitable_foreground_if_this_background(this: NonNullable<this>, other_initial_tone: NonNullable<this>, other_contrast_ratio: NonNullable<ContrastRatio>): NonNullable<Tone>

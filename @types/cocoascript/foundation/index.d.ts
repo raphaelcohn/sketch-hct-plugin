@@ -28,3 +28,5 @@
 /// <reference path="./NSURLResourceKey.d.ts" />
 /// <reference path="./NSValue.d.ts" />
 /// <reference path="./unichar.d.ts" />
+/// <reference path="./NSStringEnumerationOptions.d.ts" />
+/// <reference path="./NSTimeInterval.d.ts" />

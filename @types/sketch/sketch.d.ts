@@ -9,6 +9,7 @@ declare module "sketch"
 	import {settings} from "sketch/settings"
 	import {ui} from "sketch/ui"
 	
+	// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 	export class sketch
 	{
 		static export: typeof dom.export

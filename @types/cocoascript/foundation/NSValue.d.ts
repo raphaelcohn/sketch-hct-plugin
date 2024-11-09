@@ -14,30 +14,30 @@ declare namespace cocoascript
 		init(): NSValue
 
 		// https://developer.apple.com/documentation/foundation/nsvalue/1411621-initwithbytes
-		initWithBytes_objCType(value: void, type: string): NSValue
+		initWithBytes_objCType(value: unknown, type: string): NSValue
 
 		// https://developer.apple.com/documentation/foundation/nsvalue/1551466-valuewithbytes
-		valueWithBytes_objCType(value: void, type: string): NSValue
+		valueWithBytes_objCType(value: unknown, type: string): NSValue
 
 		// https://developer.apple.com/documentation/foundation/nsvalue/1417400-value
-		value_withObjCType(value: void, type: string): NSValue
+		value_withObjCType(value: unknown, type: string): NSValue
 
 		// https://developer.apple.com/documentation/foundation/nsvalue/1415141-getvalue
-		getValue(value: void):void
+		getValue(value: unknown):void
 
 		// https://developer.apple.com/documentation/foundation/nsvalue/1412365-objctype
 		objCType(): string
 		setObjCType(value: string): void
 
 		// https://developer.apple.com/documentation/foundation/nsvalue/1415975-valuewithpointer
-		valueWithPointer(pointer: void): NSValue
+		valueWithPointer(pointer: unknown): NSValue
 
 		// https://developer.apple.com/documentation/foundation/nsvalue/1408098-valuewithnonretainedobject
 		valueWithNonretainedObject(anObject: NSValue): NSValue
 
 		// https://developer.apple.com/documentation/foundation/nsvalue/1410668-pointervalue
 		pointerValue(): void
-		setPointerValue(value: void): void
+		setPointerValue(value: unknown): void
 
 		// https://developer.apple.com/documentation/foundation/nsvalue/1412287-nonretainedobjectvalue
 		nonretainedObjectValue(): id
@@ -204,6 +204,6 @@ declare namespace cocoascript
 		setEdgeInsetsValue(value: NSEdgeInsets): void
 
 		// https://developer.apple.com/documentation/foundation/nsvalue/2919632-getvalue
-		getValue_size(value: void, size: NSUInteger):void
+		getValue_size(value: unknown, size: NSUInteger):void
 	}
 }
