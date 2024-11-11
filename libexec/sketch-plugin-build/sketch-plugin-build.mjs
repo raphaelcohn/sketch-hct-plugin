@@ -5,7 +5,7 @@
 'use strict'
 
 import {find_root_folder_path} from "../../lib/bun/functions/find_root_folder_path.mjs";
-import {assert} from "../../lib/bun/functions/common/assert.mts";
+import assert from "../../lib/bun/functions/common/assert.mts";
 import {SketchPluginBuildActions} from "./modules/SketchPluginBuildActions.mjs";
 import {exit_error} from "../../lib/bun/functions/common/exit_error.mts";
 

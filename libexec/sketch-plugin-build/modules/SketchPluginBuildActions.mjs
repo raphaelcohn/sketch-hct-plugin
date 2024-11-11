@@ -8,14 +8,14 @@ import {SketchPluginManifestGenerator} from "./SketchPluginManifestGenerator.mjs
 import {symlink} from "../../../lib/bun/functions/file_system/symlink.mjs";
 import {compile_typescript} from "../../../lib/bun/functions/execute/typescript/index.mjs";
 import {execute_npm_binary} from "../../../lib/bun/functions/execute/npm/index.mjs";
-import {assert} from "../../../lib/bun/functions/common/assert.mts";
+import assert from "../../../lib/bun/functions/common/assert.mts";
 import {remove_file} from "../../../lib/bun/functions/file_system/remove_file.mjs";
 import {mkdir_700_p} from "../../../lib/bun/functions/file_system/mkdir_700_p.mjs";
 import {read_folder} from "../../../lib/bun/functions/file_system/read_folder.mjs";
 import {is_folder_or_symlink_and_is_readable_and_is_searchable} from "../../../lib/bun/functions/file_system/is_folder_or_symlink_and_is_readable_and_is_searchable.mjs";
-import {BuildActions} from "../../../lib/bun/functions/BuildActions.mjs";
+import {BuildActions} from "../../../lib/bun/functions/BuildActions.mts";
 import {remove_recursively_forcibly} from "../../../lib/bun/functions/file_system/remove_recursively_forcibly.mjs";
-import {PackageJson} from "./functions/PackageJson.mjs";
+import {PackageJson} from "../../../lib/bun/functions/json/package/PackageJson.mts";
 import {copy_recursive_forcibly} from "./functions/file_system/copy_recursive_forcibly.mjs";
 
 export class SketchPluginBuildActions

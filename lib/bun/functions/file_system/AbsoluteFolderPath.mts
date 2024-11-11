@@ -3,13 +3,14 @@
 
 import {homedir, tmpdir} from "node:os";
 import {rmSync, mkdirSync, type Dirent, type ObjectEncodingOptions} from "node:fs";
-import {AbsoluteFilePath} from "./AbsoluteFilePath.mjs";
-import {AbsolutePath} from "./AbsolutePath.mjs";
+import AbsoluteFilePath from "./AbsoluteFilePath.mjs";
+import AbsolutePath from "./AbsolutePath.mjs";
 import {type CopySyncOptions, cpSync, readdirSync} from "fs";
-import {FileEncodingOptions} from "./FileEncodingOptions.mjs";
+import FileEncodingOptions from "./FileEncodingOptions.mjs";
 import {cwd, env} from "process";
-import {assert} from "../common/assert.mjs";
+import assert from "../common/assert.mjs";
 import {delimiter, isAbsolute} from "path";
+import type FileName from "./FileName.mts"
 
 class CurrentWorkingDirectoryAndEnvironmentVariableCache<T>
 {
@@ -53,8 +54,7 @@ class CurrentWorkingDirectoryAndEnvironmentVariableCache<T>
 	}
 }
 
-
-export class AbsoluteFolderPath extends AbsolutePath
+export default class AbsoluteFolderPath extends AbsolutePath
 {
 	static #home = new CurrentWorkingDirectoryAndEnvironmentVariableCache(homedir, AbsoluteFolderPath.#single_path_getter)
 	
@@ -125,7 +125,7 @@ export class AbsoluteFolderPath extends AbsolutePath
 
 		const { node_script_absolute_file_path } = assert.argv_has_at_least_two_arguments()
 
-		const parent_folder_path = node_script_absolute_file_path.dirname()
+		const parent_folder_path = node_script_absolute_file_path.dirname().absolute_folder_path
 		const path_components = [parent_folder_path]
 		for (let index = 0; index < depth; index++)
 		{
@@ -157,7 +157,12 @@ export class AbsoluteFolderPath extends AbsolutePath
 		return new AbsoluteFilePath(...[this.absolute_folder_path, ...relative_file_path_components])
 	}
 	
-	public remove_recursively_forcibly(this: this)
+	public with_file_name(this: this, file_name: FileName): AbsoluteFilePath
+	{
+		return file_name.absolute_file_path(this)
+	}
+	
+	public remove_recursively_forcibly(this: this): void
 	{
 		try
 		{

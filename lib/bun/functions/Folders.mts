@@ -1,19 +1,21 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-import {assert} from "./common/assert.mjs";
-import {AbsoluteFolderPath} from "./file_system/AbsoluteFolderPath.mjs";
-import type {AbsoluteFilePath} from "./file_system/AbsoluteFilePath.mjs";
+import assert from "./common/assert.mjs";
+import AbsoluteFolderPath from "./file_system/AbsoluteFolderPath.mjs";
+import type AbsoluteFilePath from "./file_system/AbsoluteFilePath.mts";
+import PackageJson from "./json/package/PackageJson.mjs"
+import FileName from "./file_system/FileName.mjs"
 
-export class Folders
+export default class Folders
 {
 	//static readonly #TypesFolderName = "@types"
 	static readonly #AssetsFolderName = "assets"
 	static readonly #BinariesFolderName = "bin"
 	//static readonly #LibrariesFolderName = "lib"
 	//static readonly #LibExecFolderName = "libexec"
-	//static readonly #NodeModulesFolderName = "node_modules"
-	//static readonly #NodeModulesPatchesFolderName = `${Folders.#NodeModulesFolderName}.patches`
+	static readonly #NodeModulesFolderName = "node_modules"
+	//static readonly #NodeModulesPatchesFolderName = `patches`
 	//static readonly #SourceFolderName = "src"
 	static readonly #TemporaryFolderName = "tmp"
 	static readonly #VersioningFolderName = "versioning"
@@ -24,7 +26,7 @@ export class Folders
 	readonly #binaries_folder_path
 	//readonly #libraries_folder_path
 	//readonly #lib_exec_folder_path
-	//readonly #node_modules_folder_path
+	readonly #node_modules_folder_path
 	//readonly #node_modules_patches_folder_path
 	//readonly #source_folder_path
 	readonly #temporary_folder_path
@@ -41,7 +43,7 @@ export class Folders
 		this.#binaries_folder_path = this.#root_folder_path.sub_folder_path(Folders.#BinariesFolderName)
 		//this.#libraries_folder_path = this.#root_folder_path.sub_folder_path(Folders.#LibrariesFolderName)
 		//this.#lib_exec_folder_path = this.#root_folder_path.sub_folder_path(Folders.#LibExecFolderName)
-		//this.#node_modules_folder_path = this.#root_folder_path.sub_folder_path(Folders.#NodeModulesFolderName)
+		this.#node_modules_folder_path = this.#root_folder_path.sub_folder_path(Folders.#NodeModulesFolderName)
 		//this.#node_modules_patches_folder_path = this.#root_folder_path.sub_folder_path(Folders.#NodeModulesPatchesFolderName)
 		//this.#source_folder_path = this.#root_folder_path.sub_folder_path(Folders.#SourceFolderName)
 		this.#temporary_folder_path = this.#root_folder_path.sub_folder_path(Folders.#TemporaryFolderName)
@@ -63,16 +65,26 @@ export class Folders
 		return this.#root_folder_path
 	}
 	
-	public package_json_file_path(this: this): AbsoluteFilePath
+	public get node_modules_folder_path(): AbsoluteFolderPath
 	{
-		return this.root_folder_file_path("package.json")
+		assert.is_instance_of(this, Folders)
+		
+		return this.#node_modules_folder_path
 	}
 	
-	public root_folder_file_path(this: this, file_name: string): AbsoluteFilePath
+	public package_json(this: this): PackageJson
 	{
-		assert.is_non_empty_string(file_name)
-		
-		return this.#root_folder_path.sub_file_path(file_name)
+		return PackageJson.for_project(this)
+	}
+	
+	public package_json_file_path(this: this): AbsoluteFilePath
+	{
+		return this.root_folder_file_path(FileName.package_json)
+	}
+	
+	public root_folder_file_path(this: this, file_name: FileName): AbsoluteFilePath
+	{
+		return file_name.absolute_file_path(this.#root_folder_path)
 	}
 	
 	public temporary_folder_subpath(this: this, ...relative_folder_path_components: string[]): AbsoluteFolderPath

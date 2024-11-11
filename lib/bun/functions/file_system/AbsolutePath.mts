@@ -2,17 +2,20 @@
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
 import {statSync, symlinkSync, unlinkSync} from "node:fs";
-import {join} from "node:path";
-import {AbsoluteFilePath} from "./AbsoluteFilePath.mjs";
-import {AbsolutePathStats} from "./AbsolutePathStats.mjs";
-import {assert} from "../common/assert.mjs";
+import {basename, join} from "node:path";
+import AbsoluteFilePath from "./AbsoluteFilePath.mjs";
+import AbsolutePathStats from "./AbsolutePathStats.mjs";
+import assert from "../common/assert.mjs";
+import FileName from "./FileName.mjs"
 
-export abstract class AbsolutePath
+export default abstract class AbsolutePath
 {
 	readonly #absolute_path: string
 	
 	protected constructor(...absolute_path_components: string[])
 	{
+		assert.is_non_empty_string_array(absolute_path_components)
+		
 		const absolute_path = join(...absolute_path_components)
 		assert.is_absolute_path(absolute_path)
 		
@@ -29,6 +32,11 @@ export abstract class AbsolutePath
 		assert.is_instance_of(this, AbsolutePath)
 		
 		return this.#absolute_path
+	}
+	
+	public basename(this: this): FileName
+	{
+		return new FileName(basename(this.absolute_path))
 	}
 	
 	public remove(this: this): void

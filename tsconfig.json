@@ -88,7 +88,7 @@
 		
 			/* Javascript code generation */
 			
-			"module": "preserve",                              // TODO: Experiment with "node16", "commonjs", "ES6", "ES2020" and "ES2022".
+			"module": "Preserve",                              // TODO: Experiment with "node16", "commonjs", "ES6", "ES2020" and "ES2022".
 			"isolatedModules": true,
 			"preserveConstEnums": true,                        // Has to be true for isolated modules, essentially making const enums equivalent to enum and removing any benefit of them.
 			"esModuleInterop": true,

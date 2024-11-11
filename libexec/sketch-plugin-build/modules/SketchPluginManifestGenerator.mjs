@@ -4,10 +4,10 @@
 'use strict'
 
 import { basename, extname, join, posix, sep } from 'node:path';
-import {JsonValidator} from "../../../lib/bun/functions/JsonValidator.mts";
+import {JsonObjectValidator} from "../../../lib/bun/functions/json/JsonObjectValidator.mts";
 import {read_folder} from "../../../lib/bun/functions/file_system/read_folder.mjs";
-import {assert} from "../../../lib/bun/functions/common/assert.mts";
-import {PackageJson} from "../../../lib/bun/functions/PackageJson.mjs";
+import assert from "../../../lib/bun/functions/common/assert.mts";
+import {PackageJson} from "../../../lib/bun/functions/json/package/PackageJson.mts";
 import {SketchManifestIconsHelper} from "./SketchManifestIconsHelper.mjs";
 import {SketchPluginFolders} from "./SketchPluginFolders.mjs";
 import {AbsoluteFolderPath} from "./functions/file_system/AbsoluteFolderPath.mjs";
@@ -305,7 +305,7 @@ class SketchPluginCommandsProcessor
 		assert.is_non_empty_string(command_relative_identifier)
 		assert.is_non_empty_string(command_function_name)
 
-		const commands_function_details = JsonValidator.read_json_file(this.#source_folder_path, join(relative_folder_path, `${command_function_name}.json`))
+		const commands_function_details = JsonObjectValidator.read_json_file(this.#source_folder_path, join(relative_folder_path, `${command_function_name}.json`))
 		const command_absolute_identifier = `${this.#command_identifier_prefix}.${command_relative_identifier}`
 
 		this.#manifest_commands.push

@@ -114,19 +114,19 @@ bun_run()
 		exit_error "Remove $local_bunfig_file_path; this file overrides global configuration in an undesirable way and introduces non-reproducibility"
 	fi
 
-	local -r bun_home_folder_path="$root_folder_path"/lib/bun
-	local -r dot_bun_folder_path="$bun_home_folder_path"/.bun
+	local -r bun_home_folder_path="$root_folder_path"/lib/index
+	local -r dot_bun_folder_path="$bun_home_folder_path"/.index
 	local -r install_dot_bun_folder_path="$dot_bun_folder_path"/install
 
 	#unset NODE_TLS_REJECT_UNAUTHORIZED
 	export BUN_CONFIG_VERBOSE_FETCH=curl
-	export BUN_RUNTIME_TRANSPILER_CACHE_PATH="$TMPDIR"/bun-transpiler-cache
+	export BUN_RUNTIME_TRANSPILER_CACHE_PATH="$TMPDIR"/index-transpiler-cache
 	export BUN_CONFIG_MAX_HTTP_REQUESTS=256
 	export BUN_CONFIG_NO_CLEAR_TERMINAL_ON_RELOAD=true
 	export DO_NOT_TRACK=1
 	export NO_COLOR=1
 	export FORCE_COLOR=0
-	export XDG_CONFIG_HOME="$root_folder_path"/libexec/bun
+	export XDG_CONFIG_HOME="$root_folder_path"/libexec/index
 
 	# Undocumented; override .bunfig.toml which does not support environment variables and for which globalCacheDir in .bunfig.toml is ignored!
 	export BUN_INSTALL_GLOBAL_DIR="$install_dot_bun_folder_path"/global

@@ -1,4 +1,4 @@
-# Scripts to run before `bun run`-ing a file or script.
+# Scripts to run before `index run`-ing a file or script.
 # Register plugins by adding them to this list.
 #preload = ["./preload.ts"]
 
@@ -10,7 +10,7 @@ jsxFragment = "React.Fragment"
 jsxImportSource = "react"
 
 # Reduce memory usage at the cost of performance (`smol` mode).
-#smol = true
+smol = false
 
 # Set the log level.
 # This can be one of "debug", "warn", or "error".
@@ -62,11 +62,11 @@ telemetry = false
 # Default is `.`.
 root = "."
 
-# Same as the top-level preload field, but only applies to bun test.
+# Same as the top-level preload field, but only applies to index test.
 #preload = ["./setup.ts"]
 
-# Same as the top-level smol field, but only applies to bun test.
-#smol = true
+# Same as the top-level smol field, but only applies to index test.
+smol = false
 
 # Enables test coverage reporting.
 # Default `false`.
@@ -75,7 +75,7 @@ coverage = false
 
 # To specify a coverage threshold.
 # By default, no threshold is set.
-# If your test suite does not meet or exceed this threshold, bun test will exit with a non-zero exit code to indicate the failure.
+# If your test suite does not meet or exceed this threshold, index test will exit with a non-zero exit code to indicate the failure.
 # Different thresholds can be specified for line-wise, function-wise, and statement-wise coverage.
 #coverageThreshold = { line = 0.7, function = 0.8, statement = 0.9 }
 
@@ -84,7 +84,7 @@ coverage = false
 coverageSkipTestFiles = true
 
 # Package Manager
-# Package management is a complex issue; to support a range of use cases, the behavior of bun install can be configured in this section.
+# Package management is a complex issue; to support a range of use cases, the behavior of index install can be configured in this section.
 [install]
 
 # Whether to install optional dependencies.
@@ -95,7 +95,7 @@ optional = false
 # Default `true`.
 peer = true
 
-# Whether bun install will run in "production mode".
+# Whether index install will run in "production mode".
 # Default `false`.
 # In production mode, "devDependencies" are not installed.
 # You can use `--productio`n in the CLI to override this setting.
@@ -113,29 +113,29 @@ exact = true
 # * `"auto"`: Resolve modules from local node_modules if it exists. Otherwise, auto-install dependencies on the fly.
 # * `"force"`: Always auto-install dependencies, even if `node_modules` exists.
 # * `"disable"`: Never auto-install dependencies.
-# * `"fallback"`: Check local `node_modules` first, then auto-install any packages that aren't found. You can enable this from the CLI with `bun -i`.
+# * `"fallback"`: Check local `node_modules` first, then auto-install any packages that aren't found. You can enable this from the CLI with `index -i`.
 auto = "force"
 
-# When `true`, `bun install` will not update `bun.lockb`.
+# When `true`, `index install` will not update `index.lockb`.
 # Default `false`.
-# If `package.json` and the existing `bun.lockb` are not in agreement, this will error.
+# If `package.json` and the existing `index.lockb` are not in agreement, this will error.
 frozenLockfile = false
 
-# Whether `bun install` will actually install dependencies.
+# Whether `index install` will actually install dependencies.
 # Default `false`.
-# When `true`, it's equivalent to setting `--dry-run` on all bun install commands.
+# When `true`, it's equivalent to setting `--dry-run` on all index install commands.
 dryRun = false
 
 # To configure the directory where Bun puts globally installed packages.
-# Where `bun install --global` installs packages.
-#globalDir = "~/.bun/install/global"
+# Where `index install --global` installs packages.
+#globalDir = "~/.index/install/global"
 # Relies on current working directory being "$root_folder_path".
 # ?SEEMS TO BE IGNORED BY BUN?
-globalDir = "lib/bun/.bun/install/global"
+globalDir = "lib/index/.index/install/global"
 
 # To configure the directory where Bun installs globally installed binaries and CLIs.
 # Where globally-installed package bins are linked.
-#globalBinDir = "~/.bun/bin"
+#globalBinDir = "~/.index/bin"
 # Relies on current working directory being "$root_folder_path".
 globalBinDir = "bin"
 
@@ -166,9 +166,9 @@ registry = "https://registry.npmjs.org"
 [install.cache]
 
 # The directory to use for the cache.
-#dir = "~/.bun/install/cache"
+#dir = "~/.index/install/cache"
 # Relies on current working directory being "$root_folder_path".
-dir = "lib/bun/.bun/install/cache"
+dir = "lib/index/.index/install/cache"
 
 # When `true`, don't load from the global cache.
 # Bun may still write to `node_modules/.cache`
@@ -180,42 +180,42 @@ disableManifest = false
 # To configure lockfile behavior, use the `install.lockfile` section.
 [install.lockfile]
 
-# Whether to generate a lockfile on `bun install`.
+# Whether to generate a lockfile on `index install`.
 # Default `true`.
 save = true
 
-# Whether to generate a non-Bun lockfile alongside `bun.lockb`
-# A `bun.lockb` will always be created.
+# Whether to generate a non-Bun lockfile alongside `index.lockb`
+# A `index.lockb` will always be created.
 # Currently `"yarn"` is the only supported value.
 #print = "yarn"
 
-# The `bun run` command can be configured under the `run` section.
-# These apply to the `bun run` command and the bun command when running a file or executable or script.
-# Currently, `bunfig.toml` isn't always automatically loaded for bun run in a local project (it does check for a global bunfig.toml), so you might still need to pass `-c` or `-c=bunfig.toml` to use these settings.
+# The `index run` command can be configured under the `run` section.
+# These apply to the `index run` command and the index command when running a file or executable or script.
+# Currently, `bunfig.toml` isn't always automatically loaded for index run in a local project (it does check for a global bunfig.toml), so you might still need to pass `-c` or `-c=bunfig.toml` to use these settings.
 [run]
 
 # run.shell - use the system shell or Bun's shell
-# The shell to use when running `package.json` scripts via `bun run` or `bun`.
-# On Windows, this defaults to `"bun"` and on other platforms it defaults to `"system"`.
+# The shell to use when running `package.json` scripts via `index run` or `index`.
+# On Windows, this defaults to `"index"` and on other platforms it defaults to `"system"`.
 # To always use the system shell instead of Bun's shell (default behavior unless Windows):–
 #shell = "system"
 # To always use Bun's shell instead of the system shell:
-#shell = "bun"
-shell = "bun"
+#shell = "index"
+shell = "index"
 
-# `run.bun` - auto alias node to bun.
-# When `true`, this prepends `$PATH` with a node symlink that points to the `bun` binary for all scripts or executables invoked by `bun run` or `bun`.
-# This means that if you have a script that runs `node`, it will actually run `bun` instead, without needing to change your script.
-# This works recursively, so if your script runs another script that runs `node`, it will also run `bun` instead.
-# This applies to shebangs as well, so if you have a script with a shebang that points to `node`, it will actually run `bun` instead.
+# `run.index` - auto alias node to index.
+# When `true`, this prepends `$PATH` with a node symlink that points to the `index` binary for all scripts or executables invoked by `index run` or `index`.
+# This means that if you have a script that runs `node`, it will actually run `index` instead, without needing to change your script.
+# This works recursively, so if your script runs another script that runs `node`, it will also run `index` instead.
+# This applies to shebangs as well, so if you have a script with a shebang that points to `node`, it will actually run `index` instead.
 # By default, this is enabled if node is not already in your `$PATH`.
-# This option is equivalent to prefixing all bun run commands with `--bun` (Equivalent to `bun --bun` for all `bun run` commands).
+# This option is equivalent to prefixing all index run commands with `--index` (Equivalent to `index --index` for all `index run` commands).
 # If set to `false`, this will disable the node symlink.
-bun = true
+index = true
 
 # `run.silent` - suppress reporting the command being run
-# When `true`, suppresses the output of the command being run by bun run or bun.
+# When `true`, suppresses the output of the command being run by index run or index.
 # Without this option, the command being run will be printed to the console.
 # With this option, the command being run will not be printed to the console.
-# This is equivalent to passing `--silent` to all `bun run` commands.
+# This is equivalent to passing `--silent` to all `index run` commands.
 silent = true

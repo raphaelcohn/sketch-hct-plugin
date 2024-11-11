@@ -1,33 +1,18 @@
 // This file is part of sketch-hct-plugin. It is subject to the license terms in the LICENSE file found in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE. No part of sketch-hct-plugin, including this file, may be copied, modified, propagated, or distributed except according to the terms contained in the LICENSE file.
 // Copyright © 2024 The developers of sketch-hct-plugin. See the LICENSE file in the top-level directory of this distribution and at https://raw.githubusercontent.com/raphaelcohn/sketch-hct-plugin/master/LICENSE.
 
-import {dirname, basename} from "node:path";
+import type Json from "../json/Json.d.ts"
+import {dirname} from "node:path";
 import {copyFileSync, readFileSync, writeFileSync} from "node:fs";
-import {AbsolutePath} from "./AbsolutePath.mjs";
-import {FileEncodingOptions} from "./FileEncodingOptions.mjs";
-import {AbsoluteFolderPath} from "./AbsoluteFolderPath.mjs";
+import AbsolutePath from "./AbsolutePath.mjs";
+import FileEncodingOptions from "./FileEncodingOptions.mjs";
+import AbsoluteFolderPath from "./AbsoluteFolderPath.mjs";
 import {execFileSync} from "node:child_process";
-import {assert} from "../common/assert.mjs";
-import type { Json } from "./Json.mjs"
+import assert from "../common/assert.mjs";
 
-export class AbsoluteFilePath extends AbsolutePath
+export default class AbsoluteFilePath extends AbsolutePath
 {
 	static #CopyToMode = 0
-	
-	public static which(binary_file_name: string): AbsoluteFilePath
-	{
-		const paths = AbsoluteFolderPath.PATH();
-		for (let path of paths)
-		{
-			const file_path = path.sub_file_path(binary_file_name)
-			if (file_path.is_file_or_symlink_and_is_readable_and_executable())
-			{
-				return file_path
-			}
-		}
-		
-		throw new Error(`Could not find binary ${binary_file_name} on PATH ${paths}`)
-	}
 	
 	public constructor(...absolute_file_path_components: string[])
 	{
@@ -41,14 +26,9 @@ export class AbsoluteFilePath extends AbsolutePath
 		return super.absolute_path
 	}
 	
-	public dirname(this: this): string
+	public dirname(this: this): AbsoluteFolderPath
 	{
-		return dirname(this.absolute_file_path)
-	}
-	
-	public basename(this: this): string
-	{
-		return basename(this.absolute_file_path)
+		return new AbsoluteFolderPath(dirname(this.absolute_file_path))
 	}
 	
 	public copy_to(this: this, destination: this): void
@@ -112,12 +92,12 @@ export class AbsoluteFilePath extends AbsolutePath
 		}
 	}
 	
-	public execute(this: this, working_directory_folder_path: AbsoluteFolderPath, ...binary_arguments: string[]): string
+	public execute(this: this, working_directory: AbsoluteFolderPath, ...binary_arguments: string[]): string
 	{
 		const options = Object.freeze(Object.assign
 		(
 			{
-				cwd: working_directory_folder_path.absolute_folder_path
+				cwd: working_directory.absolute_folder_path
 			},
 			ExecFileOptions
 		))

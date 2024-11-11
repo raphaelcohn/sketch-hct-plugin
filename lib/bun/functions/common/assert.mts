@@ -4,11 +4,10 @@
 import {format} from "node:util";
 import {argv} from "node:process";
 import {isAbsolute} from "node:path";
+import exit_error from "./exit_error.mjs";
+import AbsoluteFilePath from "../file_system/AbsoluteFilePath.mjs";
 
-import {exit_error} from "./exit_error.mjs";
-import {AbsoluteFilePath} from "../file_system/AbsoluteFilePath.mjs";
-
-export const assert =
+const assert_inner =
 {
 	is_string(value: string): void
 	{
@@ -159,6 +158,8 @@ export const assert =
 		}
 	}
 }
+const assert: Readonly<typeof assert_inner> = Object.freeze(assert_inner)
+export default assert
 
 function assert_is_type(value: any, expected_type: string): void
 {

@@ -1,7 +1,7 @@
 {
 	"name": "sketch-hct-plugin",
 	"main": "./src/commands/generate.js",
-	"packageManger": "npm@10.8.2",
+	"packageManger": "npm@1.1.34",
 	"type": "commonjs",
 	"exports": [
 		"./src/commands/generate.js",
@@ -19,31 +19,29 @@
 		"arm64",
 		"x64"
 	],
-	"dependencies": {
-	},
+	"dependencies": {},
 	"devDependencies": {
-		"@material/material-color-utilities": "0.3.0",
-		"@sketch-hq/sketch-file-format-ts": "6.5.0",
-		"@skpm/builder": "0.9.5",
 		"typescript": "5.6.2",
 		"@typescript-eslint/eslint-plugin": "8.13.0",
 		"@typescript-eslint/parser": "8.13.0",
-		"typescript-eslint": "8.13.0"
+		"typescript-eslint": "8.13.0",
+		"@material/material-color-utilities": "0.3.0",
+		"@sketch-hq/sketch-file-format-ts": "6.5.0",
+		"@skpm/builder": "0.9.5"
 	},
 	"engines": {
-		"node": "20.17.0",
-		"npm": "10.8.2",
+		"bun": "1.1.34",
 		"sketch": ">=3.0"
 	},
 	"devEngines": {
 		"runtime": {
-			"name": "node",
-			"version": "20.17.0",
+			"name": "bun",
+			"version": "1.1.34",
 			"onFail": "warn"
 		},
 		"packageManager": {
-			"name": "npm",
-			"version": "10.8.2",
+			"name": "bun",
+			"version": "1.1.34",
 			"onFail": "warn"
 		},
 		"cpu": [
@@ -107,5 +105,8 @@
 		"extends": [
 			"plugin:@typescript-eslint/recommended"
 		]
+	},
+	"patchedDependencies": {
+		"@material/material-color-utilities@0.3.0": "patches/@material%2Fmaterial-color-utilities@0.3.0.patch"
 	}
 }

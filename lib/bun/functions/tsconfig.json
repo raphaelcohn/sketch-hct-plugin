@@ -88,7 +88,7 @@
 		
 		/* Javascript code generation */
 		
-		"module": "preserve",
+		"module": "Preserve",
 		"isolatedModules": true,
 		"preserveConstEnums": true,                        // Has to be true for isolated modules, essentially making const enums equivalent to enum and removing any benefit of them.
 		"esModuleInterop": true,
@@ -99,10 +99,10 @@
 		"emitBOM": false,
 		"newLine": "lf",
 		"removeComments": true,
-		"target": "ES2022",
+		"target": "ES2023",
 		"lib":
 		[
-			"ES2022"
+			"ES2023"
 		],
 		"useDefineForClassFields": true,
 		"downlevelIteration": true,                        // Javascript code generation for older javascript language levels (this setting maximises compatibility at the expense of code bloat and performance).
@@ -159,7 +159,7 @@
 		"noResolve": false,
 		"typeRoots":
 		[
-			"../../../libexec/sketch-plugin-build/node_modules/@types"
+			"node_modules/@types"
 		],
 		"skipDefaultLibCheck": true,
 		"skipLibCheck": true

@@ -3,9 +3,9 @@
 
 import { geteuid, getegid } from "node:process";
 import { type BigIntStats, constants } from "node:fs"
-import {assert} from "../common/assert.mjs";
+import assert from "../common/assert.mjs";
 
-export class AbsolutePathStats
+export default class AbsolutePathStats
 {
 	readonly #big_int_stats: BigIntStats
 	
@@ -93,7 +93,6 @@ export class AbsolutePathStats
 		return this.#is_mode_x(S_IXUSR, S_IXGRP, S_IXOTH)
 	}
 	
-	
 	#is_mode_x(this: this, user_bit: number, group_bit: number, other_bit: number): boolean
 	{
 		assert.is_zero_or_positive_integer(user_bit)
@@ -140,7 +139,6 @@ export class AbsolutePathStats
 	
 		return (mode & bit) > 0
 	}
-
 }
 
 // Most of these constants are not defined on Windows.
